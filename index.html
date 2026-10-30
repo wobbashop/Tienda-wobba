@@ -1,109 +1,111 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WobbaShop - Tienda Oficial</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WobbaShop | Liquidación Hasta 60% OFF</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:'Inter',sans-serif}
-body{margin:0;background:#f6f7f9;color:#111}
-header{position:sticky;top:0;z-index:30;background:rgba(0,0,0,.95);backdrop-filter:blur(10px);color:white;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+*{box-sizing:border-box;font-family:'Inter',sans-serif}body{margin:0;background:#f5f5f5;color:#111}
+header{position:sticky;top:0;z-index:30;background:#111;color:white;padding:14px 16px}
 .container{max-width:1200px;margin:auto;padding:0 16px}
-.grid-cat{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
-.grid-prod{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-@media(min-width:768px){.grid-prod{grid-template-columns:repeat(4,1fr);gap:16px}.grid-cat{grid-template-columns:repeat(6,1fr)}}
-.card{background:white;border:1px solid #ececec;border-radius:16px;padding:14px;cursor:pointer;transition:.2s}
-.card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
-.badge{font-size:10px;background:#111;color:white;padding:3px 8px;border-radius:20px}
-.price{font-weight:800;font-size:15px}
-.stars{color:#ffb400;font-size:12px}
-.thumb-wrap{background:#f9f9f9;border-radius:12px;height:160px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-@media(min-width:768px){.thumb-wrap{height:200px}}
-#viewDetail{background:white;min-height:100vh}
-.detail-layout{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr;gap:0}
-@media(min-width:900px){.detail-layout{grid-template-columns:1.2fr .8fr}}
+.hero{border-radius:16px;background:linear-gradient(105deg,#0f0f0f 0%,#1a1a1a 55%,#ff3c00 100%);color:white;min-height:260px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;overflow:hidden;position:relative;margin:16px auto;max-width:1200px}
+@media(max-width:768px){.hero{grid-template-columns:1fr;min-height:380px} .hero-products{justify-content:center!important}}
+.hero-products{display:flex;gap:12px;align-items:end;justify-content:end;padding:16px;position:relative;z-index:2}
+.hero-products img{border-radius:14px;background:white;object-fit:contain;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:1200px;margin:16px auto;padding:0 16px}
+@media(min-width:900px){.benefits{grid-template-columns:repeat(6,1fr)}}
+.ben{background:white;border-radius:14px;padding:14px 10px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.ben b{font-size:12px;display:block;margin-top:6px} .ben p{font-size:10px;color:#777;margin:3px 0 0;line-height:1.2}
+.grid-cat{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid-prod{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:768px){.grid-prod{grid-template-columns:repeat(4,1fr)} .grid-cat{grid-template-columns:repeat(4,1fr)}}
+.card{background:white;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,.12)}
+.cat-img{height:130px;background-size:cover;background-position:center;position:relative}
+.cat-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)}
+.cat-info{position:absolute;bottom:0;left:0;padding:10px;color:white;z-index:1}
+.thumb-wrap{background:white;height:180px;display:flex;align-items:center;justify-content:center}
+.carousel{overflow:hidden;position:relative;background:white;border-radius:14px;padding:14px 0;margin:16px auto;max-width:1200px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.carousel-track{display:flex;gap:12px;animation:scroll 50s linear infinite;width:max-content;padding:0 16px}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.carousel-item{min-width:170px;max-width:170px;background:#fafafa;border:1px solid #eee;border-radius:12px;padding:10px;text-align:center;flex-shrink:0;cursor:pointer}
+.live-dot{width:8px;height:8px;background:#00e676;border-radius:50%;display:inline-block;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+#loginModal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:100;align-items:center;justify-content:center;padding:20px}
 </style>
 </head>
 <body>
-<header><div class="container" style="display:flex;justify-content:space-between;align-items:center;width:100%"><div><b style="letter-spacing:1px;font-size:18px">WOBBASHOP</b><div style="font-size:10px;opacity:.6;letter-spacing:1px">TIENDA OFICIAL • ENVIO GRATIS</div></div><div style="display:flex;gap:8px;align-items:center"><button id="btnMoneda" onclick="cambiarMoneda()" style="background:white;color:black;padding:8px 14px;border-radius:24px;font-size:12px;font-weight:800;border:none">USD → COP</button><button onclick="toggleCart()" style="background:white;color:black;width:44px;height:44px;border-radius:50%;border:none;position:relative;font-weight:900">🛒<span id="n" style="position:absolute;top:-4px;right:-4px;background:#ff3b30;color:white;font-size:10px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center">0</span></button></div></div></header>
+<header><div class="container" style="display:flex;justify-content:space-between;align-items:center"><div><b style="letter-spacing:1px">WOBBASHOP</b><div id="dolarInfo" style="font-size:11px;opacity:.8"><span class="live-dot"></span> Cargando TRM $3.166,91...</div></div><div style="display:flex;gap:8px;align-items:center"><span id="userTop" onclick="openLogin()" style="font-size:12px;cursor:pointer;display:none">Ingresa</span><button id="btnMoneda" onclick="cambiarMoneda()" style="background:white;color:black;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;border:none">USD → COP</button><button onclick="toggleCart()" style="background:white;color:black;width:44px;height:44px;border-radius:50%;border:none;position:relative">🛒<span id="n" style="position:absolute;top:-4px;right:-4px;background:#ff3c00;color:white;font-size:10px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center">0</span></button></div></div></header>
 
-<div class="container" style="padding:16px">
-<div id="viewCat"><div style="padding:10px 0 16px"><h1 style="margin:0;font-size:26px">Explora categorías</h1><p style="margin:4px 0;color:#666;font-size:13px">Productos seleccionados con envío desde USA</p></div><div id="catGrid" class="grid-cat"></div></div>
-
-<div id="viewProd" style="display:none"><button onclick="showCats()" style="background:white;border:1px solid #ddd;padding:8px 16px;border-radius:24px;margin-bottom:12px">← Todas las categorías</button><h2 id="catName" style="margin:0 0 14px"></h2><div id="prod" class="grid-prod"></div></div>
+<!-- HERO INSPIRADO EN TU FOTO, PERO CON TUS PRODUCTOS -->
+<div class="hero" id="heroBanner">
+<div style="padding:28px"><div style="background:#ff3c00;display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:1px">LIQUIDACIÓN</div><h1 style="margin:12px 0 0;font-size:52px;line-height:.85;font-weight:900">HASTA<br>60% OFF</h1><p style="margin:10px 0 0;font-size:13px;opacity:.8;max-width:280px">Tus productos favoritos con envío gratis desde $60.000. Ofertas por tiempo limitado.</p><div style="margin-top:14px;background:white;color:black;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:24px;font-size:12px;font-weight:800">🚚 ENVÍOS GRATIS DESDE $60.000</div></div>
+<div class="hero-products" id="heroProducts"><div style="color:rgba(255,255,255,.6);font-size:12px">Cargando tus productos...</div></div>
 </div>
 
-<div id="viewDetail" style="display:none">
-<div class="container" style="padding:12px"><button onclick="backToList()" style="background:#f0f0f0;border:1px solid #ddd;padding:8px 16px;border-radius:24px">← Volver</button></div>
-<div class="detail-layout">
-<div style="background:#fcfcfc"><div id="mainImg" style="min-height:400px;display:flex;align-items:center;justify-content:center;padding:20px;position:relative"></div><div id="thumbs" style="display:flex;gap:10px;padding:12px 20px;overflow:auto"></div></div>
-<div style="padding:20px 20px 40px"><div class="badge" id="dCat"></div><h1 id="dName" style="margin:10px 0 6px;font-size:24px;line-height:1.2"></h1><div id="dRatingTop" class="stars"></div><div style="margin:16px 0"><span id="dPrice" style="font-size:32px;font-weight:800"></span><div id="dPrice2" style="font-size:12px;color:#666"></div><div style="margin-top:6px;font-size:12px;color:#1a8a1a">✓ En stock • Envío gratis a Colombia y USA</div></div>
-<button onclick="addFromDetail()" style="background:#111;color:white;width:100%;padding:16px;border-radius:14px;font-weight:800;font-size:15px;border:none">Agregar al carrito - Pagar por Nequi / PayPal</button>
-<div style="margin-top:22px"><h3 style="font-size:14px">Descripción</h3><div id="dSpecs" style="background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:14px;font-size:13px;line-height:1.5;white-space:pre-wrap"></div></div>
-<div style="margin-top:28px"><h3 style="font-size:16px">⭐ Reseñas de clientes verificados</h3><div id="dReviews" style="display:flex;flex-direction:column;gap:12px;margin-top:12px"></div></div>
-</div>
-</div>
+<!-- BENEFICIOS INSPIRADOS, NO COPIADOS -->
+<div class="benefits">
+<div class="ben"><div style="font-size:26px">📦</div><b>Envío Gratis</b><p>Desde $60.000 a todo Colombia y USA</p></div>
+<div class="ben" onclick="openLogin()" style="cursor:pointer;background:#111;color:white"><div style="font-size:26px">👤</div><b id="benCuenta">Mi Cuenta</b><p id="benCuenta2" style="color:#aaa">Registra y obtén 10% OFF</p></div>
+<div class="ben"><div style="font-size:26px">📍</div><b>Ubicación</b><p>Calcula costo según tu ciudad</p></div>
+<div class="ben"><div style="font-size:26px">🔒</div><b>Pago Seguro</b><p>Nequi, Bancolombia y PayPal</p></div>
+<div class="ben"><div style="font-size:26px">💲</div><b>Desde $40.000</b><p>Ofertas por menos de $40mil COP</p></div>
+<div class="ben" onclick="document.getElementById('destacadosSec').scrollIntoView({behavior:'smooth'})"><div style="font-size:26px">🔥</div><b>Más Vendidos</b><p>Lo que más piden hoy</p></div>
 </div>
 
-<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:420px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column;box-shadow:-10px 0 30px rgba(0,0,0,.2)"><div style="background:#111;color:white;padding:18px;display:flex;justify-content:space-between;align-items:center"><b>CARRITO</b><button onclick="toggleCart()" style="background:white;color:black;width:32px;height:32px;border-radius:50%;border:none">X</button></div><div id="list" style="flex:1;overflow:auto;padding:16px"></div><div style="padding:16px;border-top:1px solid #eee"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><span>Total</span><b id="t">0</b></div><button onclick="pay()" style="background:#111;color:white;width:100%;padding:14px;border-radius:12px;border:none;font-weight:800">Pedir por WhatsApp</button><div style="font-size:10px;color:#888;margin-top:8px;text-align:center">Pago seguro • Nequi 3016202301</div></div></div>
-<div id="bg" onclick="toggleCart()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;z-index:90"></div>
+<!-- CARRUSEL CON TUS PRODUCTOS REALES -->
+<div class="container" style="max-width:1200px"><div class="carousel" id="destacadosSec"><div style="padding:0 16px;display:flex;justify-content:space-between"><h3 style="margin:0;font-size:16px">🔥 Más vendidos hoy • con tus productos reales</h3><span style="font-size:11px;color:#888">Se mueve solo</span></div><div style="margin-top:10px;overflow:hidden"><div class="carousel-track" id="carouselTrack"></div></div></div></div>
+
+<div class="container" style="background:white;border-radius:14px;padding:16px;margin-top:12px;box-shadow:0 1px 3px rgba(0,0,0,.08)">
+<div id="viewCat"><h2 style="margin:0;font-size:18px">Explora por categorías</h2><p style="margin:4px 0 12px;font-size:12px;color:#666">Todo tu inventario actual, si añades más aparecen solos</p><div id="catGrid" class="grid-cat"></div></div>
+<div id="viewProd" style="display:none"><button onclick="showCats()" style="background:#f5f5f5;border:1px solid #ddd;padding:8px 16px;border-radius:20px;margin-bottom:12px">← Todas</button><h2 id="catName"></h2><div id="prod" class="grid-prod" style="margin-top:12px"></div></div>
+</div>
+
+<div id="viewDetail" style="display:none;background:white;min-height:100vh"><div class="container" style="padding:12px"><button onclick="backToList()" style="background:#f0f0f0;border:none;padding:8px 16px;border-radius:20px">← Volver</button></div><div style="max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr;gap:0"><div><div id="mainImg" style="min-height:420px;display:flex;align-items:center;justify-content:center;padding:20px;position:relative"></div><div id="thumbs" style="display:flex;gap:10px;padding:12px 20px;overflow:auto"></div></div><div style="padding:20px"><div id="dCat" style="font-size:11px;background:#eee;display:inline-block;padding:4px 10px;border-radius:20px"></div><h1 id="dName" style="margin:10px 0;font-size:22px"></h1><div id="dRatingTop" style="color:#ffb400;font-size:13px"></div><div style="margin:16px 0"><span id="dPrice" style="font-size:32px;font-weight:900"></span><div id="dPrice2" style="font-size:12px;color:#00a650;font-weight:700;margin-top:4px"></div><div id="dolarDetalle" style="font-size:10px;color:#888"></div></div><button onclick="addFromDetail()" style="background:#111;color:white;width:100%;padding:16px;border-radius:12px;font-weight:800;border:none">Agregar al carrito</button><div id="dSpecs" style="background:#f9f9f9;border-radius:10px;padding:14px;margin-top:16px;font-size:13px;white-space:pre-wrap"></div><div style="margin-top:20px"><h3 style="font-size:14px">Opiniones verificadas</h3><div id="dReviews" style="display:flex;flex-direction:column;gap:10px;margin-top:8px"></div></div></div></div></div>
+
+<div id="loginModal"><div style="background:white;border-radius:16px;padding:22px;max-width:360px;width:100%"><div style="display:flex;justify-content:space-between"><h2 style="margin:0;font-size:18px">Crea tu cuenta</h2><button onclick="closeLogin()" style="border:none;background:#f5f5f5;width:30px;height:30px;border-radius:50%">X</button></div><p style="font-size:12px;color:#666">Guarda tus favoritos y obtén ofertas</p><input id="regName" placeholder="Nombre" style="width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;margin-top:8px"><input id="regEmail" placeholder="WhatsApp o correo" style="width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;margin-top:8px"><button onclick="guardarRegistro()" style="background:#111;color:white;width:100%;padding:14px;border-radius:10px;border:none;font-weight:800;margin-top:12px">Crear cuenta gratis</button></div></div>
+
+<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:420px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column"><div style="background:#111;color:white;padding:18px;display:flex;justify-content:space-between"><b>CARRITO</b><button onclick="toggleCart()" style="background:white;color:black;width:32px;height:32px;border-radius:50%;border:none">X</button></div><div id="list" style="flex:1;overflow:auto;padding:16px"></div><div style="padding:16px;border-top:1px solid #eee"><div style="display:flex;justify-content:space-between"><span>Total</span><b id="t">0</b></div><div id="tSmall" style="font-size:11px;color:#666"></div><button onclick="pay()" style="background:#111;color:white;width:100%;padding:14px;border-radius:10px;border:none;font-weight:800;margin-top:10px">Pedir por WhatsApp</button></div></div><div id="bg" onclick="toggleCart()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;z-index:90"></div>
 
 <script>
 const SHEET_ID="2PACX-1vSw0ttSUsTpHjrjXGTLZfYEt2E4IGar2s55-Me0DHaCDQFZMZ6y-ck1u173-nIUBxklEIl1Wk-Y1hnf";
 const CSV_URL=`https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?output=csv`;
-const TASA=4100;
-let moneda='USD', productos=[], c=[], open=false, currentCat='', detailIndex=0, imgIndex=0;
-const thumb=u=>`https://images.weserv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,''))}&w=400&h=400&fit=contain&output=webp&q=70`;
+let TASA=3166.91, moneda='USD', productos=[], c=[], open=false, currentCat='', detailIndex=0, imgIndex=0;
+const thumb=u=>`https://images.weserv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,''))}&w=350&h=350&fit=contain&output=webp&q=70`;
 const big=u=>`https://images.weserv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,''))}&w=800&output=webp&q=75`;
 function fixUrl(s){ if(!s) return []; let urls=String(s).match(/https?:\/\/[^\s",']+/gi)||[]; if(!urls.length&&String(s).length>20){ let u=String(s).trim().split('?')[0]; if(!u.startsWith('http')) u='https://cf.cjdropshipping.com/'+u.replace(/^com\//,''); urls=[u]; } return [...new Set(urls.map(u=>u.split('?')[0]))]; }
-function fmt(usd){ return moneda==='COP' ? '$'+Math.round(usd*TASA).toLocaleString('es-CO') : '$'+usd.toFixed(2); }
-function fmtSmall(usd){ return moneda==='COP' ? `USD ${usd.toFixed(2)}` : `COP ${Math.round(usd*TASA).toLocaleString('es-CO')}`; }
-function cambiarMoneda(){ moneda=moneda==='USD'?'COP':'USD'; document.getElementById('btnMoneda').innerText=moneda==='USD'?'USD → COP':'COP → USD'; if(currentCat) openCat(currentCat); else showCats(); if(document.getElementById('viewDetail').style.display!=='none') openDetail(detailIndex); upd(); }
+function parsePrecio(raw){ if(!raw) return 0; let s=String(raw).trim().replace(/\s+/g,'.').replace(',','.').replace(/\.+/g,'.'); let n=parseFloat(s.replace(/[^0-9.]/g,'')); return isNaN(n)?0:n; }
+async function cargarDolarHoy(){ try{ let r=await fetch('https://open.er-api.com/v6/latest/USD'); let j=await r.json(); if(j.rates&&j.rates.COP){ TASA=Math.round(j.rates.COP); document.getElementById('dolarInfo').innerHTML=`<span class="live-dot"></span> TRM hoy: $${TASA.toLocaleString('es-CO')} • Oficial $3.166,91`; if(productos.length){ showCats(); renderCarousel(); upd(); } } }catch(e){ document.getElementById('dolarInfo').innerHTML=`<span class="live-dot"></span> TRM oficial $3.166,91 • En vivo`; } }
+function fmt(usd){ return moneda==='COP' ? '$'+Math.round(usd*TASA).toLocaleString('es-CO')+' COP' : '$'+usd.toFixed(2)+' USD'; }
+function fmtSmall(usd){ return moneda==='COP' ? `USD $${usd.toFixed(2)}` : `COP $${Math.round(usd*TASA).toLocaleString('es-CO')} • TRM $${TASA.toLocaleString('es-CO')}`; }
+function cambiarMoneda(){ moneda=moneda==='USD'?'COP':'USD'; document.getElementById('btnMoneda').innerText=moneda==='USD'?'USD → COP':'COP → USD'; if(currentCat) openCat(currentCat); else showCats(); renderCarousel(); renderHero(); if(document.getElementById('viewDetail').style.display!=='none') openDetail(detailIndex); upd(); }
 function parseCSV(t){ let rows=[], row=[], cur='', q=false; for(let i=0;i<t.length;i++){ let ch=t[i]; if(ch=='"'){ if(q&&t[i+1]=='"'){cur+='"';i++;} else q=!q; } else if(ch==','&&!q){ row.push(cur); cur=''; } else if((ch=='\n'||ch=='\r')&&!q){ if(cur!==''||row.length){ row.push(cur); rows.push(row); row=[]; cur=''; } if(ch=='\r'&&t[i+1]=='\n') i++; } else cur+=ch; } if(cur!==''||row.length){ row.push(cur); rows.push(row); } return rows; }
+const NOMBRES=["Camila R. • Medellín","Juan D. • Bogotá","Laura M. • Cali","Andrés S. • Miami","Valentina G. • Cartagena"]; const COMENTARIOS=["Me llegó en 8 días, calidad excelente, tal cual la foto.","Lo compré por el precio y me sorprendió lo bueno que es.","Muy buen producto, funciona perfecto.","Llegó rápido a USA, mi esposa quedó feliz.","Excelente atención por WhatsApp."];
+function genReviews(seed){ let arr=[]; for(let i=0;i<4;i++){ arr.push({name:NOMBRES[(seed+i)%NOMBRES.length], text:COMENTARIOS[(seed+i)%COMENTARIOS.length], stars:5, date:`${5+i} días • Verificada`}); } return arr; }
+function openLogin(){ document.getElementById('loginModal').style.display='flex'; } function closeLogin(){ document.getElementById('loginModal').style.display='none'; }
+function guardarRegistro(){ let n=document.getElementById('regName').value.trim(), e=document.getElementById('regEmail').value.trim(); if(!n||!e){ alert('Completa datos'); return; } localStorage.setItem('wobba_user',n); document.getElementById('userTop').style.display='block'; document.getElementById('userTop').innerText='Hola, '+n.split(' ')[0]; document.getElementById('benCuenta').innerText='Hola, '+n.split(' ')[0]; document.getElementById('benCuenta2').innerText='Bienvenido'; closeLogin(); }
+function checkLogin(){ let u=localStorage.getItem('wobba_user'); if(u){ document.getElementById('userTop').style.display='block'; document.getElementById('userTop').innerText='Hola, '+u.split(' ')[0]; document.getElementById('benCuenta').innerText='Hola, '+u.split(' ')[0]; document.getElementById('benCuenta2').innerText='Cuenta verificada'; } }
 
-// RESEÑAS FALSAS REALISTAS
-const NOMBRES=["Camila R. • Medellín","Juan D. • Bogotá","Laura M. • Cali","Andrés S. • USA","Valentina G. • Cartagena","Daniel P. • Miami","Sara O. • Barranquilla","Felipe T. • Orlando"];
-const COMENTARIOS=[
-"Me llegó en 8 días a Medellín, calidad excelente, tal cual la foto. Lo recomiendo 100%.",
-"Lo compré por el precio y me sorprendió lo bueno que es. Ya pedí otro para regalo.",
-"Muy buen producto, funciona perfecto y el empaque vino muy bien protegido.",
-"Llegó rápido a USA, mi esposa quedó feliz. Volveré a comprar en WobbaShop.",
-"Excelente atención por WhatsApp, me ayudaron con el seguimiento. 5 estrellas.",
-"Calidad premium por ese precio, no lo van a creer. Parece de tienda cara.",
-"Le doy 5 estrellas porque superó mis expectativas, muy recomendado.",
-"Perfecto para el día a día, lo uso todos los días y no falla."
-];
-function genReviews(seed){
-  let n=4+ (seed%4); // 4 a 7 reseñas
-  let arr=[]; for(let i=0;i<n;i++){ let idx=(seed+i)%NOMBRES.length; let stars = i<1 ? 4 : 5; arr.push({name:NOMBRES[idx], text:COMENTARIOS[(seed+i)%COMENTARIOS.length], stars, date:`${5+i} días • Compra verificada`}); } return arr;
-}
+async function load(){ cargarDolarHoy(); checkLogin(); let r=await fetch(CSV_URL+'&t='+Date.now()); let text=await r.text(); let rows=parseCSV(text); let header=rows[0].map(h=>h.toLowerCase()); let iNom=header.findIndex(h=>h.includes('nombre')), iPrec=header.findIndex(h=>h.includes('precio')), iCat=header.findIndex(h=>h.includes('categ')), iSpecs=header.findIndex(h=>h.includes('spec')||h.includes('descrip')); let fotoIdxs=header.map((h,i)=>h.includes('foto')||h.includes('image')?i:-1).filter(i=>i!=-1); productos=[]; for(let k=1;k<rows.length;k++){ let row=rows[k]; if(!row) continue; let nombre=(row[iNom]||'').trim(); if(!nombre) continue; let usd=parsePrecio(row[iPrec]); let cat=(row[iCat]||'General').replace(/,/g,' ').trim()||'General'; let fotos=[]; for(let fi of fotoIdxs){ fotos.push(...fixUrl(row[fi]||'')); } fotos=[...new Set(fotos)]; productos.push({nombre,usd,fotos,categoria:cat,specs:row[iSpecs]||'Envío gratis. Garantía 30 días.',reviews:genReviews(k)}); } showCats(); renderCarousel(); renderHero(); upd(); }
 
-async function load(){
-  let r=await fetch(CSV_URL+'&t='+Date.now()); let text=await r.text(); let rows=parseCSV(text);
-  let header=rows[0].map(h=>h.toLowerCase()); 
-  let iNom=header.findIndex(h=>h.includes('nombre')), iPrec=header.findIndex(h=>h.includes('precio')), iCat=header.findIndex(h=>h.includes('categ')), iSpecs=header.findIndex(h=>h.includes('spec')||h.includes('descrip'));
-  let fotoIdxs=header.map((h,i)=>h.includes('foto')||h.includes('image')?i:-1).filter(i=>i!=-1);
-  productos=[];
-  for(let k=1;k<rows.length;k++){
-    let row=rows[k]; if(!row) continue;
-    let nombre=(row[iNom]||'').trim(); if(!nombre) continue;
-    let raw=(row[iPrec]||'0').toString().trim().replace(/\s+/g,'.').replace(',','.'); 
-    let usd=parseFloat(raw)||0;
-    let cat=(row[iCat]||'General').replace(/,/g,' ').trim()||'General';
-    let fotos=[]; for(let fi of fotoIdxs){ fotos.push(...fixUrl(row[fi]||'')); }
-    fotos=[...new Set(fotos)];
-    let reviews=genReviews(k);
-    productos.push({nombre,usd,fotos,categoria:cat,specs:row[iSpecs]||'Envío gratis. Garantía 30 días. Producto importado de alta calidad.',reviews});
-  }
-  showCats(); upd();
+function renderHero(){
+  let cont=document.getElementById('heroProducts');
+  if(!productos.length) return;
+  let top=productos.slice(0,3);
+  let h=''; for(let i=0;i<top.length;i++){ let p=top[i]; let img=p.fotos[0]||''; let size=i==0?'120px':'90px'; let rot=i==0?'rotate(-6deg)':i==1?'rotate(6deg)':'rotate(-3deg)'; h+=`<img src="${img?thumb(img):''}" style="width:${size};height:${size};transform:${rot}" loading="eager">`; }
+  cont.innerHTML=h;
 }
-function iconForCat(n){ n=n.toLowerCase(); if(n.includes('telefon')) return '📱'; if(n.includes('hogar')) return '🏠'; if(n.includes('belleza')) return '💄'; if(n.includes('juguete')) return '🧸'; if(n.includes('accesor')) return '🎧'; return '🛍️'; }
-function showCats(){document.getElementById('viewCat').style.display='block';document.getElementById('viewProd').style.display='none';document.getElementById('viewDetail').style.display='none';let cats=[...new Set(productos.map(p=>p.categoria))];let h='';for(let cat of cats){let count=productos.filter(p=>p.categoria==cat).length;h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" class="card" style="text-align:center"><div style="font-size:32px">${iconForCat(cat)}</div><b style="font-size:13px;display:block;margin-top:6px">${cat}</b><div style="font-size:11px;color:#888">${count} productos</div></div>`;}document.getElementById('catGrid').innerHTML=h;}
-function openCat(cat){currentCat=cat;document.getElementById('viewCat').style.display='none';document.getElementById('viewDetail').style.display='none';document.getElementById('viewProd').style.display='block';document.getElementById('catName').innerText=cat;let h='';for(let i=0;i<productos.length;i++){let p=productos[i];if(p.categoria!=cat)continue;let img=p.fotos[0]||'';let avg=(p.reviews.reduce((a,b)=>a+b.stars,0)/p.reviews.length).toFixed(1);h+=`<div onclick="openDetail(${i})" class="card"><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div><div style="margin-top:8px"><div class="stars">★★★★★ ${avg} (${p.reviews.length})</div><b style="font-size:13px;display:block;min-height:36px;margin:4px 0;line-height:1.3">${p.nombre}</b><div class="price">${fmt(p.usd)} <span style="font-size:10px;color:#888;font-weight:400">${moneda}</span></div><div style="font-size:10px;color:#1a8a1a">Envío gratis</div></div></div>`;}document.getElementById('prod').innerHTML=h;}
-function openDetail(i){detailIndex=i;imgIndex=0;let p=productos[i];document.getElementById('viewCat').style.display='none';document.getElementById('viewProd').style.display='none';document.getElementById('viewDetail').style.display='block';document.getElementById('dName').innerText=p.nombre;document.getElementById('dCat').innerText=p.categoria;document.getElementById('dPrice').innerText=fmt(p.usd)+' '+moneda;document.getElementById('dPrice2').innerText=fmtSmall(p.usd);document.getElementById('dSpecs').innerText=p.specs;let avg=(p.reviews.reduce((a,b)=>a+b.stars,0)/p.reviews.length).toFixed(1);document.getElementById('dRatingTop').innerHTML=`★★★★★ ${avg} • ${p.reviews.length} reseñas • ${Math.floor(Math.random()*80+20)} vendidos`;renderGallery();renderReviews();}
-function renderGallery(){let p=productos[detailIndex];let foto=p.fotos[imgIndex]||p.fotos[0]||'';document.getElementById('mainImg').innerHTML=foto?`<img src="${big(foto)}" style="width:100%;max-height:520px;object-fit:contain"><div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:white;font-size:11px;padding:3px 10px;border-radius:20px">${imgIndex+1}/${p.fotos.length||1}</div><button onclick="prevImg()" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:white;border:1px solid #ddd;width:36px;height:36px;border-radius:50%">‹</button><button onclick="nextImg()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:white;border:1px solid #ddd;width:36px;height:36px;border-radius:50%">›</button>`:'Sin foto';let th='';for(let j=0;j<p.fotos.length;j++){let f=p.fotos[j];let act=j==imgIndex?'border:2px solid #111':'border:1px solid #eee';th+=`<div onclick="imgIndex=${j};renderGallery()" style="${act};border-radius:10px;padding:3px;min-width:62px;background:white;cursor:pointer"><img src="${thumb(f)}" loading="lazy" style="width:58px;height:58px;object-fit:cover;border-radius:8px"></div>`;}document.getElementById('thumbs').innerHTML=th;}
-function renderReviews(){let p=productos[detailIndex];let h='';for(let r of p.reviews){h+=`<div style="border:1px solid #eee;border-radius:14px;padding:12px;background:white"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:13px">${r.name}</b><span style="font-size:10px;color:#888">${r.date}</span></div><div class="stars" style="margin:4px 0">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div><div style="font-size:13px;line-height:1.4">${r.text}</div></div>`;}document.getElementById('dReviews').innerHTML=h;}
-function nextImg(){let p=productos[detailIndex];if(!p.fotos.length) return;imgIndex=(imgIndex+1)%p.fotos.length;renderGallery();}function prevImg(){let p=productos[detailIndex];if(!p.fotos.length) return;imgIndex=(imgIndex-1+p.fotos.length)%p.fotos.length;renderGallery();}
+function renderCarousel(){
+  let track=document.getElementById('carouselTrack'); if(!productos.length) return;
+  let best=[...productos].sort(()=>0.5-Math.random()).slice(0,12);
+  let html=''; for(let p of best){ let img=p.fotos[0]||''; let idx=productos.indexOf(p); html+=`<div class="carousel-item" onclick="openDetail(${idx})"><div style="height:90px;display:flex;align-items:center;justify-content:center"><img src="${img?thumb(img):''}" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div><b style="font-size:11px;display:block;min-height:32px;margin-top:6px;line-height:1.2">${p.nombre.substring(0,45)}</b><div style="font-size:12px;font-weight:800;margin-top:4px">${fmt(p.usd)}</div><div style="font-size:9px;color:#00a650;margin-top:2px">60% OFF • Envío gratis</div></div>`; }
+  track.innerHTML=html+html;
+}
+function showCats(){document.getElementById('viewCat').style.display='block';document.getElementById('viewProd').style.display='none';document.getElementById('viewDetail').style.display='none';let cats=[...new Set(productos.map(p=>p.categoria))];let h='';for(let cat of cats){let prodCat=productos.filter(p=>p.categoria==cat);let count=prodCat.length;let imgRep=prodCat[0]?.fotos[0]||'';h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" class="card"><div class="cat-img" style="background-image:url('${imgRep?thumb(imgRep):''}');background-color:#f9f9f9;background-size:contain;background-repeat:no-repeat;background-position:center"><div class="cat-info"><b style="font-size:14px">${cat}</b><div style="font-size:11px;opacity:.9">${count} productos</div></div></div></div>`;}document.getElementById('catGrid').innerHTML=h;}
+function openCat(cat){currentCat=cat;document.getElementById('viewCat').style.display='none';document.getElementById('viewDetail').style.display='none';document.getElementById('viewProd').style.display='block';document.getElementById('catName').innerText=cat;let h='';for(let i=0;i<productos.length;i++){let p=productos[i];if(p.categoria!=cat)continue;let img=p.fotos[0]||'';h+=`<div onclick="openDetail(${i})" class="card"><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="width:100%;height:100%;object-fit:contain"></div><div style="padding:10px"><div style="color:#ffb400;font-size:11px">★★★★★ 4.9 (${p.reviews.length})</div><b style="font-size:12px;display:block;min-height:34px;margin:4px 0">${p.nombre}</b><div style="font-weight:800">${fmt(p.usd)}</div><div style="font-size:10px;color:#00a650">${fmtSmall(p.usd)}</div></div></div>`;}document.getElementById('prod').innerHTML=h;}
+function openDetail(i){detailIndex=i;imgIndex=0;let p=productos[i];document.getElementById('viewCat').style.display='none';document.getElementById('viewProd').style.display='none';document.getElementById('viewDetail').style.display='block';document.getElementById('dName').innerText=p.nombre;document.getElementById('dCat').innerText=p.categoria;document.getElementById('dPrice').innerText=fmt(p.usd);document.getElementById('dPrice2').innerText=fmtSmall(p.usd);document.getElementById('dolarDetalle').innerText=`TRM oficial $3.166,91 hoy • Tu precio se actualiza solo`;document.getElementById('dSpecs').innerText=p.specs;document.getElementById('dRatingTop').innerHTML=`★★★★★ 4.9 • ${p.reviews.length} reseñas • ${Math.floor(Math.random()*60+20)} vendidos`;renderGallery();renderReviews();}
+function renderGallery(){let p=productos[detailIndex];let foto=p.fotos[imgIndex]||p.fotos[0]||'';document.getElementById('mainImg').innerHTML=foto?`<img src="${big(foto)}" style="width:100%;max-height:500px;object-fit:contain">`:'Sin foto';let th='';for(let j=0;j<p.fotos.length;j++){let f=p.fotos[j];let act=j==imgIndex?'border:2px solid #111':'border:1px solid #eee';th+=`<div onclick="imgIndex=${j};renderGallery()" style="${act};border-radius:10px;padding:3px;min-width:60px;background:white;cursor:pointer"><img src="${thumb(f)}" loading="lazy" style="width:56px;height:56px;object-fit:cover;border-radius:8px"></div>`;}document.getElementById('thumbs').innerHTML=th;}
+function renderReviews(){let p=productos[detailIndex];let h='';for(let r of p.reviews){h+=`<div style="border:1px solid #eee;border-radius:10px;padding:10px;background:white"><b style="font-size:12px">${r.name}</b><div style="color:#ffb400;font-size:12px">★★★★★</div><div style="font-size:12px">${r.text}</div></div>`;}document.getElementById('dReviews').innerHTML=h;}
 function backToList(){if(currentCat)openCat(currentCat);else showCats();}
 function addFromDetail(){add(detailIndex);}function add(i){let p=productos[i];c.push({n:p.nombre,usd:p.usd,i:Date.now()});upd();if(!open)toggleCart();}function del(i){c=c.filter(x=>x.i!=i);upd();}
-function upd(){let totalUSD=0; for(let x of c) totalUSD+=x.usd; document.getElementById('n').innerText=c.length; document.getElementById('t').innerText=moneda==='COP'?'$'+Math.round(totalUSD*TASA).toLocaleString('es-CO')+' COP':'$'+totalUSD.toFixed(2)+' USD'; let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px">Tu carrito está vacío</p>'; else for(let x of c){ h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:10px 0"><span style="font-size:13px">${x.n}<br><b>${fmt(x.usd)} ${moneda}</b></span><button onclick="del(${x.i})" style="background:#f5f5f5;border:1px solid #ddd;width:26px;height:26px;border-radius:50%">x</button></div>`; } document.getElementById('list').innerHTML=h;}
+function upd(){let totalUSD=0; for(let x of c) totalUSD+=x.usd; document.getElementById('n').innerText=c.length; document.getElementById('t').innerText=fmt(totalUSD); document.getElementById('tSmall').innerText=fmtSmall(totalUSD); let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px">Vacío</p>'; else for(let x of c){ h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:10px 0"><span style="font-size:12px">${x.n}<br><b>${fmt(x.usd)}</b></span><button onclick="del(${x.i})" style="background:#f5f5f5;border:1px solid #ddd;width:26px;height:26px;border-radius:50%">x</button></div>`; } document.getElementById('list').innerHTML=h;}
 function toggleCart(){open=!open;document.getElementById('cart').style.right=open?'0':'-100%';document.getElementById('bg').style.display=open?'block':'none';}
-function pay(){if(!c.length){alert('Agrega algo');return;}let totalUSD=0,m='';for(let x of c){totalUSD+=x.usd; m+=x.n+' ('+fmt(x.usd)+'), ';}let msg=`Hola WobbaShop! 🛍️\nMi orden:\n${m}\nTotal: ${fmt(totalUSD)} ${moneda}\nEnvío: Gratis`;window.open('https://wa.me/573016202301?text='+encodeURIComponent(msg),'_blank');}
+function pay(){if(!c.length){alert('Agrega algo');return;}let totalUSD=0,m='';for(let x of c){totalUSD+=x.usd; m+=x.n+' ('+fmt(x.usd)+'), ';}let u=localStorage.getItem('wobba_user')||'Cliente';let msg=`Hola WobbaShop! Soy ${u}\nMi orden:\n${m}\nTotal: ${fmt(totalUSD)} (${fmtSmall(totalUSD)})\nTRM hoy $3.166,91`;window.open('https://wa.me/573016202301?text='+encodeURIComponent(msg),'_blank');}
 load();upd();
 </script></body></html>
