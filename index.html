@@ -1,38 +1,140 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WobbaShop</title></head><body style="margin:0;font-family:sans-serif;background:#f5f5f5"><div style="max-width:480px;margin:auto;background:white;min-height:100vh"><header style="background:black;color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20"><div id="headTitle"><b>WOBBASHOP</b><div style="font-size:11px;opacity:.7">Categorías</div></div><button onclick="toggleCart()" style="background:white;color:black;width:44px;height:44px;border-radius:50%;font-weight:900;position:relative">🛒<span id="n" style="position:absolute;top:-5px;right:-5px;background:black;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid white">0</span></button></header>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WobbaShop</title></head>
+<body style="margin:0;font-family:sans-serif;background:#f5f5f5">
+<div style="max-width:480px;margin:auto;background:white;min-height:100vh">
+<header style="background:black;color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20">
+<div id="headTitle"><b>WOBBASHOP</b><div style="font-size:11px;opacity:.7">desde Google Sheets</div></div>
+<button onclick="toggleCart()" style="background:white;color:black;width:44px;height:44px;border-radius:50%;font-weight:900;position:relative">🛒<span id="n" style="position:absolute;top:-5px;right:-5px;background:black;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid white">0</span></button>
+</header>
 
-<!-- CATEGORIAS -->
-<div id="viewCat" style="padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
-
-<!-- PRODUCTOS DE CATEGORIA -->
+<div id="loading" style="padding:40px;text-align:center;color:#888">Cargando productos desde Sheets...</div>
+<div id="viewCat" style="display:none;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
 <div id="viewProd" style="display:none;padding:16px"><button onclick="showCats()" style="background:white;border:1px solid #ddd;padding:8px 14px;border-radius:20px;margin-bottom:12px">← Volver</button><h2 id="catName" style="margin:0 0 12px 0;font-size:22px"></h2><div id="prod" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div></div>
 
-<!-- DETALLE DE PRODUCTO -->
-<div id="viewDetail" style="display:none;background:white;min-height:100vh"><div style="position:sticky;top:0;background:white;z-index:5;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee"><button onclick="backToList()" style="background:#f5f5f5;border:1px solid #ddd;padding:8px 14px;border-radius:20px">← Volver</button><button onclick="toggleCart()" style="background:black;color:white;width:36px;height:36px;border-radius:50%">🛒</button></div><div id="gallery" style="background:#fafafa;text-align:center;padding:12px;position:relative"><div id="mainImg" style="font-size:90px;padding:20px">🧢</div><div style="position:absolute;top:50%;left:10px;right:10px;display:flex;justify-content:space-between"><button onclick="prevImg()" style="background:rgba(0,0,0,.5);color:white;border:none;width:32px;height:32px;border-radius:50%">‹</button><button onclick="nextImg()" style="background:rgba(0,0,0,.5);color:white;border:none;width:32px;height:32px;border-radius:50%">›</button></div></div><div id="thumbs" style="display:flex;gap:8px;padding:10px 16px;overflow:auto"></div><div style="padding:16px"><div style="display:flex;justify-content:space-between;align-items:start"><div><h2 id="dName" style="margin:0;font-size:20px">Gorra Negra</h2><div id="dRating" style="font-size:13px;color:#ff9900;margin-top:4px">★★★★★ (128 reseñas)</div></div><b id="dPrice" style="font-size:20px">$45.000</b></div><button onclick="addFromDetail()" style="background:black;color:white;width:100%;padding:14px;border-radius:24px;font-weight:700;margin-top:14px;font-size:15px">Agregar al carrito - Pagar por Nequi</button><div style="margin-top:20px"><b style="font-size:15px">Especificaciones</b><div id="dSpecs" style="background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:12px;margin-top:8px;font-size:13px;line-height:1.6"></div></div><div style="margin-top:20px"><b style="font-size:15px">Lo que dicen los compradores</b><div id="dReviews" style="margin-top:10px;display:flex;flex-direction:column;gap:10px"></div></div><div style="height:100px"></div></div></div>
+<div id="viewDetail" style="display:none;background:white;min-height:100vh">
+<div style="position:sticky;top:0;background:white;z-index:10;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee">
+<button onclick="backToList()" style="background:#f5f5f5;border:1px solid #ddd;padding:8px 14px;border-radius:20px">← Volver</button><button onclick="toggleCart()" style="background:black;color:white;width:36px;height:36px;border-radius:50%">🛒</button></div>
+<div style="background:#fafafa"><div id="mainImgWrap" style="text-align:center;padding:12px;position:relative"><div id="mainImg" style="min-height:200px;display:flex;align-items:center;justify-content:center"></div>
+<div style="position:absolute;top:50%;left:10px;right:10px;display:flex;justify-content:space-between"><button onclick="prevImg()" style="background:rgba(0,0,0,.5);color:white;border:none;width:36px;height:36px;border-radius:50%;font-size:18px">‹</button><button onclick="nextImg()" style="background:rgba(0,0,0,.5);color:white;border:none;width:36px;height:36px;border-radius:50%;font-size:18px">›</button></div></div>
+<div id="thumbs" style="display:flex;gap:8px;padding:10px 16px;overflow:auto"></div></div>
+<div style="padding:16px"><div style="display:flex;justify-content:space-between;align-items:start"><div><h2 id="dName" style="margin:0;font-size:20px"></h2><div id="dRating" style="font-size:13px;color:#ff9900;margin-top:4px"></div></div><b id="dPrice" style="font-size:20px"></b></div>
+<button onclick="addFromDetail()" style="background:black;color:white;width:100%;padding:14px;border-radius:24px;font-weight:700;margin-top:14px;font-size:15px">Agregar al carrito - Pagar por Nequi</button>
+<div style="margin-top:20px"><b>Especificaciones</b><div id="dSpecs" style="background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:12px;margin-top:8px;font-size:13px;line-height:1.6;white-space:pre-line"></div></div>
+<div style="margin-top:20px"><b>Reseñas de compradores</b><div id="dReviews" style="margin-top:10px;display:flex;flex-direction:column;gap:10px"></div></div><div style="height:100px"></div></div></div>
 
-<!-- CARRITO -->
-<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:480px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column"><div style="background:black;color:white;padding:16px;display:flex;justify-content:space-between"><b>CARRITO</b><button onclick="toggleCart()" style="background:white;color:black;width:28px;height:28px;border-radius:50%">X</button></div><div id="list" style="flex:1;overflow:auto;padding:12px"></div><div style="padding:12px;border-top:1px solid #ddd"><b>Total: $<span id="t">0</span></b><div style="background:#f5f5f5;border:1px solid #ddd;padding:10px;border-radius:12px;margin-top:10px"><div style="display:flex;justify-content:space-between;font-size:13px"><span>Nequi 3016202301</span><button onclick="navigator.clipboard.writeText('3016202301');alert('Copiado')" style="background:white;border:1px solid #ddd;padding:4px 10px;border-radius:20px">Copiar</button></div><button onclick="pay()" style="background:black;color:white;width:100%;padding:13px;border-radius:24px;font-weight:700;margin-top:10px">Enviar comprobante por WhatsApp →</button></div></div></div><div id="bg" onclick="toggleCart()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;z-index:90"></div></div></div><script>
-let productos=[
- {nombre:"Gorra Negra",precio:45000,categoria:"Gorras",fotos:["🧢","🧢","📦","🎁"],specs:"Material: Algodón premium<br>Talla: Ajustable (54-60cm)<br>Color: Negro mate<br>Incluye: Caja Wobba",reviews:[{n:"Andrés M.",t:"Calidad 10/10, llegó en 2 días",s:5},{n:"Laura P.",t:"Igual que la foto, me encanta",s:5},{n:"Carlos",t:"Buena, pero un poco grande",s:4}]},
- {nombre:"Gorra Azul",precio:40000,categoria:"Gorras",fotos:["🧢","💙","📦"],specs:"Material: Drill<br>Talla: Única<br>Ideal para: Diario, gym",reviews:[{n:"Sofia",t:"Color hermoso",s:5}]},
- {nombre:"Hoodie Negro",precio:89000,categoria:"Hoodies",fotos:["👕","🖤","📸","📦"],specs:"Material: Algodón afelpado 320gsm<br>Tallas: S, M, L, XL<br>No se destiñe, no se encoge",reviews:[{n:"Juan",t:"Abriga full y no pesa",s:5},{n:"Valentina",t:"Lo amo, lo uso todos los días",s:5}]},
- {nombre:"Tenis Wobba",precio:120000,categoria:"Tenis",fotos:["👟","👟","🦶","📦"],specs:"Suela: Antideslizante<br>Material: Mesh transpirable<br>Tallas: 38-44<br>Garantía 30 días",reviews:[{n:"Pipe",t:"Cómodos para trabajar todo el día",s:5}]},
- {nombre:"Bolso Cuero",precio:65000,categoria:"Bolsos",fotos:["👜","👝","📦"],specs:"Material: Cuero sintético PU<br>Medidas: 28x20cm<br>Bolsillos internos: 3",reviews:[{n:"Mafe",t:"Le cabe todo y se ve caro",s:5}]},
-];
-let c=[],open=false,currentCat='',detailIndex=0,imgIndex=0;
-const catIcons={"gorras":"🧢","hoodies":"👕","tenis":"👟","bolsos":"👜","default":"🛍️"};
-function iconFor(cat){let k=cat.toLowerCase();for(let i in catIcons){if(k.includes(i))return catIcons[i];}return catIcons.default;}
-function showCats(){document.getElementById('viewCat').style.display='grid';document.getElementById('viewProd').style.display='none';document.getElementById('viewDetail').style.display='none';let cats=[...new Set(productos.map(p=>p.categoria))];let h='';for(let cat of cats){let count=productos.filter(p=>p.categoria==cat).length;h+=`<div onclick="openCat('${cat}')" style="background:white;border:1px solid #e5e5e5;border-radius:16px;padding:20px 12px;text-align:center;cursor:pointer"><div style="font-size:40px">${iconFor(cat)}</div><b style="display:block;margin-top:8px;font-size:14px">${cat}</b><span style="font-size:12px;color:#888">${count} productos</span></div>`;}document.getElementById('viewCat').innerHTML=h;document.getElementById('headTitle').innerHTML='<b>WOBBASHOP</b><div style="font-size:11px;opacity:.7">Categorías</div>';}
-function openCat(cat){currentCat=cat;document.getElementById('viewCat').style.display='none';document.getElementById('viewDetail').style.display='none';document.getElementById('viewProd').style.display='block';document.getElementById('catName').innerText=cat;document.getElementById('headTitle').innerHTML=`<b onclick="showCats()" style="cursor:pointer">← ${cat}</b>`;let h='';for(let i=0;i<productos.length;i++){let p=productos[i];if(p.categoria!=cat)continue;h+=`<div onclick="openDetail(${i})" style="border:1px solid #e5e5e5;border-radius:12px;padding:12px;text-align:center;background:white;cursor:pointer"><div style="font-size:36px">${p.fotos[0]}</div><b style="font-size:13px;display:block;margin-top:6px">${p.nombre}</b><span style="font-weight:900">$${p.precio.toLocaleString()}</span><br><span style="font-size:12px;color:#888">★★★★★ (ver más)</span></div>`;}document.getElementById('prod').innerHTML=h;}
-function openDetail(i){detailIndex=i;imgIndex=0;let p=productos[i];document.getElementById('viewCat').style.display='none';document.getElementById('viewProd').style.display='none';document.getElementById('viewDetail').style.display='block';document.getElementById('headTitle').innerHTML=`<b onclick="backToList()" style="cursor:pointer">← ${p.nombre}</b>`;document.getElementById('dName').innerText=p.nombre;document.getElementById('dPrice').innerText='$'+p.precio.toLocaleString();document.getElementById('dSpecs').innerHTML=p.specs;let stars='★★★★★ ('+p.reviews.length+' reseñas)';document.getElementById('dRating').innerText=stars;renderGallery();let rh='';for(let r of p.reviews){rh+=`<div style="border:1px solid #eee;border-radius:12px;padding:10px"><div style="display:flex;justify-content:space-between"><b style="font-size:13px">${r.n}</b><span style="color:#ff9900;font-size:12px">${'★'.repeat(r.s)}</span></div><div style="font-size:13px;margin-top:4px;color:#333">${r.t}</div></div>`;}document.getElementById('dReviews').innerHTML=rh;window.scrollTo(0,0);}
-function renderGallery(){let p=productos[detailIndex];let foto=p.fotos[imgIndex];let el=document.getElementById('mainImg');if(foto.startsWith('http'))el.innerHTML=`<img src="${foto}" style="width:100%;max-height:300px;object-fit:contain">`;else el.innerHTML=foto;let th='';for(let j=0;j<p.fotos.length;j++){let f=p.fotos[j];let active=j==imgIndex?'border:2px solid black':'border:1px solid #eee';th+=`<div onclick="imgIndex=${j};renderGallery()" style="${active};border-radius:10px;padding:8px;background:white;cursor:pointer;min-width:50px;text-align:center">${f.startsWith('http')?`<img src="${f}" style="width:40px;height:40px;object-fit:cover">`:f}</div>`;}document.getElementById('thumbs').innerHTML=th;}
-function nextImg(){let p=productos[detailIndex];imgIndex=(imgIndex+1)%p.fotos.length;renderGallery();}
-function prevImg(){let p=productos[detailIndex];imgIndex=(imgIndex-1+p.fotos.length)%p.fotos.length;renderGallery();}
-function backToList(){if(currentCat)openCat(currentCat);else showCats();}
-function addFromDetail(){add(detailIndex);}
-function add(i){let p=productos[i];c.push({n:p.nombre,p:p.precio,i:Date.now()});upd();if(!open)toggleCart();}
-function del(i){c=c.filter(x=>x.i!=i);upd();}
-function upd(){let s=0;for(let x of c)s+=x.p;document.getElementById('n').innerText=c.length;document.getElementById('t').innerText=s.toLocaleString();let h='';if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px>Vacio</p>';else for(let x of c)h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0"><span>${x.n} $${x.p.toLocaleString()}</span><button onclick="del(${x.i})" style="background:#f5f5f5;border:1px solid #ddd;width:26px;height:26px;border-radius:50%">x</button></div>`;document.getElementById('list').innerHTML=h;}
-function toggleCart(){open=!open;document.getElementById('cart').style.right=open?'0':'-100%';document.getElementById('bg').style.display=open?'block':'none';}
-function pay(){if(!c.length){alert('Agrega algo');return;}let s=0,m='';for(let x of c){s+=x.p;m+=x.n+', ';}window.open('https://wa.me/573016202301?text='+encodeURIComponent('Hola WobbaShop! Pague $'+s+' a Nequi 3016202301 Productos: '+m),'_blank');}
-showCats();upd();
+<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:480px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column">
+<div style="background:black;color:white;padding:16px;display:flex;justify-content:space-between"><b>CARRITO</b><button onclick="toggleCart()" style="background:white;color:black;width:28px;height:28px;border-radius:50%">X</button></div>
+<div id="list" style="flex:1;overflow:auto;padding:12px"></div>
+<div style="padding:12px;border-top:1px solid #ddd"><b>Total: $<span id="t">0</span></b>
+<div style="background:#f5f5f5;border:1px solid #ddd;padding:10px;border-radius:12px;margin-top:10px">
+<div style="display:flex;justify-content:space-between;font-size:13px"><span>Nequi 3016202301</span><button onclick="navigator.clipboard.writeText('3016202301');alert('Copiado')" style="background:white;border:1px solid #ddd;padding:4px 10px;border-radius:20px">Copiar</button></div>
+<button onclick="pay()" style="background:black;color:white;width:100%;padding:13px;border-radius:24px;font-weight:700;margin-top:10px">Enviar comprobante por WhatsApp →</button></div></div></div>
+<div id="bg" onclick="toggleCart()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;z-index:90"></div>
+</div>
+<script>
+const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vSw0ttSUsTpHjrjXGTLZfYEt2E4IGar2s55-Me0DHaCDQFZMZ6y-ck1u173-nIUBxklEIl1Wk-Y1hnf/pub?gid=0&single=true&output=csv";
+let productos=[], c=[], open=false, currentCat='', detailIndex=0, imgIndex=0;
+const catIcons={"gorras":"🧢","hoodies":"👕","tenis":"👟","bolsos":"👜","tecn":"🎧","masc":"🐶","default":"🛍️"};
+function iconFor(cat){let k=(cat||'').toLowerCase();for(let i in catIcons){if(k.includes(i))return catIcons[i];}return catIcons.default;}
+
+function parseCSV(text){
+ let lines=text.trim().split('\n');
+ let headers=lines[0].split(',').map(h=>h.trim().toLowerCase());
+ let idx={}; headers.forEach((h,i)=>{ idx[h.replace(/"/g,'')]=i; });
+ let out=[];
+ for(let r=1;r<lines.length;r++){
+   if(!lines[r].trim())continue;
+   // split respetando comillas
+   let cols=lines[r].match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || lines[r].split(',');
+   cols=cols.map(c=>c.replace(/^"|"$/g,'').trim());
+   let get=(names)=>{ for(let n of names){ if(idx[n]!=null) return cols[idx[n]]||''; } return ''; };
+   let nombre=get(['nombre','name','producto']);
+   if(!nombre)continue;
+   let precio=get(['precio','price']);
+   let foto1=get(['foto1','foto','imagen1','image']);
+   let foto2=get(['foto2','imagen2']);
+   let foto3=get(['foto3','imagen3']);
+   let foto4=get(['foto4','imagen4']);
+   let fotosRaw=get(['fotos','images']); // por si usas una sola columna con | separador
+   let fotos=[];
+   if(fotosRaw && fotosRaw.includes('http')){ fotos=fotosRaw.split('|').map(s=>s.trim()).filter(Boolean); }
+   else{ fotos=[foto1,foto2,foto3,foto4].filter(f=>f && f.startsWith('http')); if(fotos.length==0 && foto1) fotos=[foto1]; }
+   // fallback emoji si no hay link
+   if(fotos.length==0) fotos=[iconFor(get(['categoria']))];
+   out.push({
+     nombre:nombre,
+     precio:parseInt((precio+'').replace(/\D/g,''))||0,
+     fotos:fotos,
+     categoria:get(['categoria','category','cat'])||'General',
+     specs:get(['specs','especificaciones','descripcion'])||'Sin especificaciones',
+     reviews:get(['reviews','reseñas','resenas'])||''
+   });
+ }
+ return out;
+}
+
+async function load(){
+ try{
+  let r=await fetch(SHEET_URL); let t=await r.text();
+  productos=parseCSV(t);
+  document.getElementById('loading').style.display='none';
+  document.getElementById('viewCat').style.display='grid';
+  showCats(); upd();
+ }catch(e){ document.getElementById('loading').innerText='Error cargando Sheets. Verifica que esté publicado como CSV. '+e; }
+}
+
+function showCats(){
+ document.getElementById('viewCat').style.display='grid';
+ document.getElementById('viewProd').style.display='none';
+ document.getElementById('viewDetail').style.display='none';
+ let cats=[...new Set(productos.map(p=>p.categoria))];
+ let h=''; for(let cat of cats){ let count=productos.filter(p=>p.categoria==cat).length;
+  h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" style="background:white;border:1px solid #e5e5e5;border-radius:16px;padding:20px 12px;text-align:center;cursor:pointer"><div style="font-size:40px">${iconFor(cat)}</div><b style="display:block;margin-top:8px;font-size:14px">${cat}</b><span style="font-size:12px;color:#888">${count} productos</span></div>`;}
+ document.getElementById('viewCat').innerHTML=h;
+ document.getElementById('headTitle').innerHTML='<b>WOBBASHOP</b><div style="font-size:11px;opacity:.7">'+productos.length+' productos</div>';
+}
+function openCat(cat){
+ currentCat=cat; document.getElementById('viewCat').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('viewProd').style.display='block';
+ document.getElementById('catName').innerText=cat; document.getElementById('headTitle').innerHTML=`<b onclick="showCats()" style="cursor:pointer">← ${cat}</b>`;
+ let h=''; for(let i=0;i<productos.length;i++){ let p=productos[i]; if(p.categoria!=cat)continue;
+  let img=p.fotos[0]; let imgHtml=img.startsWith('http')?`<img src="${img}" style="width:100%;height:90px;object-fit:contain">`:`<div style="font-size:36px">${img}</div>`;
+  h+=`<div onclick="openDetail(${i})" style="border:1px solid #e5e5e5;border-radius:12px;padding:12px;text-align:center;background:white;cursor:pointer">${imgHtml}<b style="font-size:13px;display:block;margin-top:6px">${p.nombre}</b><span style="font-weight:900">$${p.precio.toLocaleString()}</span></div>`;}
+ document.getElementById('prod').innerHTML=h;
+}
+function openDetail(i){
+ detailIndex=i; imgIndex=0; let p=productos[i];
+ document.getElementById('viewCat').style.display='none'; document.getElementById('viewProd').style.display='none'; document.getElementById('viewDetail').style.display='block';
+ document.getElementById('headTitle').innerHTML=`<b onclick="backToList()" style="cursor:pointer">← ${p.nombre}</b>`;
+ document.getElementById('dName').innerText=p.nombre; document.getElementById('dPrice').innerText='$'+p.precio.toLocaleString();
+ document.getElementById('dSpecs').innerText=p.specs.replace(/;/g,'\n');
+ let reviewsRaw=p.reviews; let rvHtml='';
+ if(reviewsRaw){
+   let revs=reviewsRaw.split(';').map(s=>s.trim()).filter(Boolean);
+   document.getElementById('dRating').innerText='★★★★★ ('+revs.length+' reseñas)';
+   for(let r of revs){ let parts=r.split('|'); let name=parts[0]||'Cliente'; let text=parts[1]||r; let stars=parseInt(parts[2])||5;
+     rvHtml+=`<div style="border:1px solid #eee;border-radius:12px;padding:10px"><div style="display:flex;justify-content:space-between"><b style="font-size:13px">${name}</b><span style="color:#ff9900;font-size:12px">${'★'.repeat(stars)}</span></div><div style="font-size:13px;margin-top:4px;color:#333">${text}</div></div>`;}
+ } else { document.getElementById('dRating').innerText='★★★★★ (Nuevo)'; rvHtml='<div style="color:#888;font-size:13px">Sé el primero en reseñar</div>'; }
+ document.getElementById('dReviews').innerHTML=rvHtml;
+ renderGallery(); window.scrollTo(0,0);
+}
+function renderGallery(){
+ let p=productos[detailIndex]; let foto=p.fotos[imgIndex]||p.fotos[0];
+ let el=document.getElementById('mainImg');
+ if(foto.startsWith('http')) el.innerHTML=`<img src="${foto}" style="width:100%;max-height:320px;object-fit:contain;border-radius:12px">`;
+ else el.innerHTML=`<div style="font-size:90px;padding:20px">${foto}</div>`;
+ let th=''; for(let j=0;j<p.fotos.length;j++){ let f=p.fotos[j]; let active=j==imgIndex?'border:2px solid black':'border:1px solid #eee';
+  let inner=f.startsWith('http')?`<img src="${f}" style="width:50px;height:50px;object-fit:cover;border-radius:8px">`:`<div style="font-size:24px">${f}</div>`;
+  th+=`<div onclick="imgIndex=${j};renderGallery()" style="${active};border-radius:10px;padding:4px;background:white;cursor:pointer;min-width:58px;display:flex;align-items:center;justify-content:center">${inner}</div>`;}
+ document.getElementById('thumbs').innerHTML=th;
+}
+function nextImg(){ let p=productos[detailIndex]; imgIndex=(imgIndex+1)%p.fotos.length; renderGallery(); }
+function prevImg(){ let p=productos[detailIndex]; imgIndex=(imgIndex-1+p.fotos.length)%p.fotos.length; renderGallery(); }
+function backToList(){ if(currentCat)openCat(currentCat); else showCats(); }
+function addFromDetail(){ add(detailIndex); }
+function add(i){ let p=productos[i]; c.push({n:p.nombre,p:p.precio,i:Date.now()}); upd(); if(!open)toggleCart(); }
+function del(i){ c=c.filter(x=>x.i!=i); upd(); }
+function upd(){ let s=0; for(let x of c)s+=x.p; document.getElementById('n').innerText=c.length; document.getElementById('t').innerText=s.toLocaleString();
+ let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px>Vacio</p>'; else for(let x of c)h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0"><span>${x.n} $${x.p.toLocaleString()}</span><button onclick="del(${x.i})" style="background:#f5f5f5;border:1px solid #ddd;width:26px;height:26px;border-radius:50%">x</button></div>`; document.getElementById('list').innerHTML=h; }
+function toggleCart(){ open=!open; document.getElementById('cart').style.right=open?'0':'-100%'; document.getElementById('bg').style.display=open?'block':'none'; }
+function pay(){ if(!c.length){alert('Agrega algo');return;} let s=0,m=''; for(let x of c){s+=x.p;m+=x.n+', ';} window.open('https://wa.me/573016202301?text='+encodeURIComponent('Hola WobbaShop! Pague $'+s+' a Nequi 3016202301 Productos: '+m),'_blank'); }
+load(); upd();
 </script></body></html>
