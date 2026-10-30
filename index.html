@@ -2,139 +2,107 @@
 <body style="margin:0;font-family:sans-serif;background:#f5f5f5">
 <div style="max-width:480px;margin:auto;background:white;min-height:100vh">
 <header style="background:black;color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20">
-<div id="headTitle"><b>WOBBASHOP</b><div style="font-size:11px;opacity:.7">desde Google Sheets</div></div>
+<div><b>WOBBASHOP</b><div id="count" style="font-size:11px;opacity:.7">Conectado a Sheets</div></div>
 <button onclick="toggleCart()" style="background:white;color:black;width:44px;height:44px;border-radius:50%;font-weight:900;position:relative">🛒<span id="n" style="position:absolute;top:-5px;right:-5px;background:black;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid white">0</span></button>
 </header>
-
-<div id="loading" style="padding:40px;text-align:center;color:#888">Cargando productos desde Sheets...</div>
-<div id="viewCat" style="display:none;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
-<div id="viewProd" style="display:none;padding:16px"><button onclick="showCats()" style="background:white;border:1px solid #ddd;padding:8px 14px;border-radius:20px;margin-bottom:12px">← Volver</button><h2 id="catName" style="margin:0 0 12px 0;font-size:22px"></h2><div id="prod" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div></div>
-
-<div id="viewDetail" style="display:none;background:white;min-height:100vh">
-<div style="position:sticky;top:0;background:white;z-index:10;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee">
-<button onclick="backToList()" style="background:#f5f5f5;border:1px solid #ddd;padding:8px 14px;border-radius:20px">← Volver</button><button onclick="toggleCart()" style="background:black;color:white;width:36px;height:36px;border-radius:50%">🛒</button></div>
-<div style="background:#fafafa"><div id="mainImgWrap" style="text-align:center;padding:12px;position:relative"><div id="mainImg" style="min-height:200px;display:flex;align-items:center;justify-content:center"></div>
-<div style="position:absolute;top:50%;left:10px;right:10px;display:flex;justify-content:space-between"><button onclick="prevImg()" style="background:rgba(0,0,0,.5);color:white;border:none;width:36px;height:36px;border-radius:50%;font-size:18px">‹</button><button onclick="nextImg()" style="background:rgba(0,0,0,.5);color:white;border:none;width:36px;height:36px;border-radius:50%;font-size:18px">›</button></div></div>
-<div id="thumbs" style="display:flex;gap:8px;padding:10px 16px;overflow:auto"></div></div>
-<div style="padding:16px"><div style="display:flex;justify-content:space-between;align-items:start"><div><h2 id="dName" style="margin:0;font-size:20px"></h2><div id="dRating" style="font-size:13px;color:#ff9900;margin-top:4px"></div></div><b id="dPrice" style="font-size:20px"></b></div>
-<button onclick="addFromDetail()" style="background:black;color:white;width:100%;padding:14px;border-radius:24px;font-weight:700;margin-top:14px;font-size:15px">Agregar al carrito - Pagar por Nequi</button>
-<div style="margin-top:20px"><b>Especificaciones</b><div id="dSpecs" style="background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:12px;margin-top:8px;font-size:13px;line-height:1.6;white-space:pre-line"></div></div>
-<div style="margin-top:20px"><b>Reseñas de compradores</b><div id="dReviews" style="margin-top:10px;display:flex;flex-direction:column;gap:10px"></div></div><div style="height:100px"></div></div></div>
-
-<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:480px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column">
-<div style="background:black;color:white;padding:16px;display:flex;justify-content:space-between"><b>CARRITO</b><button onclick="toggleCart()" style="background:white;color:black;width:28px;height:28px;border-radius:50%">X</button></div>
-<div id="list" style="flex:1;overflow:auto;padding:12px"></div>
-<div style="padding:12px;border-top:1px solid #ddd"><b>Total: $<span id="t">0</span></b>
-<div style="background:#f5f5f5;border:1px solid #ddd;padding:10px;border-radius:12px;margin-top:10px">
-<div style="display:flex;justify-content:space-between;font-size:13px"><span>Nequi 3016202301</span><button onclick="navigator.clipboard.writeText('3016202301');alert('Copiado')" style="background:white;border:1px solid #ddd;padding:4px 10px;border-radius:20px">Copiar</button></div>
-<button onclick="pay()" style="background:black;color:white;width:100%;padding:13px;border-radius:24px;font-weight:700;margin-top:10px">Enviar comprobante por WhatsApp →</button></div></div></div>
-<div id="bg" onclick="toggleCart()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;z-index:90"></div>
+<div id="viewCat" style="padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
+<div id="viewProd" style="display:none;padding:16px"><button onclick="showCats()" style="background:white;border:1px solid #ddd;padding:8px 14px;border-radius:20px;margin-bottom:12px">← Volver</button><h2 id="catName"></h2><div id="prod" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div></div>
+<div id="viewDetail" style="display:none"><div style="padding:12px;display:flex;justify-content:space-between;border-bottom:1px solid #eee;background:white;position:sticky;top:0;z-index:10"><button onclick="backToList()" style="background:#f5f5f5;border:1px solid #ddd;padding:8px 14px;border-radius:20px">← Volver</button><button onclick="toggleCart()" style="background:black;color:white;width:36px;height:36px;border-radius:50%">🛒</button></div>
+<div style="background:#fafafa"><div id="mainImg" style="min-height:300px;display:flex;align-items:center;justify-content:center;padding:12px;position:relative"></div><div id="thumbs" style="display:flex;gap:8px;padding:10px 16px;overflow:auto"></div></div>
+<div style="padding:16px"><h2 id="dName" style="margin:0"></h2><div id="dRating" style="color:#ff9900;font-size:13px"></div><b id="dPrice" style="font-size:22px;display:block;margin-top:6px"></b><button onclick="addFromDetail()" style="background:black;color:white;width:100%;padding:14px;border-radius:24px;font-weight:700;margin-top:14px">Agregar - Nequi</button><div style="margin-top:20px"><b>Especificaciones</b><div id="dSpecs" style="background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:12px;margin-top:8px;font-size:13px;line-height:1.6"></div></div><div style="margin-top:20px"><b>Reseñas</b><div id="dReviews" style="margin-top:10px;display:flex;flex-direction:column;gap:10px"></div></div></div></div>
+<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:480px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column"><div style="background:black;color:white;padding:16px;display:flex;justify-content:space-between"><b>CARRITO</b><button onclick="toggleCart()" style="background:white;color:black;width:28px;height:28px;border-radius:50%">X</button></div><div id="list" style="flex:1;overflow:auto;padding:12px"></div><div style="padding:12px;border-top:1px solid #ddd"><b>Total: $<span id="t">0</span></b><button onclick="pay()" style="background:black;color:white;width:100%;padding:13px;border-radius:24px;margin-top:10px">WhatsApp →</button></div></div><div id="bg" onclick="toggleCart()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;z-index:90"></div>
 </div>
 <script>
 const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vSw0ttSUsTpHjrjXGTLZfYEt2E4IGar2s55-Me0DHaCDQFZMZ6y-ck1u173-nIUBxklEIl1Wk-Y1hnf/pub?gid=0&single=true&output=csv";
 let productos=[], c=[], open=false, currentCat='', detailIndex=0, imgIndex=0;
-const catIcons={"gorras":"🧢","hoodies":"👕","tenis":"👟","bolsos":"👜","tecn":"🎧","masc":"🐶","default":"🛍️"};
-function iconFor(cat){let k=(cat||'').toLowerCase();for(let i in catIcons){if(k.includes(i))return catIcons[i];}return catIcons.default;}
+const iconFor=(cat)=>{cat=(cat||'').toLowerCase(); if(cat.includes('gorra'))return '🧢'; if(cat.includes('tenis'))return '👟'; if(cat.includes('bolso'))return '👜'; if(cat.includes('hood'))return '👕'; return '🛍️';};
 
-function parseCSV(text){
- let lines=text.trim().split('\n');
- let headers=lines[0].split(',').map(h=>h.trim().toLowerCase());
- let idx={}; headers.forEach((h,i)=>{ idx[h.replace(/"/g,'')]=i; });
+function smartParse(text){
+ text=text.replace(/^\uFEFF/,'');
+ // FIX 1: Protege las URLs de CJ que tienen coma adentro
+ text=text.replace(/https?:\/\/[^\s"\n]+/g, (url)=>{
+   return url.replace(/,/g,'__CJ_COMMA__');
+ });
+ let lines=text.split(/\r?\n/).filter(l=>l.trim()!='');
+ if(!lines.length) return [];
+ let headers=lines[0].split(',').map(h=>h.toLowerCase().replace(/"/g,'').trim());
+ let iNom=headers.findIndex(h=>h.includes('nombre')||h.includes('name'));
+ let iPrec=headers.findIndex(h=>h.includes('precio')||h.includes('price'));
+ let iCat=headers.findIndex(h=>h.includes('categ'));
+ let iSpecs=headers.findIndex(h=>h.includes('spec')||h.includes('descrip'));
+ let iRev=headers.findIndex(h=>h.includes('review')||h.includes('rese'));
+ let fotoIdxs=headers.map((h,i)=>h.includes('foto')||h.includes('image')?i:-1).filter(i=>i!=-1);
  let out=[];
  for(let r=1;r<lines.length;r++){
-   if(!lines[r].trim())continue;
-   // split respetando comillas
-   let cols=lines[r].match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || lines[r].split(',');
-   cols=cols.map(c=>c.replace(/^"|"$/g,'').trim());
-   let get=(names)=>{ for(let n of names){ if(idx[n]!=null) return cols[idx[n]]||''; } return ''; };
-   let nombre=get(['nombre','name','producto']);
-   if(!nombre)continue;
-   let precio=get(['precio','price']);
-   let foto1=get(['foto1','foto','imagen1','image']);
-   let foto2=get(['foto2','imagen2']);
-   let foto3=get(['foto3','imagen3']);
-   let foto4=get(['foto4','imagen4']);
-   let fotosRaw=get(['fotos','images']); // por si usas una sola columna con | separador
+   let cols=lines[r].split(',').map(c=>c.replace(/^"|"$/g,'').trim().replace(/__CJ_COMMA__/g,','));
+   // FIX 2: Si la linea se rompio por la coma de CJ, reconstruye
+   if(cols.length>headers.length){
+     let fixed=[]; let temp='';
+     for(let col of lines[r].split(',')){
+       if(col.includes('https://')||col.includes('http://')){ if(temp) fixed.push(temp); temp=col; }
+       else if(temp && (temp.includes('?x-oss-process')||temp.includes('__CJ_COMMA__'))){ temp+=','+col; }
+       else { if(temp){fixed.push(temp); temp='';} fixed.push(col); }
+     }
+     if(temp) fixed.push(temp);
+     cols=fixed.map(c=>c.replace(/^"|"$/g,'').trim().replace(/__CJ_COMMA__/g,','));
+   }
+   let nombre=(cols[iNom]||'').trim(); if(!nombre) continue;
+   let precio=parseInt((cols[iPrec]||'0').replace(/[^0-9]/g,''))||0;
+   let categoria=(cols[iCat]||'General').trim();
+   let specs=(cols[iSpecs]||'').trim();
+   let reviews=(cols[iRev]||'').trim();
    let fotos=[];
-   if(fotosRaw && fotosRaw.includes('http')){ fotos=fotosRaw.split('|').map(s=>s.trim()).filter(Boolean); }
-   else{ fotos=[foto1,foto2,foto3,foto4].filter(f=>f && f.startsWith('http')); if(fotos.length==0 && foto1) fotos=[foto1]; }
-   // fallback emoji si no hay link
-   if(fotos.length==0) fotos=[iconFor(get(['categoria']))];
-   out.push({
-     nombre:nombre,
-     precio:parseInt((precio+'').replace(/\D/g,''))||0,
-     fotos:fotos,
-     categoria:get(['categoria','category','cat'])||'General',
-     specs:get(['specs','especificaciones','descripcion'])||'Sin especificaciones',
-     reviews:get(['reviews','reseñas','resenas'])||''
-   });
+   for(let fi of fotoIdxs){ let v=(cols[fi]||'').trim(); if(v.startsWith('http')) fotos.push(v); }
+   if(!fotos.length){ let m=lines[r].match(/https?:\/\/[^\s"]+/g); if(m) fotos=m.map(u=>u.replace(/__CJ_COMMA__/g,',')); }
+   if(!fotos.length) fotos=[iconFor(categoria)];
+   out.push({nombre,precio,fotos,categoria,specs:specs||'Sin especificaciones',reviews});
  }
  return out;
 }
 
 async function load(){
- try{
-  let r=await fetch(SHEET_URL); let t=await r.text();
-  productos=parseCSV(t);
-  document.getElementById('loading').style.display='none';
-  document.getElementById('viewCat').style.display='grid';
-  showCats(); upd();
- }catch(e){ document.getElementById('loading').innerText='Error cargando Sheets. Verifica que esté publicado como CSV. '+e; }
+ let r=await fetch(SHEET_URL); let t=await r.text();
+ productos=smartParse(t);
+ document.getElementById('count').innerText=productos.length+' productos desde Sheets';
+ showCats(); upd();
 }
-
 function showCats(){
- document.getElementById('viewCat').style.display='grid';
- document.getElementById('viewProd').style.display='none';
- document.getElementById('viewDetail').style.display='none';
+ document.getElementById('viewCat').style.display='grid'; document.getElementById('viewProd').style.display='none'; document.getElementById('viewDetail').style.display='none';
  let cats=[...new Set(productos.map(p=>p.categoria))];
  let h=''; for(let cat of cats){ let count=productos.filter(p=>p.categoria==cat).length;
-  h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" style="background:white;border:1px solid #e5e5e5;border-radius:16px;padding:20px 12px;text-align:center;cursor:pointer"><div style="font-size:40px">${iconFor(cat)}</div><b style="display:block;margin-top:8px;font-size:14px">${cat}</b><span style="font-size:12px;color:#888">${count} productos</span></div>`;}
+  h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" style="background:white;border:1px solid #e5e5e5;border-radius:16px;padding:20px 12px;text-align:center;cursor:pointer"><div style="font-size:40px">${iconFor(cat)}</div><b>${cat}</b><div style="font-size:12px;color:#888">${count}</div></div>`;}
  document.getElementById('viewCat').innerHTML=h;
- document.getElementById('headTitle').innerHTML='<b>WOBBASHOP</b><div style="font-size:11px;opacity:.7">'+productos.length+' productos</div>';
 }
 function openCat(cat){
- currentCat=cat; document.getElementById('viewCat').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('viewProd').style.display='block';
- document.getElementById('catName').innerText=cat; document.getElementById('headTitle').innerHTML=`<b onclick="showCats()" style="cursor:pointer">← ${cat}</b>`;
- let h=''; for(let i=0;i<productos.length;i++){ let p=productos[i]; if(p.categoria!=cat)continue;
-  let img=p.fotos[0]; let imgHtml=img.startsWith('http')?`<img src="${img}" style="width:100%;height:90px;object-fit:contain">`:`<div style="font-size:36px">${img}</div>`;
+ currentCat=cat; document.getElementById('viewCat').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('viewProd').style.display='block'; document.getElementById('catName').innerText=cat;
+ let h=''; for(let i=0;i<productos.length;i++){ let p=productos[i]; if(p.categoria!=cat) continue;
+  let img=p.fotos[0]; let imgHtml=img.startsWith('http')?`<img src="${img}" style="width:100%;height:90px;object-fit:contain" onerror="this.style.display='none'">`:`<div style="font-size:36px">${img}</div>`;
   h+=`<div onclick="openDetail(${i})" style="border:1px solid #e5e5e5;border-radius:12px;padding:12px;text-align:center;background:white;cursor:pointer">${imgHtml}<b style="font-size:13px;display:block;margin-top:6px">${p.nombre}</b><span style="font-weight:900">$${p.precio.toLocaleString()}</span></div>`;}
  document.getElementById('prod').innerHTML=h;
 }
 function openDetail(i){
  detailIndex=i; imgIndex=0; let p=productos[i];
  document.getElementById('viewCat').style.display='none'; document.getElementById('viewProd').style.display='none'; document.getElementById('viewDetail').style.display='block';
- document.getElementById('headTitle').innerHTML=`<b onclick="backToList()" style="cursor:pointer">← ${p.nombre}</b>`;
- document.getElementById('dName').innerText=p.nombre; document.getElementById('dPrice').innerText='$'+p.precio.toLocaleString();
- document.getElementById('dSpecs').innerText=p.specs.replace(/;/g,'\n');
- let reviewsRaw=p.reviews; let rvHtml='';
- if(reviewsRaw){
-   let revs=reviewsRaw.split(';').map(s=>s.trim()).filter(Boolean);
-   document.getElementById('dRating').innerText='★★★★★ ('+revs.length+' reseñas)';
-   for(let r of revs){ let parts=r.split('|'); let name=parts[0]||'Cliente'; let text=parts[1]||r; let stars=parseInt(parts[2])||5;
-     rvHtml+=`<div style="border:1px solid #eee;border-radius:12px;padding:10px"><div style="display:flex;justify-content:space-between"><b style="font-size:13px">${name}</b><span style="color:#ff9900;font-size:12px">${'★'.repeat(stars)}</span></div><div style="font-size:13px;margin-top:4px;color:#333">${text}</div></div>`;}
- } else { document.getElementById('dRating').innerText='★★★★★ (Nuevo)'; rvHtml='<div style="color:#888;font-size:13px">Sé el primero en reseñar</div>'; }
- document.getElementById('dReviews').innerHTML=rvHtml;
- renderGallery(); window.scrollTo(0,0);
+ document.getElementById('dName').innerText=p.nombre; document.getElementById('dPrice').innerText='$'+p.precio.toLocaleString(); document.getElementById('dSpecs').innerHTML=p.specs.replace(/;/g,'<br>');
+ let revs=p.reviews?p.reviews.split(';').filter(Boolean):[]; document.getElementById('dRating').innerText=revs.length?`★★★★★ (${revs.length})`:'★★★★★';
+ let rh=''; for(let r of revs){ let parts=r.split('|'); rh+=`<div style="border:1px solid #eee;border-radius:12px;padding:10px"><b style="font-size:13px">${parts[0]||'Cliente'}</b><div style="font-size:13px">${parts[1]||r}</div><span style="color:#ff9900;font-size:12px">${'★'.repeat(parseInt(parts[2])||5)}</span></div>`;}
+ document.getElementById('dReviews').innerHTML=rh||'<div style="color:#888">Sin reseñas</div>';
+ renderGallery();
 }
 function renderGallery(){
  let p=productos[detailIndex]; let foto=p.fotos[imgIndex]||p.fotos[0];
- let el=document.getElementById('mainImg');
- if(foto.startsWith('http')) el.innerHTML=`<img src="${foto}" style="width:100%;max-height:320px;object-fit:contain;border-radius:12px">`;
- else el.innerHTML=`<div style="font-size:90px;padding:20px">${foto}</div>`;
- let th=''; for(let j=0;j<p.fotos.length;j++){ let f=p.fotos[j]; let active=j==imgIndex?'border:2px solid black':'border:1px solid #eee';
-  let inner=f.startsWith('http')?`<img src="${f}" style="width:50px;height:50px;object-fit:cover;border-radius:8px">`:`<div style="font-size:24px">${f}</div>`;
-  th+=`<div onclick="imgIndex=${j};renderGallery()" style="${active};border-radius:10px;padding:4px;background:white;cursor:pointer;min-width:58px;display:flex;align-items:center;justify-content:center">${inner}</div>`;}
+ document.getElementById('mainImg').innerHTML=foto.startsWith('http')?`<img src="${foto}" style="width:100%;max-height:320px;object-fit:contain"><div style="position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;padding:0 10px"><button onclick="prevImg();event.stopPropagation()" style="background:rgba(0,0,0,.6);color:white;border:none;width:36px;height:36px;border-radius:50%">‹</button><button onclick="nextImg();event.stopPropagation()" style="background:rgba(0,0,0,.6);color:white;border:none;width:36px;height:36px;border-radius:50%">›</button></div>`:`<div style="font-size:90px">${foto}</div>`;
+ let th=''; for(let j=0;j<p.fotos.length;j++){ let f=p.fotos[j]; let act=j==imgIndex?'border:2px solid black':'border:1px solid #eee'; th+=`<div onclick="imgIndex=${j};renderGallery()" style="${act};border-radius:10px;padding:4px;min-width:60px;display:flex;align-items:center;justify-content:center;background:white;cursor:pointer"><img src="${f}" style="width:50px;height:50px;object-fit:cover;border-radius:8px" onerror="this.parentElement.innerHTML='🖼️'"></div>`;}
  document.getElementById('thumbs').innerHTML=th;
 }
-function nextImg(){ let p=productos[detailIndex]; imgIndex=(imgIndex+1)%p.fotos.length; renderGallery(); }
-function prevImg(){ let p=productos[detailIndex]; imgIndex=(imgIndex-1+p.fotos.length)%p.fotos.length; renderGallery(); }
-function backToList(){ if(currentCat)openCat(currentCat); else showCats(); }
-function addFromDetail(){ add(detailIndex); }
-function add(i){ let p=productos[i]; c.push({n:p.nombre,p:p.precio,i:Date.now()}); upd(); if(!open)toggleCart(); }
-function del(i){ c=c.filter(x=>x.i!=i); upd(); }
-function upd(){ let s=0; for(let x of c)s+=x.p; document.getElementById('n').innerText=c.length; document.getElementById('t').innerText=s.toLocaleString();
- let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px>Vacio</p>'; else for(let x of c)h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0"><span>${x.n} $${x.p.toLocaleString()}</span><button onclick="del(${x.i})" style="background:#f5f5f5;border:1px solid #ddd;width:26px;height:26px;border-radius:50%">x</button></div>`; document.getElementById('list').innerHTML=h; }
-function toggleCart(){ open=!open; document.getElementById('cart').style.right=open?'0':'-100%'; document.getElementById('bg').style.display=open?'block':'none'; }
-function pay(){ if(!c.length){alert('Agrega algo');return;} let s=0,m=''; for(let x of c){s+=x.p;m+=x.n+', ';} window.open('https://wa.me/573016202301?text='+encodeURIComponent('Hola WobbaShop! Pague $'+s+' a Nequi 3016202301 Productos: '+m),'_blank'); }
+function nextImg(){ let p=productos[detailIndex]; imgIndex=(imgIndex+1)%p.fotos.length; renderGallery();}
+function prevImg(){ let p=productos[detailIndex]; imgIndex=(imgIndex-1+p.fotos.length)%p.fotos.length; renderGallery();}
+function backToList(){ if(currentCat)openCat(currentCat); else showCats();}
+function addFromDetail(){ add(detailIndex);}
+function add(i){ let p=productos[i]; c.push({n:p.nombre,p:p.precio,i:Date.now()}); upd(); if(!open)toggleCart();}
+function del(i){ c=c.filter(x=>x.i!=i); upd();}
+function upd(){ let s=0; for(let x of c)s+=x.p; document.getElementById('n').innerText=c.length; document.getElementById('t').innerText=s.toLocaleString(); let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px>Vacio</p>'; else for(let x of c)h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0"><span>${x.n} $${x.p.toLocaleString()}</span><button onclick="del(${x.i})" style="background:#f5f5f5;border:1px solid #ddd;width:26px;height:26px;border-radius:50%">x</button></div>`; document.getElementById('list').innerHTML=h;}
+function toggleCart(){ open=!open; document.getElementById('cart').style.right=open?'0':'-100%'; document.getElementById('bg').style.display=open?'block':'none';}
+function pay(){ if(!c.length){alert('Agrega algo');return;} let s=0,m=''; for(let x of c){s+=x.p;m+=x.n+', ';} window.open('https://wa.me/573016202301?text='+encodeURIComponent('Hola WobbaShop! Pague $'+s+' a Nequi 3016202301 Productos: '+m),'_blank');}
 load(); upd();
 </script></body></html>
