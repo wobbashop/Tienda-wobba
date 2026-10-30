@@ -1,1 +1,93 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WobbaShop</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-gray-100"><div style="max-width:420px;margin:auto;background:white;min-height:100vh"><div style="background:black;color:white;padding:20px;text-align:center"><h1 style="font-size:28px;font-weight:900">WobbaShop</h1><p>Productos Variados</p></div><div style="padding:15px"><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div style="border:1px solid #ddd;border-radius:15px;padding:15px;text-align:center"><div style="font-size:30px">🧢</div><p style="font-weight:bold">Gorra Wobba</p><p>$45.000</p><button onclick="add('Gorra Wobba',45000)" style="background:black;color:white;width:100%;padding:8px;border-radius:20px;margin-top:8px">Agregar +</button></div><div style="border:1px solid #ddd;border-radius:15px;padding:15px;text-align:center"><div style="font-size:30px">👕</div><p style="font-weight:bold">Hoodie</p><p>$89.000</p><button onclick="add('Hoodie',89000)" style="background:black;color:white;width:100%;padding:8px;border-radius:20px;margin-top:8px">Agregar +</button></div></div><div style="border:2px solid black;border-radius:15px;padding:15px;margin-top:20px"><h3 style="font-weight:900">🛒 CARRITO (<span id="c">0</span>)</h3><div id="lista">Vacío</div><p style="font-weight:900;font-size:20px">Total: $<span id="t">0</span></p><div style="background:#2000B1;color:white;border-radius:12px;padding:12px;margin-top:10px"><p style="font-size:12px;font-weight:bold">PAGO NEQUI 3016202301 <button onclick="navigator.clipboard.writeText('3016202301');alert('Copiado 3016202301')" style="background:white;color:#2000B1;padding:4px 8px;border-radius:20px">COPIAR</button></p><button onclick="pagar()" style="background:#25D366;color:white;width:100%;padding:12px;border-radius:12px;font-weight:900;margin-top:10px">YA PAGUÉ - WHATSAPP</button></div></div></div></div><script>let cart=[],total=0;function add(n,p){cart.push({n,p});total+=p;render()}function render(){document.getElementById('c').innerText=cart.length;document.getElementById('t').innerText=total.toLocaleString();document.getElementById('lista').innerHTML=cart.length?cart.map(x=>`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee"><span>${x.n}</span><span>$${x.p.toLocaleString()}</span></div>`).join(''):'Vacío'}function pagar(){if(!cart.length){alert('Agrega algo');return}let m=`Hola WobbaShop! Ya pagué $${total} a Nequi 3016202301. Productos: ${cart.map(x=>x.n).join(', ')}. Mi nombre:`;window.open('https://wa.me/573016202301?text='+encodeURIComponent(m),'_blank')}</script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WobbaShop</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+<div style="max-width:480px;margin:auto;background:white;min-height:100vh;position:relative">
+
+<!-- HEADER CON CARRITO ARRIBA A LA DERECHA -->
+<header style="background:black;color:white;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20">
+<div>
+<h1 style="font-size:24px;font-weight:900;letter-spacing:1px">WOBBASHOP</h1>
+<p style="font-size:11px;opacity:.7">Productos Variados</p>
+</div>
+<button onclick="toggleCart()" style="position:relative;background:white;color:black;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center">
+<i class="fa-solid fa-cart-shopping"></i>
+<span id="cartCount" style="position:absolute;top:-6px;right:-6px;background:#25D366;color:white;font-size:11px;font-weight:900;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center">0</span>
+</button>
+</header>
+
+<!-- SOLO PRODUCTOS -->
+<div style="padding:16px">
+<h2 style="font-weight:900;font-size:18px;margin-bottom:12px">PRODUCTOS</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+<div style="border:1px solid #e5e5e5;border-radius:16px;padding:14px;text-align:center;background:white">
+<div style="font-size:36px">🧢</div>
+<p style="font-weight:800;margin-top:6px">Gorra Wobba</p>
+<p style="font-size:13px;color:#666">Original</p>
+<p style="font-weight:900;margin:6px 0">$45.000</p>
+<button onclick="addProduct('Gorra Wobba',45000)" style="background:black;color:white;width:100%;padding:9px;border-radius:24px;font-weight:700;font-size:13px">Agregar +</button>
+</div>
+
+<div style="border:1px solid #e5e5e5;border-radius:16px;padding:14px;text-align:center;background:white">
+<div style="font-size:36px">👕</div>
+<p style="font-weight:800;margin-top:6px">Hoodie Wobba</p>
+<p style="font-size:13px;color:#666">Premium</p>
+<p style="font-weight:900;margin:6px 0">$89.000</p>
+<button onclick="addProduct('Hoodie Wobba',89000)" style="background:black;color:white;width:100%;padding:9px;border-radius:24px;font-weight:700;font-size:13px">Agregar +</button>
+</div>
+
+<div style="border:1px solid #e5e5e5;border-radius:16px;padding:14px;text-align:center;background:white">
+<div style="font-size:36px">👟</div>
+<p style="font-weight:800;margin-top:6px">Tenis Wobba</p>
+<p style="font-size:13px;color:#666">Urban</p>
+<p style="font-weight:900;margin:6px 0">$120.000</p>
+<button onclick="addProduct('Tenis Wobba',120000)" style="background:black;color:white;width:100%;padding:9px;border-radius:24px;font-weight:700;font-size:13px">Agregar +</button>
+</div>
+
+<div style="border:1px solid #e5e5e5;border-radius:16px;padding:14px;text-align:center;background:white">
+<div style="font-size:36px">👜</div>
+<p style="font-weight:800;margin-top:6px">Bolso</p>
+<p style="font-size:13px;color:#666">Cuero</p>
+<p style="font-weight:900;margin:6px 0">$65.000</p>
+<button onclick="addProduct('Bolso',65000)" style="background:black;color:white;width:100%;padding:9px;border-radius:24px;font-weight:700;font-size:13px">Agregar +</button>
+</div>
+
+</div>
+</div>
+
+<!-- CARRITO DESLIZABLE -->
+<div id="cartDrawer" style="position:fixed;top:0;right:-100%;width:100%;max-width:480px;height:100%;background:white;z-index:50;transition:0.3s;box-shadow:-10px 0 30px rgba(0,0,0,0.2);display:flex;flex-direction:column">
+<div style="background:black;color:white;padding:16px;display:flex;justify-content:space-between;align-items:center">
+<h3 style="font-weight:900;font-size:18px"><i class="fa-solid fa-cart-shopping"></i> TU CARRITO</h3>
+<button onclick="toggleCart()" style="background:white;color:black;width:32px;height:32px;border-radius:50%"><i class="fa-solid fa-xmark"></i></button>
+</div>
+
+<div id="cartItems" style="flex:1;overflow-y:auto;padding:16px">
+<p style="text-align:center;color:#999;margin-top:40px">Tu carrito está vacío<br>Agrega productos 🛒</p>
+</div>
+
+<div style="border-top:2px solid black;padding:16px;background:#fafafa">
+<div style="display:flex;justify-content:space-between;font-weight:900;font-size:18px;margin-bottom:12px">
+<span>Total:</span><span>$<span id="cartTotal">0</span></span>
+</div>
+
+<div style="background:#2000B1;color:white;border-radius:12px;padding:12px">
+<p style="font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center">
+<span>NEQUI 3016202301</span>
+<button onclick="navigator.clipboard.writeText('3016202301');alert('Copiado 3016202301')" style="background:white;color:#2000B1;padding:5px 12px;border-radius:20px;font-size:11px">COPIAR</button>
+</p>
+<button onclick="checkout()" style="background:#25D366;color:white;width:100%;padding:14px;border-radius:12px;font-weight:900;margin-top:10px;font-size:15px"><i class="fa-brands fa-whatsapp"></i> YA PAGUÉ - ENVIAR COMPROBANTE</button>
+<p style="font-size:10px;text-align:center;margin-top:8px;opacity:.8">Después de pagar, envíanos el comprobante por WhatsApp</p>
+</div>
+</div>
+</div>
+
+<!-- FONDO OSCURO -->
+<div id="overlay
