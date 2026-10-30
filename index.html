@@ -2,107 +2,107 @@
 <body style="margin:0;font-family:sans-serif;background:#f5f5f5">
 <div style="max-width:480px;margin:auto;background:white;min-height:100vh">
 <header style="background:black;color:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20">
-<div><b>WOBBASHOP</b><div id="count" style="font-size:11px;opacity:.7">Conectado a Sheets</div></div>
+<div><b>WOBBASHOP</b><div id="count" style="font-size:11px;opacity:.7">Detectando moneda...</div></div>
+<div style="display:flex;gap:8px;align-items:center">
+<button id="currencyBtn" onclick="toggleCurrency()" style="background:white;color:black;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:700;border:none">USD</button>
 <button onclick="toggleCart()" style="background:white;color:black;width:44px;height:44px;border-radius:50%;font-weight:900;position:relative">🛒<span id="n" style="position:absolute;top:-5px;right:-5px;background:black;color:white;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid white">0</span></button>
+</div>
 </header>
 <div id="viewCat" style="padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
 <div id="viewProd" style="display:none;padding:16px"><button onclick="showCats()" style="background:white;border:1px solid #ddd;padding:8px 14px;border-radius:20px;margin-bottom:12px">← Volver</button><h2 id="catName"></h2><div id="prod" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div></div>
-<div id="viewDetail" style="display:none"><div style="padding:12px;display:flex;justify-content:space-between;border-bottom:1px solid #eee;background:white;position:sticky;top:0;z-index:10"><button onclick="backToList()" style="background:#f5f5f5;border:1px solid #ddd;padding:8px 14px;border-radius:20px">← Volver</button><button onclick="toggleCart()" style="background:black;color:white;width:36px;height:36px;border-radius:50%">🛒</button></div>
-<div style="background:#fafafa"><div id="mainImg" style="min-height:300px;display:flex;align-items:center;justify-content:center;padding:12px;position:relative"></div><div id="thumbs" style="display:flex;gap:8px;padding:10px 16px;overflow:auto"></div></div>
-<div style="padding:16px"><h2 id="dName" style="margin:0"></h2><div id="dRating" style="color:#ff9900;font-size:13px"></div><b id="dPrice" style="font-size:22px;display:block;margin-top:6px"></b><button onclick="addFromDetail()" style="background:black;color:white;width:100%;padding:14px;border-radius:24px;font-weight:700;margin-top:14px">Agregar - Nequi</button><div style="margin-top:20px"><b>Especificaciones</b><div id="dSpecs" style="background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:12px;margin-top:8px;font-size:13px;line-height:1.6"></div></div><div style="margin-top:20px"><b>Reseñas</b><div id="dReviews" style="margin-top:10px;display:flex;flex-direction:column;gap:10px"></div></div></div></div>
-<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:480px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column"><div style="background:black;color:white;padding:16px;display:flex;justify-content:space-between"><b>CARRITO</b><button onclick="toggleCart()" style="background:white;color:black;width:28px;height:28px;border-radius:50%">X</button></div><div id="list" style="flex:1;overflow:auto;padding:12px"></div><div style="padding:12px;border-top:1px solid #ddd"><b>Total: $<span id="t">0</span></b><button onclick="pay()" style="background:black;color:white;width:100%;padding:13px;border-radius:24px;margin-top:10px">WhatsApp →</button></div></div><div id="bg" onclick="toggleCart()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;z-index:90"></div>
+<div id="viewDetail" style="display:none"><div style="padding:12px;display:flex;justify-content:space-between;border-bottom:1px solid #eee;background:white;position:sticky;top:0"><button onclick="backToList()" style="background:#f5f5f5;border:1px solid #ddd;padding:8px 14px;border-radius:20px">← Volver</button><button onclick="toggleCart()" style="background:black;color:white;width:36px;height:36px;border-radius:50%">🛒</button></div>
+<div style="background:#fafafa"><div id="mainImg" style="min-height:340px;display:flex;align-items:center;justify-content:center;padding:12px;position:relative"></div><div id="thumbs" style="display:flex;gap:8px;padding:10px 16px;overflow:auto"></div></div>
+<div style="padding:16px"><h2 id="dName"></h2><div id="dRating" style="color:#ff9900;font-size:13px"></div><b id="dPrice" style="font-size:26px;display:block"></b><div id="dPrice2" style="font-size:12px;color:#888"></div><button onclick="addFromDetail()" style="background:black;color:white;width:100%;padding:14px;border-radius:24px;font-weight:700;margin-top:14px">Agregar</button><div style="margin-top:20px"><b>Especificaciones</b><div id="dSpecs" style="background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:12px;margin-top:8px;font-size:13px;white-space:pre-wrap"></div></div><div style="margin-top:20px"><b>Reseñas</b><div id="dReviews" style="margin-top:10px;display:flex;flex-direction:column;gap:10px"></div></div></div></div>
+<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:480px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column"><div style="background:black;color:white;padding:16px;display:flex;justify-content:space-between"><b id="cartTitle">CARRITO</b><button onclick="toggleCart()" style="background:white;color:black;width:28px;height:28px;border-radius:50%">X</button></div><div id="list" style="flex:1;overflow:auto;padding:12px"></div><div style="padding:12px;border-top:1px solid #ddd"><b>Total: <span id="t">0</span></b><button onclick="pay()" style="background:black;color:white;width:100%;padding:13px;border-radius:24px;margin-top:10px">WhatsApp →</button></div></div><div id="bg" onclick="toggleCart()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;z-index:90"></div>
 </div>
 <script>
-const SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vSw0ttSUsTpHjrjXGTLZfYEt2E4IGar2s55-Me0DHaCDQFZMZ6y-ck1u173-nIUBxklEIl1Wk-Y1hnf/pub?gid=0&single=true&output=csv";
+const SHEET_ID="2PACX-1vSw0ttSUsTpHjrjXGTLZfYEt2E4IGar2s55-Me0DHaCDQFZMZ6y-ck1u173-nIUBxklEIl1Wk-Y1hnf";
+const SHEET_URL=`https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/gviz/tq?tqx=out:json`;
+const USD_TO_COP = 4100; // cambia aqui el cambio
+let currency = 'USD'; // USD o COP
 let productos=[], c=[], open=false, currentCat='', detailIndex=0, imgIndex=0;
-const iconFor=(cat)=>{cat=(cat||'').toLowerCase(); if(cat.includes('gorra'))return '🧢'; if(cat.includes('tenis'))return '👟'; if(cat.includes('bolso'))return '👜'; if(cat.includes('hood'))return '👕'; return '🛍️';};
 
-function smartParse(text){
- text=text.replace(/^\uFEFF/,'');
- // FIX 1: Protege las URLs de CJ que tienen coma adentro
- text=text.replace(/https?:\/\/[^\s"\n]+/g, (url)=>{
-   return url.replace(/,/g,'__CJ_COMMA__');
- });
- let lines=text.split(/\r?\n/).filter(l=>l.trim()!='');
- if(!lines.length) return [];
- let headers=lines[0].split(',').map(h=>h.toLowerCase().replace(/"/g,'').trim());
- let iNom=headers.findIndex(h=>h.includes('nombre')||h.includes('name'));
- let iPrec=headers.findIndex(h=>h.includes('precio')||h.includes('price'));
- let iCat=headers.findIndex(h=>h.includes('categ'));
- let iSpecs=headers.findIndex(h=>h.includes('spec')||h.includes('descrip'));
- let iRev=headers.findIndex(h=>h.includes('review')||h.includes('rese'));
- let fotoIdxs=headers.map((h,i)=>h.includes('foto')||h.includes('image')?i:-1).filter(i=>i!=-1);
- let out=[];
- for(let r=1;r<lines.length;r++){
-   let cols=lines[r].split(',').map(c=>c.replace(/^"|"$/g,'').trim().replace(/__CJ_COMMA__/g,','));
-   // FIX 2: Si la linea se rompio por la coma de CJ, reconstruye
-   if(cols.length>headers.length){
-     let fixed=[]; let temp='';
-     for(let col of lines[r].split(',')){
-       if(col.includes('https://')||col.includes('http://')){ if(temp) fixed.push(temp); temp=col; }
-       else if(temp && (temp.includes('?x-oss-process')||temp.includes('__CJ_COMMA__'))){ temp+=','+col; }
-       else { if(temp){fixed.push(temp); temp='';} fixed.push(col); }
-     }
-     if(temp) fixed.push(temp);
-     cols=fixed.map(c=>c.replace(/^"|"$/g,'').trim().replace(/__CJ_COMMA__/g,','));
-   }
-   let nombre=(cols[iNom]||'').trim(); if(!nombre) continue;
-   let precio=parseInt((cols[iPrec]||'0').replace(/[^0-9]/g,''))||0;
-   let categoria=(cols[iCat]||'General').trim();
-   let specs=(cols[iSpecs]||'').trim();
-   let reviews=(cols[iRev]||'').trim();
-   let fotos=[];
-   for(let fi of fotoIdxs){ let v=(cols[fi]||'').trim(); if(v.startsWith('http')) fotos.push(v); }
-   if(!fotos.length){ let m=lines[r].match(/https?:\/\/[^\s"]+/g); if(m) fotos=m.map(u=>u.replace(/__CJ_COMMA__/g,',')); }
-   if(!fotos.length) fotos=[iconFor(categoria)];
-   out.push({nombre,precio,fotos,categoria,specs:specs||'Sin especificaciones',reviews});
- }
- return out;
+const proxy=u=>{if(!u||!u.startsWith('http')) return u; return 'https://images.weserv.nl/?url='+encodeURIComponent(u.replace(/^https?:\/\//,''))+'&w=800&output=jpg';};
+const cleanPriceUSD=v=>{ let s=String(v||'0').trim().replace(/\s+/g,'.').replace(',','.'); let n=parseFloat(s); return isNaN(n)?0:n; };
+const fixUrl=s=>{ if(!s) return []; let re=/(?:https?:\/\/)?(?:[a-z0-9-]+\.)*cjdropshipping\w*\.com\/[^\s"']+/gi; let m=String(s).match(re); if(!m) return []; let out=[]; for(let u of m){ if(!u.startsWith('http')) u='https://'+u.replace(/^com\//,'cf.cjdropshipping.com/'); u=u.replace('pshipping.com','cf.cjdropshipping.com').split('?')[0]; out.push(u);} return out; };
+
+function formatPrice(usd){
+  if(currency==='COP') return '$'+Math.round(usd*USD_TO_COP).toLocaleString('es-CO')+' COP';
+  return '$'+usd.toFixed(2)+' USD';
+}
+function formatPriceSmall(usd){
+  if(currency==='COP') return 'USD $'+usd.toFixed(2);
+  return 'COP $'+Math.round(usd*USD_TO_COP).toLocaleString('es-CO');
+}
+
+async function detectCurrency(){
+  try{
+    let r=await fetch('https://ipapi.co/json/');
+    let j=await r.json();
+    if(j.country_code==='CO'){ currency='COP'; }
+    else { currency='USD'; }
+  }catch(e){ 
+    // si falla, mira idioma del navegador
+    if(navigator.language && navigator.language.includes('es-CO')) currency='COP';
+    else currency='USD';
+  }
+  document.getElementById('currencyBtn').innerText=currency;
+  document.getElementById('count').innerText=currency==='COP'?'Precios en Pesos Colombianos':'Prices in US Dollars';
+  document.getElementById('cartTitle').innerText=currency==='COP'?'CARRITO - COP':'CART - USD';
+  if(productos.length){ showCats(); if(currentCat) openCat(currentCat); }
+  upd();
+}
+function toggleCurrency(){
+  currency=currency==='USD'?'COP':'USD';
+  document.getElementById('currencyBtn').innerText=currency;
+  document.getElementById('count').innerText=currency==='COP'?'Precios en Pesos Colombianos':'Prices in US Dollars';
+  document.getElementById('cartTitle').innerText=currency==='COP'?'CARRITO - COP':'CART - USD';
+  if(currentCat) openCat(currentCat); else showCats();
+  if(document.getElementById('viewDetail').style.display!=='none') openDetail(detailIndex);
+  upd();
 }
 
 async function load(){
- let r=await fetch(SHEET_URL); let t=await r.text();
- productos=smartParse(t);
- document.getElementById('count').innerText=productos.length+' productos desde Sheets';
- showCats(); upd();
+ let r=await fetch(SHEET_URL); let txt=await r.text();
+ let json=JSON.parse(txt.substring(txt.indexOf('{'), txt.lastIndexOf('}')+1));
+ let cols=json.table.cols.map(c=>c.label.toLowerCase());
+ let iNom=cols.findIndex(h=>h.includes('nombre')), iPrec=cols.findIndex(h=>h.includes('precio')), iCat=cols.findIndex(h=>h.includes('categ')), iSpecs=cols.findIndex(h=>h.includes('spec')||h.includes('descrip')), iRev=cols.findIndex(h=>h.includes('review'));
+ let fotoIdxs=cols.map((h,i)=>h.includes('foto')?i:-1).filter(i=>i!=-1);
+ productos=[];
+ for(let row of json.table.rows){
+  let get=i=>row.c[i]?row.c[i].v||'':'';
+  let nombre=String(get(iNom)).trim(); if(!nombre) continue;
+  let precio=cleanPriceUSD(get(iPrec));
+  let categoria=String(get(iCat)||'General').replace(/,/g,' ').trim()||'General';
+  let fotos=[]; for(let fi of fotoIdxs){ fotos.push(...fixUrl(get(fi))); }
+  fotos=[...new Set(fotos)]; if(!fotos.length) fotos=['🛍️'];
+  productos.push({nombre,precio,fotos,categoria,specs:String(get(iSpecs)||''),reviews:String(get(iRev)||'')});
+ }
+ document.getElementById('count').innerText=productos.length+' productos';
+ showCats(); upd(); detectCurrency();
 }
-function showCats(){
- document.getElementById('viewCat').style.display='grid'; document.getElementById('viewProd').style.display='none'; document.getElementById('viewDetail').style.display='none';
- let cats=[...new Set(productos.map(p=>p.categoria))];
- let h=''; for(let cat of cats){ let count=productos.filter(p=>p.categoria==cat).length;
-  h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" style="background:white;border:1px solid #e5e5e5;border-radius:16px;padding:20px 12px;text-align:center;cursor:pointer"><div style="font-size:40px">${iconFor(cat)}</div><b>${cat}</b><div style="font-size:12px;color:#888">${count}</div></div>`;}
- document.getElementById('viewCat').innerHTML=h;
+function showCats(){document.getElementById('viewCat').style.display='grid';document.getElementById('viewProd').style.display='none';document.getElementById('viewDetail').style.display='none';let cats=[...new Set(productos.map(p=>p.categoria))];let h='';for(let cat of cats){let count=productos.filter(p=>p.categoria==cat).length;h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" style="background:white;border:1px solid #e5e5e5;border-radius:16px;padding:20px 12px;text-align:center;cursor:pointer"><div style="font-size:40px">🛍️</div><b>${cat}</b><div style="font-size:12px;color:#888">${count}</div></div>`;}document.getElementById('viewCat').innerHTML=h;}
+function openCat(cat){currentCat=cat;document.getElementById('viewCat').style.display='none';document.getElementById('viewDetail').style.display='none';document.getElementById('viewProd').style.display='block';document.getElementById('catName').innerText=cat;let h='';for(let i=0;i<productos.length;i++){let p=productos[i];if(p.categoria!=cat)continue;let img=p.fotos[0];let imgHtml=img.startsWith('http')?`<img src="${proxy(img)}" loading="lazy" style="width:100%;height:100px;object-fit:contain">`:`<div style="font-size:36px">${img}</div>`;h+=`<div onclick="openDetail(${i})" style="border:1px solid #e5e5e5;border-radius:12px;padding:12px;text-align:center;background:white;cursor:pointer"><div style="height:100px;display:flex;align-items:center;justify-content:center">${imgHtml}</div><b style="font-size:12px;display:block;margin-top:6px;min-height:36px">${p.nombre}</b><span style="font-weight:900">${formatPrice(p.precio)}</span><div style="font-size:10px;color:#888">${formatPriceSmall(p.precio)}</div></div>`;}document.getElementById('prod').innerHTML=h;}
+function openDetail(i){detailIndex=i;imgIndex=0;let p=productos[i];document.getElementById('viewCat').style.display='none';document.getElementById('viewProd').style.display='none';document.getElementById('viewDetail').style.display='block';document.getElementById('dName').innerText=p.nombre;document.getElementById('dPrice').innerText=formatPrice(p.precio);document.getElementById('dPrice2').innerText=formatPriceSmall(p.precio);document.getElementById('dSpecs').innerText=p.specs;let revs=p.reviews?p.reviews.split(';').filter(Boolean):[];document.getElementById('dRating').innerText=revs.length?`★★★★★ (${revs.length})`:'★★★★★';let rh='';for(let r of revs){let parts=r.split('|');rh+=`<div style="border:1px solid #eee;border-radius:12px;padding:10px"><b>${parts[0]||'Cliente'}</b><div style="font-size:13px">${parts[1]||r}</div></div>`;}document.getElementById('dReviews').innerHTML=rh||'<div style="color:#888">Sin reseñas</div>';renderGallery();}
+function renderGallery(){let p=productos[detailIndex];let foto=p.fotos[imgIndex]||p.fotos[0];document.getElementById('mainImg').innerHTML=`<img src="${proxy(foto)}" style="width:100%;max-height:380px;object-fit:contain"><div style="position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;padding:0 10px"><button onclick="prevImg()" style="background:rgba(0,0,0,.6);color:white;border:none;width:36px;height:36px;border-radius:50%">‹</button><button onclick="nextImg()" style="background:rgba(0,0,0,.6);color:white;border:none;width:36px;height:36px;border-radius:50%">›</button></div><div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:white;font-size:11px;padding:2px 8px;border-radius:10px">${imgIndex+1}/${p.fotos.length}</div>`;let th='';for(let j=0;j<p.fotos.length;j++){let f=p.fotos[j];let act=j==imgIndex?'border:2px solid black':'border:1px solid #eee';th+=`<div onclick="imgIndex=${j};renderGallery()" style="${act};border-radius:10px;padding:3px;min-width:60px;background:white;cursor:pointer"><img src="${proxy(f)}" style="width:56px;height:56px;object-fit:cover;border-radius:8px"></div>`;}document.getElementById('thumbs').innerHTML=th;}
+function nextImg(){let p=productos[detailIndex];imgIndex=(imgIndex+1)%p.fotos.length;renderGallery();}function prevImg(){let p=productos[detailIndex];imgIndex=(imgIndex-1+p.fotos.length)%p.fotos.length;renderGallery();}
+function backToList(){if(currentCat)openCat(currentCat);else showCats();}
+function addFromDetail(){add(detailIndex);}function add(i){let p=productos[i];c.push({n:p.nombre,usd:p.precio,i:Date.now()});upd();if(!open)toggleCart();}function del(i){c=c.filter(x=>x.i!=i);upd();}
+function upd(){
+  let totalUSD=0; for(let x of c) totalUSD+=x.usd;
+  let totalDisplay=currency==='COP'?Math.round(totalUSD*USD_TO_COP).toLocaleString('es-CO')+' COP':totalUSD.toFixed(2)+' USD';
+  document.getElementById('n').innerText=c.length; document.getElementById('t').innerText=totalDisplay;
+  let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px>Vacio</p>';
+  else for(let x of c){ h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0"><span style="font-size:13px">${x.n}<br><b>${formatPrice(x.usd)}</b></span><button onclick="del(${x.i})" style="background:#f5f5f5;border:1px solid #ddd;width:26px;height:26px;border-radius:50%">x</button></div>`; }
+  document.getElementById('list').innerHTML=h;
 }
-function openCat(cat){
- currentCat=cat; document.getElementById('viewCat').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('viewProd').style.display='block'; document.getElementById('catName').innerText=cat;
- let h=''; for(let i=0;i<productos.length;i++){ let p=productos[i]; if(p.categoria!=cat) continue;
-  let img=p.fotos[0]; let imgHtml=img.startsWith('http')?`<img src="${img}" style="width:100%;height:90px;object-fit:contain" onerror="this.style.display='none'">`:`<div style="font-size:36px">${img}</div>`;
-  h+=`<div onclick="openDetail(${i})" style="border:1px solid #e5e5e5;border-radius:12px;padding:12px;text-align:center;background:white;cursor:pointer">${imgHtml}<b style="font-size:13px;display:block;margin-top:6px">${p.nombre}</b><span style="font-weight:900">$${p.precio.toLocaleString()}</span></div>`;}
- document.getElementById('prod').innerHTML=h;
+function toggleCart(){open=!open;document.getElementById('cart').style.right=open?'0':'-100%';document.getElementById('bg').style.display=open?'block':'none';}
+function pay(){
+  if(!c.length){alert('Agrega algo');return;}
+  let totalUSD=0,m=''; for(let x of c){totalUSD+=x.usd; m+=x.n+' ($'+x.usd+'), ';}
+  let totalCOP=Math.round(totalUSD*USD_TO_COP);
+  let msg=`Hola WobbaShop! Mi orden:\n${m}\nTotal USD: $${totalUSD.toFixed(2)}\nTotal COP: $${totalCOP.toLocaleString('es-CO')}\nMoneda vista: ${currency}`;
+  window.open('https://wa.me/573016202301?text='+encodeURIComponent(msg),'_blank');
 }
-function openDetail(i){
- detailIndex=i; imgIndex=0; let p=productos[i];
- document.getElementById('viewCat').style.display='none'; document.getElementById('viewProd').style.display='none'; document.getElementById('viewDetail').style.display='block';
- document.getElementById('dName').innerText=p.nombre; document.getElementById('dPrice').innerText='$'+p.precio.toLocaleString(); document.getElementById('dSpecs').innerHTML=p.specs.replace(/;/g,'<br>');
- let revs=p.reviews?p.reviews.split(';').filter(Boolean):[]; document.getElementById('dRating').innerText=revs.length?`★★★★★ (${revs.length})`:'★★★★★';
- let rh=''; for(let r of revs){ let parts=r.split('|'); rh+=`<div style="border:1px solid #eee;border-radius:12px;padding:10px"><b style="font-size:13px">${parts[0]||'Cliente'}</b><div style="font-size:13px">${parts[1]||r}</div><span style="color:#ff9900;font-size:12px">${'★'.repeat(parseInt(parts[2])||5)}</span></div>`;}
- document.getElementById('dReviews').innerHTML=rh||'<div style="color:#888">Sin reseñas</div>';
- renderGallery();
-}
-function renderGallery(){
- let p=productos[detailIndex]; let foto=p.fotos[imgIndex]||p.fotos[0];
- document.getElementById('mainImg').innerHTML=foto.startsWith('http')?`<img src="${foto}" style="width:100%;max-height:320px;object-fit:contain"><div style="position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;padding:0 10px"><button onclick="prevImg();event.stopPropagation()" style="background:rgba(0,0,0,.6);color:white;border:none;width:36px;height:36px;border-radius:50%">‹</button><button onclick="nextImg();event.stopPropagation()" style="background:rgba(0,0,0,.6);color:white;border:none;width:36px;height:36px;border-radius:50%">›</button></div>`:`<div style="font-size:90px">${foto}</div>`;
- let th=''; for(let j=0;j<p.fotos.length;j++){ let f=p.fotos[j]; let act=j==imgIndex?'border:2px solid black':'border:1px solid #eee'; th+=`<div onclick="imgIndex=${j};renderGallery()" style="${act};border-radius:10px;padding:4px;min-width:60px;display:flex;align-items:center;justify-content:center;background:white;cursor:pointer"><img src="${f}" style="width:50px;height:50px;object-fit:cover;border-radius:8px" onerror="this.parentElement.innerHTML='🖼️'"></div>`;}
- document.getElementById('thumbs').innerHTML=th;
-}
-function nextImg(){ let p=productos[detailIndex]; imgIndex=(imgIndex+1)%p.fotos.length; renderGallery();}
-function prevImg(){ let p=productos[detailIndex]; imgIndex=(imgIndex-1+p.fotos.length)%p.fotos.length; renderGallery();}
-function backToList(){ if(currentCat)openCat(currentCat); else showCats();}
-function addFromDetail(){ add(detailIndex);}
-function add(i){ let p=productos[i]; c.push({n:p.nombre,p:p.precio,i:Date.now()}); upd(); if(!open)toggleCart();}
-function del(i){ c=c.filter(x=>x.i!=i); upd();}
-function upd(){ let s=0; for(let x of c)s+=x.p; document.getElementById('n').innerText=c.length; document.getElementById('t').innerText=s.toLocaleString(); let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px>Vacio</p>'; else for(let x of c)h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0"><span>${x.n} $${x.p.toLocaleString()}</span><button onclick="del(${x.i})" style="background:#f5f5f5;border:1px solid #ddd;width:26px;height:26px;border-radius:50%">x</button></div>`; document.getElementById('list').innerHTML=h;}
-function toggleCart(){ open=!open; document.getElementById('cart').style.right=open?'0':'-100%'; document.getElementById('bg').style.display=open?'block':'none';}
-function pay(){ if(!c.length){alert('Agrega algo');return;} let s=0,m=''; for(let x of c){s+=x.p;m+=x.n+', ';} window.open('https://wa.me/573016202301?text='+encodeURIComponent('Hola WobbaShop! Pague $'+s+' a Nequi 3016202301 Productos: '+m),'_blank');}
 load(); upd();
 </script></body></html>
