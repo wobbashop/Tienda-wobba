@@ -3,49 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop - Buscador Google</title>
+<title>Shop Oficial</title>
 <style>
 body{margin:0;font-family:Arial;background:#f5f5f5}
-.header{background:#131921;color:white;padding:10px 14px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50}
-.logo{font-weight:800;font-size:18px}
+.header{background:#131921;color:white;padding:8px 12px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.logo{font-weight:800;font-size:18px;white-space:nowrap}
+.searchCenter{flex:1;max-width:650px;margin:0 auto;display:flex;align-items:center;position:relative}
+.searchBox{flex:1;background:white;border-radius:24px;display:flex;align-items:center;padding:4px 4px 4px 14px}
+.searchBox input{flex:1;border:none;outline:none;padding:8px;font-size:14px;border-radius:24px}
+.searchBox button{background:#febd69;border:none;width:38px;height:32px;border-radius:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .card{background:white;border-radius:10px;border:1px solid #e8e8e8;overflow:hidden;cursor:pointer;position:relative}
 .thumb-wrap{height:170px;background:white;display:flex;align-items:center;justify-content:center;padding:8px}
-.price-old{font-size:11px;color:#888;text-decoration:line-through;margin-left:5px;font-weight:400}
-#searchWrap{max-width:650px;margin:16px auto;padding:0 12px;position:relative}
-#searchBox{background:white;border-radius:24px;border:1px solid #dfe1e5;display:flex;align-items:center;padding:6px 14px;box-shadow:0 1px 6px rgba(32,33,36,.28)}
-#searchBox:focus-within{box-shadow:0 2px 8px rgba(32,33,36,.28);border-color:transparent}
-#searchInput{flex:1;border:none;outline:none;padding:10px 10px;font-size:15px}
-#suggestBox{position:absolute;left:12px;right:12px;top:54px;background:white;border-radius:0 0 24px 24px;box-shadow:0 4px 6px rgba(32,33,36,.28);border:1px solid #dfe1e5;border-top:none;z-index:60;display:none;max-height:300px;overflow:auto}
-.sug{padding:10px 18px;cursor:pointer;font-size:14px;display:flex;align-items:center;gap:10px}
-.sug:hover{background:#f8f9fa}
+.price-old{font-size:11px;color:#888;text-decoration:line-through;margin-left:5px}
+#suggestBox{position:absolute;left:0;right:0;top:42px;background:white;border-radius:0 0 12px 12px;box-shadow:0 4px 10px rgba(0,0,0,.2);z-index:200;display:none;max-height:300px;overflow:auto;color:#111}
+.sug{padding:10px 14px;cursor:pointer;font-size:13px;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;align-items:center}
+.sug:hover{background:#f5f5f5}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 @media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){.logo{font-size:14px}.searchCenter{max-width:100%}}
 </style>
 </head>
 <body>
 
+<!-- HEADER CON BUSCADOR EN EL CENTRO Y LUPA -->
 <div class="header">
 <div class="logo">SHOP</div>
-<div style="margin-left:auto;display:flex;gap:10px;align-items:center">
-<div id="cartBtn" style="background:#febd69;color:#111;padding:6px 12px;border-radius:18px;font-weight:700;font-size:12px;cursor:pointer" onclick="openCart()">🛒 Carrito <span id="cartCount">0</span></div>
-</div>
-</div>
 
-<!-- BUSCADOR TIPO GOOGLE - SOLO NOMBRE -->
-<div id="searchWrap">
-<div id="searchBox">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9aa0a6" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-<input id="searchInput" type="text" placeholder="Buscar producto por nombre..." oninput="buscarGoogle(this.value)" onfocus="buscarGoogle(this.value)" autocomplete="off">
-<svg onclick="clearSearch()" style="cursor:pointer" width="20" height="20" viewBox="0 0 24 24" fill="#70757a"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+<div class="searchCenter">
+<div class="searchBox" style="width:100%">
+<input id="searchInput" type="text" placeholder="Buscar por nombre..." oninput="buscarGoogle(this.value)" onfocus="buscarGoogle(this.value)" autocomplete="off">
+<button onclick="buscarGoogle(document.getElementById('searchInput').value)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+</button>
 </div>
 <div id="suggestBox"></div>
-<div id="searchInfo" style="font-size:12px;color:#70757a;margin:8px 4px 0;display:none"></div>
 </div>
 
-<div id="mainShop" style="max-width:1200px;margin:0 auto;padding:0 12px 40px">
+<div id="cartBtn" style="background:#fff;color:#111;padding:6px 12px;border-radius:18px;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap" onclick="openCart()">🛒 <span id="cartCount">0</span></div>
+</div>
+
+<div id="mainShop" style="max-width:1200px;margin:0 auto;padding:12px 12px 40px">
 <div id="viewCats"></div>
 <div id="viewProd" style="display:none">
-<h2 id="catName" style="font-size:16px;margin:10px 0"></h2>
+<h2 id="catName" style="font-size:15px;margin:10px 0"></h2>
 <div id="prod" class="grid"></div>
 </div>
 <div id="viewDetail" style="display:none"></div>
@@ -57,135 +57,76 @@ let productos = [
 {nombre:"Organizador de Cables", categoria:"Hogar", usd:5, specs:"Organiza todo", fotos:["https://i.ibb.co/placeholder.jpg"]},
 {nombre:"Soporte Celular Auto", categoria:"Auto", usd:8, specs:"360 grados", fotos:["https://i.ibb.co/placeholder.jpg"]}
 ];
-
-function fmt(usd){ let cop = usd * 4200; return '$' + cop.toLocaleString('es-CO') }
-function getDiscountForProduct(i){ return 35 + (i % 25) }
-function getVisualOldPrice(usd, off){ return usd / (1 - off/100) }
-function thumb(url){ return url }
-
-let cart = [];
-let currentCat = '';
-
+function fmt(usd){return '$'+(usd*4200).toLocaleString('es-CO')}
+function getDiscountForProduct(i){return 35 + (i % 25)}
+function getVisualOldPrice(usd, off){return usd / (1 - off/100)}
+function thumb(u){return u}
+let cart=[];
 function showCats(){
  document.getElementById('viewProd').style.display='none';
  document.getElementById('viewDetail').style.display='none';
  document.getElementById('viewCats').style.display='block';
- let cats = [...new Set(productos.map(p=>p.categoria))];
- let h = `<div class="grid">`;
- for(let c of cats){
-   h+=`<div class="card" onclick="openCat('${c}')" style="padding:20px;text-align:center;font-weight:700">${c}</div>`;
- }
- h+=`</div><br><button onclick="openAllProducts()" style="width:100%;padding:14px;background:#111;color:white;border:none;border-radius:24px;font-weight:700;cursor:pointer">Ver todos los productos - Envio gratis</button>`;
- document.getElementById('viewCats').innerHTML = h;
+ let cats=[...new Set(productos.map(p=>p.categoria))];
+ let h=`<div class="grid">`;
+ for(let c of cats){h+=`<div class="card" onclick="openCat('${c}')" style="padding:20px;text-align:center;font-weight:700">${c}</div>`}
+ h+=`</div><br><button onclick="openAllProducts()" style="width:100%;padding:14px;background:#111;color:white;border:none;border-radius:24px;font-weight:700">Ver todos - Envio gratis</button>`;
+ document.getElementById('viewCats').innerHTML=h;
 }
-
 function openCat(cat){
- currentCat = cat;
  document.getElementById('viewCats').style.display='none';
  document.getElementById('viewProd').style.display='block';
- document.getElementById('catName').innerText = cat + ' • Click en la otra pagina para ver detalle';
+ document.getElementById('catName').innerText=cat;
  renderProds(productos.filter(p=>p.categoria==cat));
 }
-
 function openAllProducts(){
  document.getElementById('viewCats').style.display='none';
  document.getElementById('viewProd').style.display='block';
- document.getElementById('catName').innerText = 'Todos los productos • Envio gratis siempre';
+ document.getElementById('catName').innerText='Todos los productos • Envio gratis siempre';
  renderProds(productos);
 }
-
 function renderProds(lista){
  let h='';
  for(let idx=0; idx<productos.length; idx++){
-   let p = productos[idx];
-   if(!lista.includes(p)) continue;
-   let off=getDiscountForProduct(idx);
-   let oldPrice=getVisualOldPrice(p.usd, off);
-   h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:6px;left:6px;background:#111;color:white;font-size:10px;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${thumb(p.fotos[0])}" style="max-width:100%;max-height:100%"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a">Envio gratis</div></div></div>`;
+  let p=productos[idx]; if(!lista.includes(p)) continue;
+  let off=getDiscountForProduct(idx); let oldP=getVisualOldPrice(p.usd,off);
+  h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:6px;left:6px;background:#111;color:white;font-size:10px;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${thumb(p.fotos[0])}" style="max-width:100%;max-height:100%"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldP)}</span></div><div style="font-size:10px;color:#0a7a0a">Envio gratis</div></div></div>`;
  }
- if(!h) h = `<div style="grid-column:1/-1;text-align:center;padding:30px;background:white;border-radius:12px">No hay productos</div>`;
- document.getElementById('prod').innerHTML = h;
+ document.getElementById('prod').innerHTML=h;
 }
-
 function openDetail(i){
- let p = productos[i];
- document.getElementById('viewProd').style.display='none';
- document.getElementById('viewCats').style.display='none';
- document.getElementById('viewDetail').style.display='block';
- document.getElementById('viewDetail').innerHTML = `
- <div style="background:white;padding:14px;border-radius:12px">
- <button onclick="showCats()" style="border:none;background:#f0f0f0;padding:8px 12px;border-radius:18px;cursor:pointer">← Volver</button>
- <h2 style="margin:12px 0 6px">${p.nombre}</h2>
- <div style="font-size:12px;color:#666">${p.categoria} • Envio gratis siempre</div>
- <div style="height:280px;display:flex;align-items:center;justify-content:center;margin:12px 0"><img src="${p.fotos[0]}" style="max-width:100%;max-height:100%"></div>
- <div style="font-size:22px;font-weight:800">${fmt(p.usd)} <span class="price-old">${fmt(getVisualOldPrice(p.usd,getDiscountForProduct(i)))}</span></div>
- <p style="font-size:13px;color:#333">${p.specs}</p>
- <button onclick="addToCart(${i})" style="width:100%;padding:14px;background:#ffd814;border:none;border-radius:24px;font-weight:800;cursor:pointer;margin-top:10px">Agregar al carrito - Icono del carrito real</button>
- </div>`;
+ let p=productos[i];
+ document.getElementById('viewProd').style.display='none';document.getElementById('viewCats').style.display='none';document.getElementById('viewDetail').style.display='block';
+ document.getElementById('viewDetail').innerHTML=`<div style="background:white;padding:14px;border-radius:12px"><button onclick="showCats()" style="border:none;background:#f0f0f0;padding:8px 12px;border-radius:18px">← Volver</button><h2>${p.nombre}</h2><div style="height:280px;display:flex;align-items:center;justify-content:center"><img src="${p.fotos[0]}" style="max-width:100%;max-height:100%"></div><div style="font-size:22px;font-weight:800">${fmt(p.usd)}</div><p style="font-size:13px">${p.specs}</p><button onclick="addToCart(${i})" style="width:100%;padding:14px;background:#ffd814;border:none;border-radius:24px;font-weight:800;margin-top:10px">Agregar al carrito</button></div>`;
 }
-
-// --- BUSCADOR TIPO GOOGLE SOLO NOMBRE ---
+// BUSCADOR GOOGLE SOLO NOMBRE - CENTRO ARRIBA CON LUPA
 function buscarGoogle(q){
- let texto = q.toLowerCase().trim();
- let box = document.getElementById('suggestBox');
- let info = document.getElementById('searchInfo');
- 
- if(texto.length < 1){
-   box.style.display='none';
-   info.style.display='none';
-   return;
- }
-
- // SOLO POR NOMBRE como Google
- let filtrados = productos.filter(p => p.nombre.toLowerCase().includes(texto));
-
- // Sugerencias tipo Google
- if(filtrados.length > 0){
-   let sHtml = '';
-   for(let p of filtrados.slice(0,6)){
-     let idx = productos.indexOf(p);
-     sHtml += `<div class="sug" onclick="selectSearch('${p.nombre.replace(/'/g,"")}')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9aa0a6" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> ${p.nombre}</div>`;
-   }
-   box.innerHTML = sHtml;
-   box.style.display='block';
- } else {
-   box.innerHTML = `<div class="sug">No hay resultados para "${q}"</div>`;
-   box.style.display='block';
- }
-
- // Si presiona Enter o escribe 2 letras, muestra resultados en la otra pagina
- if(texto.length >= 2){
-   info.style.display='block';
-   info.innerText = `${filtrados.length} resultados para "${q}" • Solo por nombre`;
-   document.getElementById('viewCats').style.display='none';
-   document.getElementById('viewDetail').style.display='none';
-   document.getElementById('viewProd').style.display='block';
-   document.getElementById('catName').innerText = `Busqueda: "${q}" • ${filtrados.length} resultados`;
-   renderProds(filtrados);
+ let texto=q.toLowerCase().trim();
+ let box=document.getElementById('suggestBox');
+ if(texto.length<1){box.style.display='none';return;}
+ let filtrados=productos.filter(p=>p.nombre.toLowerCase().includes(texto));
+ if(filtrados.length>0){
+  let sHtml='';
+  for(let p of filtrados.slice(0,8)){
+   sHtml+=`<div class="sug" onclick="selectSearch('${p.nombre.replace(/'/g,"")}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> ${p.nombre}</div>`;
+  }
+  box.innerHTML=sHtml; box.style.display='block';
+ } else {box.innerHTML=`<div class="sug">No hay resultados para "${q}"</div>`; box.style.display='block';}
+ if(texto.length>=2){
+  document.getElementById('viewCats').style.display='none';
+  document.getElementById('viewDetail').style.display='none';
+  document.getElementById('viewProd').style.display='block';
+  document.getElementById('catName').innerText=`Busqueda: "${q}" • ${filtrados.length} resultados • Solo por nombre`;
+  renderProds(filtrados);
  }
 }
-
 function selectSearch(nombre){
- document.getElementById('searchInput').value = nombre;
+ document.getElementById('searchInput').value=nombre;
  document.getElementById('suggestBox').style.display='none';
  buscarGoogle(nombre);
 }
-
-function clearSearch(){
- document.getElementById('searchInput').value='';
- document.getElementById('suggestBox').style.display='none';
- document.getElementById('searchInfo').style.display='none';
- showCats();
-}
-
-function addToCart(i){ cart.push(productos[i]); document.getElementById('cartCount').innerText = cart.length; alert('Agregado: ' + productos[i].nombre + ' • Ver icono carrito real arriba'); }
-function openCart(){ alert('Carrito: ' + cart.length + ' productos\nEnvio gratis siempre\n' + cart.map(p=>p.nombre).join('\n')); }
-
-// Click fuera cierra sugerencias
-document.addEventListener('click', (e)=>{
- if(!e.target.closest('#searchWrap')){ document.getElementById('suggestBox').style.display='none'; }
-});
-
+function addToCart(i){cart.push(productos[i]);document.getElementById('cartCount').innerText=cart.length;}
+function openCart(){alert('Carrito: '+cart.length+' productos');}
+document.addEventListener('click',(e)=>{if(!e.target.closest('.searchCenter')){document.getElementById('suggestBox').style.display='none';}});
 showCats();
 </script>
 </body>
