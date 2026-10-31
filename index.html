@@ -1,20 +1,22 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WobbaShop</title>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WobbaShop | Tienda Oficial</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;font-family:'Inter',sans-serif}body{margin:0;background:#f2f2f2;color:#111}
 .redline{height:4px;background:#ff3c00;width:100%;position:sticky;top:0;z-index:50}
-header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:10px 12px}
-.container{max-width:1200px;margin:auto;padding:0 12px}
-.hero{border-radius:0 0 16px 16px;background:linear-gradient(105deg,#111 60%,#ff3c00 100%);color:white;min-height:200px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;margin:0 auto 12px;max-width:1200px;overflow:hidden}
+header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:12px 16px}
+.container{max-width:1200px;margin:auto;padding:0 16px}
+.hero{border-radius:0 0 16px 16px;background:linear-gradient(105deg,#111 60%,#ff3c00 100%);color:white;min-height:260px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;margin:0 auto 12px;max-width:1200px;overflow:hidden}
+@media(max-width:768px){.hero{grid-template-columns:1fr}}
 .hero-products{display:flex;gap:10px;padding:14px;justify-content:end;align-items:center;flex-wrap:wrap}
-.hero-products img{width:80px;height:80px;border-radius:12px;background:white;object-fit:contain;padding:5px;cursor:pointer}
+.hero-products img{width:90px;height:90px;border-radius:12px;background:white;object-fit:contain;padding:5px;cursor:pointer;border:1px solid #eee}
 .benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:1200px;margin:0 auto;padding:0 12px}
 @media(min-width:900px){.benefits{grid-template-columns:repeat(6,1fr)}}
 .ben{background:white;border-radius:12px;padding:14px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;border:1px solid #eee}
 .ben b{font-size:11px;display:block;margin-top:6px;font-weight:800} .ben p{font-size:10px;color:#666;margin:3px 0 0}
 .carousel{background:white;border-radius:12px;padding:14px 0;margin:12px auto;max-width:1200px;box-shadow:0 1px 3px rgba(0,0,0,.08);position:relative;border:1px solid #eee}
-.carousel-track{display:flex;gap:12px;padding:0 48px 0 12px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none}
-.carousel-item{min-width:165px;max-width:165px;background:white;border:1px solid #eee;border-radius:12px;padding:10px;flex-shrink:0;cursor:pointer;position:relative}
+.carousel-track{display:flex;gap:12px;padding:0 48px 0 12px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;cursor:grab;user-select:none}
+.carousel-track::-webkit-scrollbar{display:none}
+.carousel-item{min-width:165px;max-width:165px;background:white;border:1px solid #eee;border-radius:12px;padding:10px;text-align:left;flex-shrink:0;cursor:pointer;position:relative}
 .badge-off{position:absolute;top:8px;left:8px;background:#111;color:white;font-size:10px;font-weight:800;padding:3px 7px;border-radius:10px}
 .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:white;border:1px solid #ddd;width:36px;height:36px;border-radius:50%;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.12);cursor:pointer;font-weight:900}
 .carousel-btn.left{left:8px} .carousel-btn.right{right:8px}
@@ -31,7 +33,7 @@ header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:10
 .detail-amazon{background:white;min-height:100vh}
 .detail-grid{display:grid;grid-template-columns:45% 55%;gap:0;max-width:1300px;margin:auto}
 @media(max-width:900px){.detail-grid{grid-template-columns:1fr}}
-.searchCenter{flex:1;max-width:500px;margin:0 10px;position:relative}
+.searchCenter{flex:1;max-width:500px;margin:0 14px;position:relative}
 .searchBox{background:white;border-radius:24px;display:flex;align-items:center;padding:4px 5px 4px 14px}
 .searchBox input{flex:1;border:none;outline:none;padding:8px 6px;font-size:13px;color:#111}
 .searchBox button{background:#febd69;border:none;min-width:38px;height:32px;border-radius:18px;cursor:pointer}
@@ -39,101 +41,150 @@ header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:10
 @media(max-width:768px){.searchCenter{max-width:100%;margin:8px 0 0 0;order:3;flex-basis:100%} header .container{flex-wrap:wrap}}
 
 /* 3 RAYITAS */
-#menuBtn{background:transparent;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:6px}
+#menuBtn{background:transparent;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:8px}
 #menuBtn span{width:22px;height:2px;background:white;display:block;border-radius:2px}
-#sideMenu{position:fixed;top:0;left:-100%;width:88%;max-width:380px;height:100%;background:#fff;z-index:300;transition:.32s;box-shadow:2px 0 20px rgba(0,0,0,.3);display:flex;flex-direction:column;overflow:auto}
+#sideMenu{position:fixed;top:0;left:-100%;width:88%;max-width:380px;height:100%;background:#fff;z-index:500;transition:.32s;box-shadow:2px 0 20px rgba(0,0,0,.3);display:flex;flex-direction:column;overflow:auto}
 #sideMenu.open{left:0}
-#menuOverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:299}
-
-/* ESTILO COMO MERCADO LIBRE */
-.ml-row{display:flex;align-items:center;gap:18px;padding:16px 22px;cursor:pointer;border-bottom:1px solid transparent}
+#menuOverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:499}
+.ml-row{display:flex;align-items:center;gap:18px;padding:18px 22px;cursor:pointer;border-bottom:1px solid #f2f2f2}
 .ml-row:hover{background:#f5f5f5}
-.ml-row.active{background:#eef2ff}
-.ml-row.active span{color:#3483fa;font-weight:700}
+.ml-row.active{background:#fffbe6}
 .ml-icon{width:26px;height:26px;display:flex;align-items:center;justify-content:center}
-.ml-row span{font-size:15px;color:#333}
-.badge-gratis{background:#00a650;color:white;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;margin-left:8px}
-.badge-nuevo{background:#3483fa;color:white;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;margin-left:8px}
+.ml-row span{font-size:15px;color:#111;font-weight:600}
 .divider{height:8px;background:#f5f5f5;border-top:1px solid #eee;border-bottom:1px solid #eee}
-.menuCat{padding:12px 22px 12px 66px;font-size:14px;cursor:pointer;color:#333;border-bottom:1px solid #f5f5f5}
+.menuCat{padding:13px 22px 13px 66px;font-size:14px;cursor:pointer;color:#333;border-bottom:1px solid #f5f5f5}
 .menuCat:hover{background:#f5f5f5}
 </style>
 </head>
 <body>
 <div class="redline"></div>
 <header><div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
-<div onclick="showCats()" style="cursor:pointer"><b style="letter-spacing:1px">WOBBASHOP</b><div id="dolarInfo" style="font-size:10px;opacity:.8">Envio en Colombia</div></div>
-<div class="searchCenter"><div class="searchBox"><input id="searchInput" type="text" placeholder="Estoy buscando..." oninput="buscarGoogle(this.value)" autocomplete="off"><button onclick="abrirPrimerResultado()">🔍</button></div><div id="suggestBox"></div></div>
-<div style="display:flex;gap:6px;align-items:center">
+<div onclick="showCats()" style="cursor:pointer"><b style="letter-spacing:1px">WOBBASHOP</b><div id="dolarInfo" style="font-size:11px;opacity:.8">TRM $3.166,91 oficial • Envio en Colombia</div></div>
+
+<div class="searchCenter">
+<div class="searchBox">
+<input id="searchInput" type="text" placeholder="Buscar por nombre..." oninput="buscarGoogle(this.value)" autocomplete="off">
+<button onclick="abrirPrimerResultado()">🔍</button>
+</div>
+<div id="suggestBox"></div>
+</div>
+
+<div style="display:flex;gap:8px;align-items:center">
 <button id="menuBtn" onclick="openSideMenu()"><span></span><span></span><span></span></button>
-<button id="btnPerfil" onclick="openProfile()" style="background:white;color:#111;width:40px;height:40px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;position:relative">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+<button id="btnPerfil" onclick="openProfile()" style="background:white;color:#111;width:44px;height:44px;border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;position:relative">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
 <span id="perfilBadge" style="position:absolute;bottom:-2px;right:-2px;background:#00c853;width:10px;height:10px;border-radius:50%;border:2px solid white;display:none"></span>
 </button>
-<button onclick="toggleCart()" style="background:white;color:#111;width:40px;height:40px;border-radius:50%;border:none;position:relative;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span id="n" style="position:absolute;top:-4px;right:-4px;background:#ff3c00;color:white;font-size:10px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center">0</span></button>
-<button id="btnMoneda" onclick="cambiarMoneda()" style="background:#ffe600;color:#111;padding:6px 10px;border-radius:20px;font-size:10px;font-weight:800;border:none">USD→COP</button></div></div></header>
+<button onclick="toggleCart()" style="background:white;color:#111;width:44px;height:44px;border-radius:50%;border:none;position:relative;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span id="n" style="position:absolute;top:-4px;right:-4px;background:#ff3c00;color:white;font-size:10px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center">0</span></button>
+<button id="btnMoneda" onclick="cambiarMoneda()" style="background:#ffe600;color:#111;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;border:none">USD → COP</button></div></div></header>
 
 <div id="menuOverlay" onclick="closeSideMenu()"></div>
 <div id="sideMenu">
-<!-- ARRIBA -->
-<div style="padding:4px 0">
-<div class="ml-row" onclick="closeSideMenu();showCats()"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span>Inicio</span></div>
+<div style="background:#111;color:white;padding:18px 22px;display:flex;justify-content:space-between;align-items:center"><b>WOBBASHOP</b><button onclick="closeSideMenu()" style="background:white;color:#111;border:none;width:32px;height:32px;border-radius:50%;font-weight:800">X</button></div>
 
-<div class="ml-row" onclick="closeSideMenu();openMasVendidosPage()"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/><circle cx="12" cy="8" r="1"/></svg></div><span>Ofertas</span></div>
-
-<div class="ml-row" onclick="closeSideMenu();openInfo('play')"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><rect x="2" y="4" width="20" height="14" rx="2"/><polygon points="10 8 16 12 10 16 10 8" fill="#333"/></svg></div><span>Mercado Play</span><span class="badge-gratis">GRATIS</span></div>
-
-<div class="ml-row" onclick="closeSideMenu();openHistorialPage()"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span>Historial</span></div>
-
-<div class="ml-row" onclick="closeSideMenu();openInfo('pago')"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div><span>Ayuda / PQR</span></div>
-</div>
-
-<div class="divider"></div>
-
-<div style="padding:4px 0">
-<div class="ml-row" onclick="closeSideMenu();openInfo('supermercado')"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M6 13c0-3 2-5 6-5s6 2 6 5"/><path d="M9 13a3 3 0 0 1 6 0"/><path d="M5 8h14l-1 9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 8z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></div><span>Supermercado</span><span class="badge-nuevo">NUEVO</span></div>
-
-<div class="ml-row" onclick="closeSideMenu();openCat('Moda')"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M20 21v-2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v2"/><path d="M16 3l-1 7-3-2-3 2-1-7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2z"/></svg></div><span>Moda</span></div>
-</div>
-
-<div class="divider"></div>
-
-<div style="padding:4px 0">
-<div class="ml-row active" onclick="closeSideMenu();openMasVendidosPage()"><div class="ml-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="#3483fa" stroke="#3483fa" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/><path d="M12 17v4"/><path d="M9 22l3-2 3 2"/></svg></div><span>Más vendidos</span></div>
-
-<div class="ml-row" onclick="closeSideMenu();openInfo('internacional')"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M2 12h20"/><path d="M22 12a6 6 0 0 0-6-6H8a6 6 0 0 0-6 6"/><path d="M16 16l4-4-4-4"/><path d="M6 20a10 10 0 0 1 12 0"/></svg></div><span>Internacional</span><span class="badge-nuevo">NUEVO</span></div>
-
-<div class="ml-row" onclick="closeSideMenu();openInfo('tiendas')"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M3 9l1-5h16l1 5"/><path d="M7 9V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><path d="M5 9v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9"/><path d="M12 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/><path d="M17 16l2 2"/></svg></div><span>Tiendas oficiales</span></div>
-
-<div class="ml-row" onclick="toggleCategoriasMenu()"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/><rect x="3" y="4" width="4" height="4" rx="1"/><rect x="3" y="10" width="4" height="4" rx="1"/><rect x="3" y="16" width="4" height="4" rx="1"/></svg></div><span>Categorías</span><span style="margin-left:auto">⌄</span></div>
+<div class="ml-row" onclick="closeSideMenu();showCats()"><div class="ml-icon">🏠</div><span>Inicio</span></div>
+<div class="ml-row" onclick="closeSideMenu();openHistorialPage()"><div class="ml-icon">🕒</div><span>Historial</span></div>
+<div class="ml-row active" onclick="closeSideMenu();openMasVendidosPage()"><div class="ml-icon">⭐</div><span>Más vendidos</span></div>
+<div class="ml-row" onclick="toggleCategoriasMenu()"><div class="ml-icon">📦</div><span>Categorías</span><span style="margin-left:auto;font-size:12px">▼</span></div>
 <div id="categoriasListMenu" style="display:none;background:#fafafa"></div>
-</div>
 
 <div class="divider"></div>
 
-<div style="padding:4px 0">
-<div class="ml-row" onclick="closeSideMenu();openProfile()"><div class="ml-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><span>Resumen</span></div>
-</div>
+<div class="ml-row" onclick="closeSideMenu();openMenos40kPage()"><div class="ml-icon">💲</div><span>Menos de $40K</span></div>
+<div class="ml-row" onclick="closeSideMenu();openInfo('envio')"><div class="ml-icon">🚚</div><span>Envío en Colombia - 3 a 15 días</span></div>
+<div class="ml-row" onclick="closeSideMenu();openInfo('pago')"><div class="ml-icon">🔒</div><span>Pago seguro - Nequi 3016202301</span></div>
+
+<div class="divider"></div>
+
+<div class="ml-row" onclick="closeSideMenu();openLogin()"><div class="ml-icon">👤</div><span id="menuCuenta">Mi cuenta</span></div>
+<div class="ml-row" onclick="closeSideMenu();toggleCart()"><div class="ml-icon">🛒</div><span>Carrito</span></div>
 
 <div style="margin-top:auto;padding:16px;font-size:11px;color:#999;border-top:1px solid #eee">WobbaShop • Envio en Colombia 3 a 15 dias<br>Nequi 3016202301 • WhatsApp +57 3016202301</div>
 </div>
 
 <div id="mainShop">
-<div class="hero"><div style="padding:20px"><div style="font-size:10px;letter-spacing:2px;opacity:.8;font-weight:800;background:rgba(255,255,255,.15);display:inline-block;padding:4px 10px;border-radius:20px">ENVIO EN COLOMBIA</div><h1 style="margin:10px 0 0;font-size:34px;line-height:.9;font-weight:900">Descuentos hasta 60% OFF</h1><p style="font-size:12px;opacity:.7;margin:8px 0 0">Envio en Colombia 3 a 15 dias</p></div><div class="hero-products" id="heroProducts"></div></div>
+<div class="hero"><div style="padding:26px"><div style="font-size:10px;letter-spacing:2px;opacity:.8;font-weight:800;background:rgba(255,255,255,.15);display:inline-block;padding:4px 10px;border-radius:20px">ENVIO EN COLOMBIA</div><h1 style="margin:10px 0 0;font-size:40px;line-height:.9;font-weight:900">Descuentos hasta 60% OFF</h1><p style="font-size:12px;opacity:.7;margin:10px 0 0;max-width:340px">Envio en Colombia 3 a 15 dias - Gratis siempre</p></div><div class="hero-products" id="heroProducts"></div></div>
+
 <div class="benefits">
-<div class="ben" onclick="openInfo('envio')"><b>ENVIO EN COLOMBIA</b><p>Gratis<br>3 a 15 dias</p></div>
+<div class="ben" onclick="openInfo('envio')"><b>ENVIO EN COLOMBIA</b><p>Gratis siempre<br>3 a 15 dias</p></div>
 <div class="ben" onclick="openLogin()"><b id="benCuenta">MI CUENTA</b><p>Inicia sesion</p></div>
 <div class="ben" onclick="openHistorialPage()"><b>HISTORIAL</b><p>Lo que viste</p></div>
 <div class="ben" onclick="openMasVendidosPage()"><b>MAS VENDIDOS</b><p>Tendencia</p></div>
 <div class="ben" onclick="openMenos40kPage()"><b>MENOS DE $40K</b><p>Ver productos</p></div>
 <div class="ben" onclick="openSideMenu()"><b>MENÚ ☰</b><p>Categorias</p></div>
 </div>
-<div class="carousel" id="destacadosSec"><div style="padding:0 16px;display:flex;justify-content:space-between"><h3 style="margin:0;font-size:15px;font-weight:800">Más vendidos</h3><span onclick="openMasVendidosPage()" style="font-size:12px;color:#007185;cursor:pointer;font-weight:700">Ver más ›</span></div><div style="position:relative;margin-top:12px"><button class="carousel-btn left" onclick="scrollCarrusel(-300)">‹</button><button class="carousel-btn right" onclick="scrollCarrusel(300)">›</button><div class="carousel-track" id="carouselTrack"></div></div></div>
-<div class="container" style="background:white;border-radius:14px;padding:16px;margin-top:12px;border:1px solid #eee"><div style="margin-bottom:18px"><h3 style="margin:0 0 10px;font-size:14px;font-weight:800">Búsqueda popular</h3><div class="chips" id="chipsBuscado"></div></div><div id="viewCat"><h2 style="margin:0;font-size:16px;font-weight:800">Categorias</h2><div id="catGrid" class="grid-cat" style="margin-top:12px"></div></div></div>
+
+<div class="carousel" id="destacadosSec">
+<div style="padding:0 16px;display:flex;justify-content:space-between"><h3 style="margin:0;font-size:15px;font-weight:800">Mas vendidos</h3></div>
+<div style="position:relative;margin-top:12px"><button class="carousel-btn left" onclick="scrollCarrusel(-300)">‹</button><button class="carousel-btn right" onclick="scrollCarrusel(300)">›</button><div class="carousel-track" id="carouselTrack"></div></div>
 </div>
 
-<div id="viewCategoria" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:12px 16px;display:flex;justify-content:space-between"><b id="tituloCategoria">CATEGORIA</b><button onclick="showCats()" style="background:white;color:#111;border:none;padding:6px 14px;border-radius:20px;font-weight:700">X</button></div><div style="max-width:1200px;margin:auto;padding:16px"><div id="nombreCategoria" style="font-size:20px;font-weight:900"></div><p style="font-size:12px;color:#666">Envio en Colombia - 3 a 15 dias</p><div id="categoriaGrid" class="grid-prod" style="margin-top:16px"></div></div></div>
+<div class="container" style="background:white;border-radius:14px;padding:16px;margin-top:12px;border:1px solid #eee">
+<div style="margin-bottom:18px"><h3 style="margin:0 0 10px;font-size:14px;font-weight:800">Busqueda popular</h3><div class="chips" id="chipsBuscado"></div></div>
+<div id="viewCat"><h2 style="margin:0;font-size:16px;font-weight:800">Categorias • Click para entrar a otra pagina</h2><div id="catGrid" class="grid-cat" style="margin-top:12px"></div></div>
+</div>
+</div>
+
+<div id="viewCategoria" style="display:none;background:white;min-height:100vh">
+<div style="background:#111;color:white;padding:12px 16px;display:flex;justify-content:space-between;align-items:center"><b id="tituloCategoria">CATEGORIA</b><button onclick="showCats()" style="background:white;color:#111;border:none;padding:6px 14px;border-radius:20px;font-weight:700;cursor:pointer">X</button></div>
+<div style="max-width:1200px;margin:auto;padding:16px">
+<h2 id="nombreCategoria" style="margin:0;font-size:20px;font-weight:900"></h2>
+<p style="font-size:12px;color:#666;margin:6px 0 0">Envio en Colombia - 3 a 15 dias - Gratis siempre</p>
+<div id="categoriaGrid" class="grid-prod" style="margin-top:16px"></div>
+</div>
+</div>
+
+<div id="viewDetail" class="detail-amazon" style="display:none">
+<div style="background:white;border-bottom:1px solid #ddd;padding:10px 16px"><button onclick="backToList()" style="background:#f0f0f0;border:1px solid #ddd;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600">← Volver</button></div>
+<div class="detail-grid">
+<div style="padding:16px;border-right:1px solid #eee"><div id="mainImg" style="min-height:420px;display:flex;align-items:center;justify-content:center"></div><div id="thumbs" style="display:flex;gap:8px;padding:12px 0;overflow:auto;border-top:1px solid #eee;margin-top:12px"></div></div>
+<div style="padding:20px">
+<div id="dCat" style="font-size:11px;color:#007185;font-weight:700"></div>
+<h1 id="dName" style="margin:6px 0;font-size:20px;font-weight:400"></h1>
+<div id="dRatingTop" style="font-size:12px;color:#007185"></div>
+<hr style="margin:12px 0;border:none;border-top:1px solid #e7e7e7">
+<div><span id="dPrice" style="font-size:28px"></span><span id="dPriceOld" class="price-old"></span><span id="dOff" style="margin-left:8px;background:#cc0c39;color:white;font-size:12px;padding:2px 6px;border-radius:3px;font-weight:700"></span></div>
+<div id="dPrice2" style="font-size:12px;color:#565959;margin-top:6px"></div>
+<div style="font-size:12px;color:#067d62;margin-top:6px;font-weight:700">Envio en Colombia - 3 a 15 dias - Gratis</div>
+<button onclick="addFromDetail()" style="background:#ffd814;border:1px solid #fcd200;width:100%;padding:12px;border-radius:20px;cursor:pointer;font-weight:700;margin-top:12px">Agregar al carrito</button>
+<div style="margin-top:18px;border:2px solid #111;border-radius:12px;padding:14px;background:#fffbe6">
+<b style="font-size:13px">PAGO DIRECTO</b>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+<div onclick="openPagoPage()" style="background:#2000b1;color:white;padding:12px;border-radius:10px;text-align:center;cursor:pointer;font-weight:800">NEQUI<br>301 620 2301</div>
+<div onclick="openPagoPage()" style="background:#00c853;color:white;padding:12px;border-radius:10px;text-align:center;cursor:pointer;font-weight:800">WHATSAPP<br>+57 301 620 2301</div>
+</div>
+<button onclick="openPagoPage()" style="background:#111;color:white;width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;margin-top:10px;cursor:pointer">Ir a pagina de pago →</button>
+</div>
+<div style="margin-top:20px;border-top:1px solid #e7e7e7;padding-top:16px"><h3 style="font-size:16px;font-weight:700;margin:0 0 8px">Sobre este articulo</h3><div id="dSpecs" style="font-size:13px;white-space:pre-wrap"></div></div>
+<div style="margin-top:20px;border-top:1px solid #e7e7e7;padding-top:16px"><h3 style="font-size:16px;font-weight:700;margin:0 0 10px">Opiniones</h3><div id="dReviews"></div></div>
+</div>
+</div>
+</div>
+
+<div id="viewPago" style="display:none;background:white;min-height:100vh">
+<div style="background:#111;color:white;padding:12px 16px;display:flex;justify-content:space-between"><b>PAGO SEGURO</b><button onclick="closePagoPage()" style="background:white;color:#111;border:none;padding:6px 14px;border-radius:20px;font-weight:700">X</button></div>
+<div style="max-width:600px;margin:auto;padding:20px">
+<h2 style="font-weight:900;font-size:22px;margin:0">Finaliza tu compra</h2>
+<p style="font-size:13px;color:#666">Envio en Colombia - 3 a 15 dias</p>
+<div style="background:#f7f7f7;border:1px solid #eee;border-radius:12px;padding:14px;margin-top:16px;text-align:center"><div style="font-size:28px;font-weight:900">301 620 2301</div><div style="font-size:12px">NEQUI OFICIAL</div><button onclick="copiarNequi()" style="background:#2000b1;color:white;width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;margin-top:10px">Copiar Nequi</button></div>
+<div style="background:#e8f5e9;border:1px solid #c8e6c9;border-radius:12px;padding:14px;margin-top:14px;text-align:center"><div style="font-size:24px;font-weight:900">+57 301 620 2301</div><button onclick="pagarWhatsappDirecto()" style="background:#00c853;color:white;width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;margin-top:10px">Ir a WhatsApp →</button></div>
+<button onclick="closePagoPage()" style="background:#f5f5f5;border:1px solid #ddd;width:100%;padding:12px;border-radius:10px;margin-top:14px">← Volver</button>
+</div>
+</div>
+
+<div id="viewMenos40k" style="display:none;background:white;min-height:100vh">
+<div style="background:#111;color:white;padding:12px 16px;display:flex;justify-content:space-between"><b>MENOS DE $40.000</b><button onclick="showCats()" style="background:white;color:#111;border:none;padding:6px 14px;border-radius:20px;font-weight:700">X</button></div>
+<div style="max-width:1200px;margin:auto;padding:16px">
+<div style="background:#fffbe6;border:2px solid #111;border-radius:12px;padding:16px">
+<h2 style="margin:0;font-weight:900;font-size:20px">Productos por menos de $40.000 COP</h2>
+<p style="font-size:12px;line-height:1.7;margin:8px 0 0">• TRM $3.166,91 oficial<br>• Envio en Colombia - 3 a 15 dias - Gratis<br>• Pago Nequi 3016202301 / WhatsApp +57 3016202301<br>• Garantia 12 meses</p>
+</div>
+<div id="menos40kGrid" class="grid-prod" style="margin-top:16px"></div>
+</div>
+</div>
+
 <div id="viewHistorial" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:12px 16px;display:flex;justify-content:space-between"><b>HISTORIAL</b><button onclick="showCats()" style="background:white;color:#111;border:none;padding:6px 14px;border-radius:20px;font-weight:700">X</button></div><div style="max-width:1200px;margin:auto;padding:16px"><div id="historialGrid" class="grid-prod"></div></div></div>
-<div id="viewMasVendidos" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:12px 16px;display:flex;justify-content:space-between"><b>MÁS VENDIDOS</b><button onclick="showCats()" style="background:white;color:#111;border:none;padding:6px 14px;border-radius:20px;font-weight:700">X</button></div><div style="max-width:1200px;margin:auto;padding:16px"><div style="background:#fffbe6;border:2px solid #111;border-radius:12px;padding:14px"><h2 style="margin:0;font-size:18px;font-weight:900">Más vendidos en WobbaShop</h2><p style="font-size:12px;margin:6px 0 0">Envio en Colombia - 3 a 15 dias - Gratis</p></div><div id="masVendidosGrid" class="grid-prod" style="margin-top:16px"></div></div></div>
-<div id="viewDetail" class="detail-amazon" style="display:none"><div style="background:white;border-bottom:1px solid #ddd;padding:10px 16px"><button onclick="backToList()" style="background:#f0f0f0;border:1px solid #ddd;padding:8px 16px;border-radius:8px;font-weight:600">← Volver</button></div><div class="detail-grid"><div style="padding:16px;border-right:1px solid #eee"><div id="mainImg" style="min-height:380px;display:flex;align-items:center;justify-content:center"></div><div id="thumbs" style="display:flex;gap:8px;padding:12px 0;overflow:auto;border-top:1px solid #eee;margin-top:12px"></div></div><div style="padding:20px"><div id="dCat" style="font-size:11px;color:#007185;font-weight:700"></div><h1 id="dName" style="margin:6px 0;font-size:20px"></h1><div id="dRatingTop" style="font-size:12px;color:#007185"></div><div style="margin:12px 0"><span id="dPrice" style="font-size:28px"></span><span id="dPriceOld" class="price-old"></span><span id="dOff" style="margin-left:8px;background:#cc0c39;color:white;font-size:12px;padding:2px 6px;border-radius:3px;font-weight:700"></span></div><div id="dPrice2" style="font-size:12px;color:#565959"></div><div style="font-size:12px;color:#067d62;margin-top:6px;font-weight:700">Envio en Colombia - 3 a 15 dias - Gratis</div><button onclick="addFromDetail()" style="background:#ffd814;border:1px solid #fcd200;width:100%;padding:12px;border-radius:20px;font-weight:700;margin-top:12px">Agregar al carrito</button><div style="margin-top:18px;border:2px solid #111;border-radius:12px;padding:14px;background:#fffbe6"><b style="font-size:13px">PAGO DIRECTO</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><div onclick="openPagoPage()" style="background:#2000b1;color:white;padding:12px;border-radius:10px;text-align:center;font-weight:800">NEQUI<br>301 620 2301</div><div onclick="openPagoPage()" style="background:#00c853;color:white;padding:12px;border-radius:10px;text-align:center;font-weight:800">WHATSAPP<br>+57 301</div></div><button onclick="openPagoPage()" style="background:#111;color:white;width:100%;padding:12px;border-radius:10px;border:none;font-weight:800;margin-top:10px">Ir a pagina de pago →</button></div><div style="margin-top:20px;border-top:1px solid #e7e7e7;padding-top:16px"><h3 style="font-size:16px;font-weight:700">Sobre este articulo</h3><div id="dSpecs" style="font-size:13px;white-space:pre-wrap"></div></div><div style="margin-top:20px;border-top:1px solid #e7e7e7;padding-top:16px"><h3 style="font-size:16px;font-weight:700">Opiniones</h3><div id="dReviews"></div></div></div></div></div>
-<div id="viewPago" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:12px 16px;display:flex;justify-content:space-between"><b>PAGO SEGURO</b><button onclick="closePagoPage()" style="backgr
+<div id="viewMasVendidos" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:12px 16px;display:flex;justify-content:space-between"><b>MÁS VENDIDOS</b><button onclick="showCats()" style="background:white;color:#111;border:none;padding:6px 14px;border-radius:20px;font-weight:700">X</button></div><div style="max-width:1200px;margin:auto;padding:16px"><div id="masVendidosGrid" class="grid-prod"></div></div></div>
+
+<div id="loginModal" style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:200;align-items:center;justify-content:center;padding:20px"><div style="background:white;border-radius:16px;padding:22px;max-width:360px;width:100%"><div style="display:flex;justify-content:space-between"><h2 style="margin:0;font-size:18px;font-weight:800">Mi cuenta</h2><button onclick="closeLogin()" style="border:none;background:#f5f5f5;width:32px;height:32px;border-radius:50%">X</button></div><input id="regName" placeholder="Nombre completo" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:14px"><input id="regEmail" placeholder="WhatsApp o correo" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:10px"><button onclick="guardarRegistro()" style="background:#111;color:white;width:100%;padding:14px;border-radius:10px;border:none;font-weight:800;margin-top:14px">Crear cuenta</button></div></div>
+<div id="profileModal" style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:200;align-items:center;justify-content:center;padding:20px"><div style="background:white;border-radius:16px;padding:22px;max-width:380px;width:100%"><div style="display:flex;justify-content:space
