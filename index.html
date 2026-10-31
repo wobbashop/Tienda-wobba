@@ -46,7 +46,6 @@ header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:12
 .detail-amazon{background:white;min-height:100vh}
 .detail-grid{display:grid;grid-template-columns:45% 55%;gap:0;max-width:1300px;margin:auto}
 @media(max-width:900px){.detail-grid{grid-template-columns:1fr}}
-/* BUSCADOR CENTRO */
 .searchCenter{flex:1;max-width:500px;margin:0 14px;position:relative}
 .searchBox{background:white;border-radius:24px;display:flex;align-items:center;padding:4px 5px 4px 14px}
 .searchBox input{flex:1;border:none;outline:none;padding:8px 6px;font-size:13px;color:#111}
@@ -59,11 +58,10 @@ header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:12
 <div class="redline"></div>
 <header><div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap"><div><b style="letter-spacing:1px">WOBBASHOP</b><div id="dolarInfo" style="font-size:11px;opacity:.8">TRM $3.166,91 oficial • Envio gratis • 3 a 15 dias</div></div>
 
-<!-- BUSCADOR EN EL CENTRO EN LA PARTE SUPERIOR CON LUPA AL LADO -->
 <div class="searchCenter">
 <div class="searchBox">
-<input id="searchInput" type="text" placeholder="Buscar por nombre..." oninput="buscarGoogle(this.value)" onfocus="buscarGoogle(this.value)" autocomplete="off">
-<button onclick="buscarGoogle(document.getElementById('searchInput').value)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
+<input id="searchInput" type="text" placeholder="Buscar por nombre..." oninput="buscarGoogle(this.value)" onfocus="buscarGoogle(this.value)" autocomplete="off" onkeydown="if(event.key==='Enter'){abrirPrimerResultado()}">
+<button onclick="abrirPrimerResultado()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
 </div>
 <div id="suggestBox"></div>
 </div>
@@ -116,7 +114,7 @@ header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:12
 </div>
 
 <div id="viewDetail" class="detail-amazon" style="display:none">
-<div style="background:white;border-bottom:1px solid #ddd;padding:10px 16px;display:flex;gap:10px;align-items:center"><button onclick="backToList()" style="background:#f0f0f0;border:1px solid #ddd;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600">← Volver a resultados</button><span style="font-size:12px;color:#666">Al hacer click se abre esta pagina con detalle completo como en tu video</span></div>
+<div style="background:white;border-bottom:1px solid #ddd;padding:10px 16px;display:flex;gap:10px;align-items:center"><button onclick="backToList()" style="background:#f0f0f0;border:1px solid #ddd;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600">← Volver a resultados</button><span style="font-size:12px;color:#666">Pagina de detalle con reseña y compra como en tu video</span></div>
 <div class="detail-grid">
 <div style="padding:16px;border-right:1px solid #eee">
 <div id="mainImg" style="min-height:420px;display:flex;align-items:center;justify-content:center;padding:10px;background:white;position:relative"></div>
@@ -133,10 +131,6 @@ header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:12
 <div style="font-size:12px;color:#067d62;margin-top:6px;font-weight:700">Envio GRATIS siempre • Entrega 3 a 15 dias • Precio original sin cambios</div>
 <div style="font-size:12px;color:#565959;margin-top:4px">TRM $3.166,91 oficial • Pago protegido</div>
 </div>
-<div style="margin:16px 0">
-<div style="font-size:14px;font-weight:700;margin-bottom:6px">Color: <span id="dColor" style="font-weight:400">Negro</span></div>
-<div style="display:flex;gap:8px"><div style="border:2px solid #e77600;width:40px;height:40px;border-radius:6px;background:#111"></div><div style="border:1px solid #ddd;width:40px;height:40px;border-radius:6px;background:#ccc"></div></div>
-</div>
 <button onclick="addFromDetail()" style="background:#ffd814;border:1px solid #fcd200;color:#0f1111;width:100%;padding:12px;border-radius:20px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f1111" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Agregar al carrito</button>
 <button style="background:#ffa41c;border:1px solid #ff8f00;color:#0f1111;width:100%;padding:12px;border-radius:20px;font-weight:400;cursor:pointer;margin-top:8px" onclick="addFromDetail();toggleCart()">Comprar ahora</button>
 <div style="margin-top:20px;border-top:1px solid #e7e7e7;padding-top:16px">
@@ -146,9 +140,6 @@ header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:12
 <div style="margin-top:20px;border-top:1px solid #e7e7e7;padding-top:16px">
 <h3 style="font-size:16px;font-weight:700;margin:0 0 10px">Opiniones de clientes</h3>
 <div id="dReviews" style="display:flex;flex-direction:column;gap:12px"></div>
-</div>
-<div style="margin-top:20px;border:1px solid #ddd;border-radius:8px;padding:12px">
-<b style="font-size:13px">Informacion de envio - Gratis siempre</b><div style="font-size:12px;color:#444;margin-top:6px;line-height:1.5">• Envio gratis en todos los productos, sin minimo<br>• Colombia: 3 a 10 dias habiles<br>• USA: 8 a 15 dias habiles<br>• Seguimiento incluido<br>• Garantia 12 meses<br>• Precio original sin cambios, descuento solo visual</div>
 </div>
 </div>
 </div>
@@ -162,7 +153,7 @@ header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:12
 <script>
 const SHEET_ID="2PACX-1vSw0ttSUsTpHjrjXGTLZfYEt2E4IGar2s55-Me0DHaCDQFZMZ6y-ck1u173-nIUBxklEIl1Wk-Y1hnf";
 const CSV_URL=`https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?output=csv`;
-let TASA=3166.91, moneda='USD', productos=[], c=[], open=false, currentCat='', detailIndex=0, imgIndex=0, isDown=false, startX, scrollLeft;
+let TASA=3166.91, moneda='USD', productos=[], c=[], open=false, currentCat='', detailIndex=0, imgIndex=0, isDown=false, startX, scrollLeft, lastSearchResults=[];
 const thumb=u=>`https://images.weserv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,''))}&w=350&h=350&fit=contain&output=webp&q=75`;
 const big=u=>`https://images.weserv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,''))}&w=800&output=webp&q=80`;
 function fixUrl(s){ if(!s) return []; let urls=String(s).match(/https?:\/\/[^\s",']+/gi)||[]; if(!urls.length&&String(s).length>20){ let u=String(s).trim().split('?')[0]; if(!u.startsWith('http')) u='https://cf.cjdropshipping.com/'+u.replace(/^com\//,''); urls=[u]; } return [...new Set(urls.map(u=>u.split('?')[0]))]; }
@@ -197,64 +188,10 @@ function closeInfo(){ document.getElementById('infoModal').style.display='none';
 function cerrarSesion(){ localStorage.removeItem('wobba_user'); localStorage.removeItem('wobba_email'); document.getElementById('perfilBadge').style.display='none'; document.getElementById('benCuenta').innerText='MI CUENTA'; closeProfile(); }
 function guardarRegistro(){ let n=document.getElementById('regName').value.trim(), e=document.getElementById('regEmail').value.trim(); if(!n||!e){ alert('Completa datos'); return; } localStorage.setItem('wobba_user',n); localStorage.setItem('wobba_email',e); document.getElementById('perfilBadge').style.display='block'; document.getElementById('benCuenta').innerText='HOLA, '+n.split(' ')[0].toUpperCase(); closeLogin(); openProfile(); }
 function checkLogin(){ let u=localStorage.getItem('wobba_user'); if(u){ document.getElementById('perfilBadge').style.display='block'; document.getElementById('benCuenta').innerText='HOLA, '+u.split(' ')[0].toUpperCase(); } }
-function findProductByKeyword(keyword){
-  let k=keyword.toLowerCase();
-  let found=productos.find(p=> p.nombre.toLowerCase().includes(k) || p.categoria.toLowerCase().includes(k));
-  if(!found) found=productos[Math.floor(Math.random()*productos.length)];
-  return found;
-}
-function renderAmazonBottom(){
-  let cont=document.getElementById('amazonBottom');
-  let bloques=[
-    {titulo:"Conectate con electronicos", items:[
-      {label:"Auriculares", keyword:"auricular"},
-      {label:"Tabletas", keyword:"tablet"},
-      {label:"Juegos", keyword:"juego"},
-      {label:"Altavoces", keyword:"altavoz"}
-    ]},
-    {titulo:"Consigue los equipos y accesorios mas destacados", items:[
-      {label:"Computadoras de escritorio", keyword:"computador"},
-      {label:"Portatiles", keyword:"portatil"},
-      {label:"Discos duros", keyword:"disco"},
-      {label:"Accesorios para equipo", keyword:"accesorio"}
-    ]}
-  ];
-  let html='';
-  bloques.forEach(bloque=>{
-    html+=`<div class="amazon-card"><h2>${bloque.titulo}</h2><div class="amazon-subgrid">`;
-    bloque.items.forEach(item=>{
-      let prod=findProductByKeyword(item.keyword);
-      let idx=productos.indexOf(prod);
-      let off=getDiscountForProduct(idx>=0?idx:0);
-      let img=prod && prod.fotos[0] ? prod.fotos[0] : '';
-      html+=`<div class="amazon-subitem" onclick="openDetail(${idx>=0?idx:0})"><img src="${img?thumb(img):''}" loading="lazy"><span>${item.label}</span><div class="offer-badge">-${off}% Ver detalle</div></div>`;
-    });
-    html+=`</div><div style="margin-top:12px"><span style="font-size:12px;color:#0066c0;font-weight:700;cursor:pointer" onclick="openAllProducts()">Ver mas categorias</span></div></div>`;
-  });
-  cont.innerHTML=html;
-}
-function openAllProducts(){
-  document.getElementById('mainShop').style.display='block';
-  document.getElementById('viewCat').style.display='none';
-  document.getElementById('viewProd').style.display='block';
-  document.getElementById('amazonBottom').style.display='none';
-  document.getElementById('viewDetail').style.display='none';
-  document.getElementById('catName').innerText=`Todos los productos • ${productos.length} productos • Envio gratis siempre • Click en cualquiera para ver su pagina`;
-  let h=''; for(let i=0;i<productos.length;i++){ let p=productos[i]; let img=p.fotos[0]||''; let off=getDiscountForProduct(i); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${i})" class="card"><div style="position:absolute;top:6px;left:6px;z-index:2;background:#111;color:white;font-size:10px;font-weight:800;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre.substring(0,60)}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;font-weight:700">Envio gratis • 3 a 15 dias • Click para ver pagina</div></div></div>`; }
-  document.getElementById('prod').innerHTML=h;
-  window.scrollTo(0,0);
-}
-function filtrarMenos40k(){
-  let filtrados=productos.filter(p=> Math.round(p.usd*TASA) <= 40000 );
-  if(!filtrados.length){ alert(`No hay productos ≤ $40.000 con TRM $${TASA.toLocaleString('es-CO')}`); return; }
-  document.getElementById('mainShop').style.display='block';
-  document.getElementById('viewCat').style.display='none'; document.getElementById('viewProd').style.display='block'; document.getElementById('amazonBottom').style.display='none'; document.getElementById('viewDetail').style.display='none';
-  document.getElementById('catName').innerText=`Menos de $40.000 COP • ${filtrados.length} productos • Envio gratis siempre`;
-  let h=''; for(let p of filtrados){ let idx=productos.indexOf(p); let img=p.fotos[0]||''; let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:6px;left:6px;z-index:2;background:#111;color:white;font-size:10px;font-weight:800;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre.substring(0,60)}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;font-weight:700">Envio gratis • Click para ver pagina</div></div></div>`; }
-  document.getElementById('prod').innerHTML=h;
-  window.scrollTo(0,0);
-}
-function filtrarMarca(txt){ let filtrados=productos.filter(p=> (p.nombre+' '+p.categoria).toLowerCase().includes(txt.toLowerCase())); if(!filtrados.length){ alert('No hay productos de '+txt); return; } document.getElementById('mainShop').style.display='block'; document.getElementById('viewCat').style.display='none'; document.getElementById('viewProd').style.display='block'; document.getElementById('amazonBottom').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('catName').innerText=`${txt.toUpperCase()} • ${filtrados.length} productos`; let h=''; for(let p of filtrados){ let idx=productos.indexOf(p); let img=p.fotos[0]||''; let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:6px;left:6px;background:#111;color:white;font-size:10px;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div></div></div>`; } document.getElementById('prod').innerHTML=h; window.scrollTo(0,0); }
+function findProductByKeyword(keyword){ let k=keyword.toLowerCase(); let found=productos.find(p=> p.nombre.toLowerCase().includes(k) || p.categoria.toLowerCase().includes(k)); if(!found) found=productos[Math.floor(Math.random()*productos.length)]; return found; }
+function renderAmazonBottom(){ let cont=document.getElementById('amazonBottom'); let bloques=[{titulo:"Conectate con electronicos", items:[{label:"Auriculares", keyword:"auricular"},{label:"Tabletas", keyword:"tablet"},{label:"Juegos", keyword:"juego"},{label:"Altavoces", keyword:"altavoz"}]},{titulo:"Consigue los equipos y accesorios mas destacados", items:[{label:"Computadoras de escritorio", keyword:"computador"},{label:"Portatiles", keyword:"portatil"},{label:"Discos duros", keyword:"disco"},{label:"Accesorios para equipo", keyword:"accesorio"}]}]; let html=''; bloques.forEach(bloque=>{ html+=`<div class="amazon-card"><h2>${bloque.titulo}</h2><div class="amazon-subgrid">`; bloque.items.forEach(item=>{ let prod=findProductByKeyword(item.keyword); let idx=productos.indexOf(prod); let off=getDiscountForProduct(idx>=0?idx:0); let img=prod && prod.fotos[0] ? prod.fotos[0] : ''; html+=`<div class="amazon-subitem" onclick="openDetail(${idx>=0?idx:0})"><img src="${img?thumb(img):''}" loading="lazy"><span>${item.label}</span><div class="offer-badge">-${off}% Ver detalle</div></div>`; }); html+=`</div><div style="margin-top:12px"><span style="font-size:12px;color:#0066c0;font-weight:700;cursor:pointer" onclick="openAllProducts()">Ver mas categorias</span></div></div>`; }); cont.innerHTML=html; }
+function openAllProducts(){ document.getElementById('mainShop').style.display='block'; document.getElementById('viewCat').style.display='none'; document.getElementById('viewProd').style.display='block'; document.getElementById('amazonBottom').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('catName').innerText=`Todos los productos • ${productos.length} productos • Envio gratis siempre • Click en cualquiera para ver su pagina`; let h=''; for(let i=0;i<productos.length;i++){ let p=productos[i]; let img=p.fotos[0]||''; let off=getDiscountForProduct(i); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${i})" class="card"><div style="position:absolute;top:6px;left:6px;z-index:2;background:#111;color:white;font-size:10px;font-weight:800;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre.substring(0,60)}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;font-weight:700">Envio gratis • 3 a 15 dias • Click para ver pagina</div></div></div>`; } document.getElementById('prod').innerHTML=h; window.scrollTo(0,0); }
+function filtrarMenos40k(){ let filtrados=productos.filter(p=> Math.round(p.usd*TASA) <= 40000 ); if(!filtrados.length){ alert(`No hay productos ≤ $40.000 con TRM $${TASA.toLocaleString('es-CO')}`); return; } document.getElementById('mainShop').style.display='block'; document.getElementById('viewCat').style.display='none'; document.getElementById('viewProd').style.display='block'; document.getElementById('amazonBottom').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('catName').innerText=`Menos de $40.000 COP • ${filtrados.length} productos • Envio gratis siempre`; let h=''; for(let p of filtrados){ let idx=productos.indexOf(p); let img=p.fotos[0]||''; let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:6px;left:6px;z-index:2;background:#111;color:white;font-size:10px;font-weight:800;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre.substring(0,60)}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;font-weight:700">Envio gratis • Click para ver pagina</div></div></div>`; } document.getElementById('prod').innerHTML=h; window.scrollTo(0,0); }
 function openCatFromText(cat){ if(!cat){ showCats(); return; } openCat(cat); }
 function scrollCarrusel(px){ document.getElementById('carouselTrack').scrollBy({left:px,behavior:'smooth'}); }
 
@@ -263,7 +200,7 @@ async function load(){
   let r=await fetch(CSV_URL+'&t='+Date.now()); let text=await r.text(); let rows=parseCSV(text);
   let header=rows[0].map(h=>h.toLowerCase()); let iNom=header.findIndex(h=>h.includes('nombre')), iPrec=header.findIndex(h=>h.includes('precio')), iCat=header.findIndex(h=>h.includes('categ')), iSpecs=header.findIndex(h=>h.includes('spec')||h.includes('descrip'));
   let fotoIdxs=header.map((h,i)=>h.includes('foto')||h.includes('image')?i:-1).filter(i=>i!=-1);
-  productos=[]; for(let k=1;k<rows.length;k++){ let row=rows[k]; if(!row) continue; let nombre=(row[iNom]||'').trim(); if(!nombre) continue; let usd=parsePrecio(row[iPrec]); let cat=(row[iCat]||'General').replace(/,/g,' ').trim()||'General'; let fotos=[]; for(let fi of fotoIdxs){ fotos.push(...fixUrl(row[fi]||'')); } fotos=[...new Set(fotos)]; productos.push({nombre,usd,fotos,categoria:cat,specs:row[iSpecs]||'• Organizador de coche para asiento trasero. Este organizador de reposacabezas para coche esta hecho de plastico resistente, no se rompe facilmente, es duradero y garantiza una experiencia de viaje optima.\n• Con ganchos. Diseño plegable.\n• Dispensador multifuncional para pañuelos y bebidas.\n• Compatible con la mayoria de vehiculos.\n• Material: Plastico premium\n• Envio gratis siempre 3 a 15 dias\n• Garantia 12 meses',reviews:genReviews(k)}); }
+  productos=[]; for(let k=1;k<rows.length;k++){ let row=rows[k]; if(!row) continue; let nombre=(row[iNom]||'').trim(); if(!nombre) continue; let usd=parsePrecio(row[iPrec]); let cat=(row[iCat]||'General').replace(/,/g,' ').trim()||'General'; let fotos=[]; for(let fi of fotoIdxs){ fotos.push(...fixUrl(row[fi]||'')); } fotos=[...new Set(fotos)]; productos.push({nombre,usd,fotos,categoria:cat,specs:row[iSpecs]||'• Envio gratis siempre 3 a 15 dias\n• Garantia 12 meses',reviews:genReviews(k)}); }
   showCats(); renderAll(); upd();
   let track=document.getElementById('carouselTrack');
   track.addEventListener('mousedown', (e)=>{ isDown=true; startX=e.pageX - track.offsetLeft; scrollLeft=track.scrollLeft; });
@@ -275,12 +212,7 @@ async function load(){
 }
 function renderAll(){ renderHero(); renderCarousel(); renderChips(); renderCats(); renderOfertas(); renderAmazonBottom(); }
 function renderHero(){ let cont=document.getElementById('heroProducts'); if(!productos.length) return; let top=productos.filter(p=>p.fotos[0]).slice(0,4); let h=''; for(let p of top){ let img=p.fotos[0]; let idx=productos.indexOf(p); h+=`<img src="${thumb(img)}" onclick="openDetail(${idx})" draggable="false">`; } cont.innerHTML=h; }
-function renderCarousel(){
-  let track=document.getElementById('carouselTrack'); if(!productos.length) return;
-  let best=[...productos].sort(()=>0.5-Math.random()).slice(0,14);
-  let html=''; for(let p of best){ let img=p.fotos[0]||''; let idx=productos.indexOf(p); let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); html+=`<div class="carousel-item" onclick="if(!isDown) openDetail(${idx})"><div class="badge-off">-${off}%</div><div style="height:90px;display:flex;align-items:center;justify-content:center;background:white;margin-top:18px"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain" draggable="false"></div><b style="font-size:11px;display:block;min-height:32px;margin-top:8px;line-height:1.2">${p.nombre.substring(0,50)}</b><div style="font-weight:800;font-size:12px">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;font-weight:600">Envio gratis • Ver pagina</div></div>`; }
-  track.innerHTML=html;
-}
+function renderCarousel(){ let track=document.getElementById('carouselTrack'); if(!productos.length) return; let best=[...productos].sort(()=>0.5-Math.random()).slice(0,14); let html=''; for(let p of best){ let img=p.fotos[0]||''; let idx=productos.indexOf(p); let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); html+=`<div class="carousel-item" onclick="if(!isDown) openDetail(${idx})"><div class="badge-off">-${off}%</div><div style="height:90px;display:flex;align-items:center;justify-content:center;background:white;margin-top:18px"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain" draggable="false"></div><b style="font-size:11px;display:block;min-height:32px;margin-top:8px;line-height:1.2">${p.nombre.substring(0,50)}</b><div style="font-weight:800;font-size:12px">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;font-weight:600">Envio gratis • Ver pagina</div></div>`; } track.innerHTML=html; }
 function renderChips(){ let cont=document.getElementById('chipsBuscado'); if(!productos.length) return; let cats=[...new Set(productos.map(p=>p.categoria))]; let h=''; for(let cat of cats.slice(0,8)){ h+=`<div class="chip" onclick="openCat('${cat.replace(/'/g,"\\'")}')">${cat}</div>`; } h+=`<div class="chip" onclick="filtrarMenos40k()">Menos de $40.000</div>`; cont.innerHTML=h; }
 function renderCats(){ let cats=[...new Set(productos.map(p=>p.categoria))]; let h=''; for(let cat of cats){ let prodCat=productos.filter(p=>p.categoria==cat); let count=prodCat.length; let imgRep=prodCat.find(p=>p.fotos[0])?.fotos[0]||''; h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" class="card"><div class="cat-real-img"><img src="${imgRep?thumb(imgRep):''}" loading="lazy"></div><div style="padding:12px"><b style="font-size:13px;font-weight:800">${cat}</b><div style="font-size:11px;color:#666;margin-top:2px">${count} productos • Imagen real • Click para ver</div></div></div>`; } document.getElementById('catGrid').innerHTML=h; }
 function renderOfertas(){ let grid=document.getElementById('ofertasGrid'); if(!productos.length) return; let ofertas=productos.slice(0,8); let h=''; for(let p of ofertas){ let img=p.fotos[0]||''; let idx=productos.indexOf(p); let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:8px;left:8px;z-index:2;background:#111;color:white;font-size:10px;font-weight:800;padding:4px 8px;border-radius:10px">-${off}% OFF</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:12px"><b style="font-size:11px;display:block;min-height:34px;margin:4px 0;line-height:1.3">${p.nombre}</b><div style="font-weight:800;font-size:13px">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;margin-top:2px;font-weight:700">Envio gratis • Click para ver pagina</div></div></div>`; } grid.innerHTML=h; }
@@ -309,45 +241,39 @@ function upd(){let totalUSD=0; for(let x of c) totalUSD+=x.usd; document.getElem
 function toggleCart(){open=!open;document.getElementById('cart').style.right=open?'0':'-100%';document.getElementById('bg').style.display=open?'block':'none';}
 function pay(){if(!c.length){alert('Tu carrito esta vacio');return;}let totalUSD=0,m='';for(let x of c){totalUSD+=x.usd; m+=`${x.n} (-${x.off}% visual ${fmt(x.usd)}), `;}let u=localStorage.getItem('wobba_user')||'Cliente';let msg=`Hola WobbaShop, soy ${u}\nPedido: ${m}\nTotal real igual al original: ${fmt(totalUSD)}\nEnvio gratis siempre • TRM $${TASA.toLocaleString('es-CO')} • 3 a 15 dias`;window.open('https://wa.me/573016202301?text='+encodeURIComponent(msg),'_blank');}
 
-// BUSCADOR TIPO GOOGLE - SOLO NOMBRE - CENTRO ARRIBA CON LUPA
+// === BUSCADOR AHORA ABRE DIRECTO LA PAGINA CON RESEÑA Y COMPRA ===
 function buscarGoogle(q){
  let texto=q.toLowerCase().trim();
  let box=document.getElementById('suggestBox');
- if(!texto){box.style.display='none'; return;}
- if(!productos.length){box.innerHTML=`<div style="padding:10px 14px;font-size:13px">Cargando productos...</div>`; box.style.display='block'; return;}
+ if(!texto){box.style.display='none'; lastSearchResults=[]; return;}
+ if(!productos.length){box.innerHTML=`<div style="padding:10px 14px;font-size:13px">Cargando...</div>`; box.style.display='block'; return;}
  let filtrados=productos.filter(p=>p.nombre.toLowerCase().includes(texto));
+ lastSearchResults=filtrados;
  let html='';
  filtrados.slice(0,8).forEach(p=>{
    let idx=productos.indexOf(p);
    let safe=p.nombre.replace(/'/g,"\\'");
-   html+=`<div onclick="selectSearch('${safe}')" style="padding:11px 14px;font-size:13px;border-bottom:1px solid #eee;cursor:pointer;display:flex;gap:8px;align-items:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> ${p.nombre}</div>`;
+   html+=`<div onclick="abrirProductoDirecto(${idx})" style="padding:11px 14px;font-size:13px;border-bottom:1px solid #eee;cursor:pointer;display:flex;gap:8px;align-items:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> ${p.nombre}<span style="margin-left:auto;font-size:10px;color:#0a7a0a">Ver pagina →</span></div>`;
  });
  if(filtrados.length==0) html=`<div style="padding:11px 14px;font-size:13px;color:#666">No hay resultados para "${q}"</div>`;
  box.innerHTML=html;
  box.style.display='block';
- if(texto.length>=1){
-   document.getElementById('mainShop').style.display='block';
-   document.getElementById('viewCat').style.display='none';
-   document.getElementById('viewProd').style.display='block';
-   document.getElementById('viewDetail').style.display='none';
-   document.getElementById('amazonBottom').style.display='none';
-   document.getElementById('catName').innerText=`Busqueda: "${q}" • ${filtrados.length} resultados • Solo por nombre`;
-   let h='';
-   filtrados.forEach(p=>{
-     let i=productos.indexOf(p);
-     let img=p.fotos[0]||'';
-     let off=getDiscountForProduct(i);
-     let oldPrice=getVisualOldPrice(p.usd, off);
-     h+=`<div onclick="openDetail(${i})" class="card"><div style="position:absolute;top:6px;left:6px;background:#111;color:white;font-size:10px;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" style="max-width:100%;max-height:100%"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a">Envio gratis • Click para ver pagina</div></div></div>`;
-   });
-   document.getElementById('prod').innerHTML=h || `<div style="grid-column:1/-1;text-align:center;padding:20px;background:white;border-radius:12px">No encontramos "${q}"</div>`;
- }
 }
-function selectSearch(nombre){
- document.getElementById('searchInput').value=nombre;
+
+function abrirProductoDirecto(idx){
  document.getElementById('suggestBox').style.display='none';
- buscarGoogle(nombre);
+ document.getElementById('searchInput').value=productos[idx].nombre;
+ openDetail(idx); // ABRE LA PAGINA CON RESEÑA, COMPRA, ETC COMO TU VIDEO
 }
+
+function abrirPrimerResultado(){
+ let texto=document.getElementById('searchInput').value.toLowerCase().trim();
+ if(!texto || !lastSearchResults.length) return;
+ document.getElementById('suggestBox').style.display='none';
+ let idx=productos.indexOf(lastSearchResults[0]);
+ if(idx>=0) openDetail(idx); // ABRE DIRECTO LA PAGINA CON RESEÑA
+}
+
 document.addEventListener('click',e=>{
  if(!e.target.closest('.searchCenter')){ document.getElementById('suggestBox').style.display='none'; }
 });
