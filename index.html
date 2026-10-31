@@ -1,142 +1,356 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SHOP</title>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WobbaShop | Tienda Oficial</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:Arial;background:#f2f2f2}
-.header{background:#131921;color:#fff;padding:8px 10px;display:flex;align-items:center;gap:8px;position:sticky;top:0;z-index:999}
-.logo{font-weight:900;font-size:18px}
-.searchCenter{flex:1;max-width:520px;margin:0 auto;position:relative}
-.searchBox{background:#fff;border-radius:24px;display:flex;align-items:center;padding:4px 5px 4px 15px;width:100%;box-sizing:border-box}
-.searchBox input{flex:1;border:none;outline:none;padding:8px 6px;font-size:14px}
-.searchBox button{background:#febd69;border:none;min-width:42px;height:34px;border-radius:20px;cursor:pointer}
-#suggestBox{position:absolute;left:0;right:0;top:44px;background:#fff;color:#111;border-radius:0 0 12px 12px;box-shadow:0 6px 15px rgba(0,0,0,.25);display:none;z-index:1000;max-height:320px;overflow:auto}
-.sug{padding:11px 14px;font-size:13px;border-bottom:1px solid #eee;cursor:pointer;display:flex;gap:8px}
-.sug:hover{background:#f5f5f5}
-.card{background:#fff;border-radius:8px;border:1px solid #e3e3e3;overflow:hidden;cursor:pointer;position:relative}
-.thumb-wrap{height:170px;display:flex;align-items:center;justify-content:center;background:#fff;padding:8px}
-.price-old{font-size:11px;color:#888;text-decoration:line-through;margin-left:5px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-@media(min-width:800px){.grid{grid-template-columns:repeat(4,1fr)}}
+*{box-sizing:border-box;font-family:'Inter',sans-serif}body{margin:0;background:#f2f2f2;color:#111}
+.redline{height:4px;background:#ff3c00;width:100%;position:sticky;top:0;z-index:50}
+header{position:sticky;top:4px;z-index:40;background:#111;color:white;padding:12px 16px}
+.container{max-width:1200px;margin:auto;padding:0 16px}
+.hero{border-radius:0 0 16px 16px;background:linear-gradient(105deg,#111 60%,#ff3c00 100%);color:white;min-height:260px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;margin:0 auto 12px;max-width:1200px;overflow:hidden}
+@media(max-width:768px){.hero{grid-template-columns:1fr}}
+.hero-products{display:flex;gap:10px;padding:14px;justify-content:end;align-items:center;flex-wrap:wrap}
+.hero-products img{width:90px;height:90px;border-radius:12px;background:white;object-fit:contain;padding:5px;cursor:pointer;border:1px solid #eee}
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:1200px;margin:0 auto;padding:0 12px}
+@media(min-width:900px){.benefits{grid-template-columns:repeat(6,1fr)}}
+.ben{background:white;border-radius:12px;padding:14px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;border:1px solid #eee}
+.ben b{font-size:11px;display:block;margin-top:6px;font-weight:800} .ben p{font-size:10px;color:#666;margin:3px 0 0}
+.carousel{background:white;border-radius:12px;padding:14px 0;margin:12px auto;max-width:1200px;box-shadow:0 1px 3px rgba(0,0,0,.08);position:relative;border:1px solid #eee}
+.carousel-track{display:flex;gap:12px;padding:0 48px 0 12px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;cursor:grab;user-select:none}
+.carousel-track::-webkit-scrollbar{display:none}
+.carousel-item{min-width:165px;max-width:165px;background:white;border:1px solid #eee;border-radius:12px;padding:10px;text-align:left;flex-shrink:0;cursor:pointer;position:relative}
+.badge-off{position:absolute;top:8px;left:8px;background:#111;color:white;font-size:10px;font-weight:800;padding:3px 7px;border-radius:10px}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:white;border:1px solid #ddd;width:36px;height:36px;border-radius:50%;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.12);cursor:pointer;font-weight:900}
+.carousel-btn.left{left:8px} .carousel-btn.right{right:8px}
+.trust-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:1200px;margin:12px auto;padding:0 12px}
+.trust-item{background:white;border-radius:12px;padding:14px;display:flex;gap:10px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;border:1px solid #eee}
+.grid-cat{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:768px){.grid-cat{grid-template-columns:repeat(4,1fr)} .grid-prod{grid-template-columns:repeat(4,1fr)}}
+.grid-prod{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;border:1px solid #eee;position:relative}
+.cat-real-img{width:100%;height:140px;background:white;display:flex;align-items:center;justify-content:center;padding:10px}
+.cat-real-img img{width:100%;height:100%;object-fit:contain}
+.thumb-wrap{background:white;height:180px;display:flex;align-items:center;justify-content:center;padding:10px;position:relative}
+.chips{display:flex;gap:8px;overflow:auto;padding:8px 0;white-space:nowrap;scrollbar-width:none}
+.chip{background:white;border:1px solid #ddd;padding:9px 16px;border-radius:24px;font-size:12px;cursor:pointer;flex-shrink:0;font-weight:600}
+.chip:hover{background:#111;color:white}
+.amazon-bottom{display:grid;grid-template-columns:repeat(1,1fr);gap:12px;max-width:1200px;margin:20px auto 0;padding:0 12px}
+@media(min-width:768px){.amazon-bottom{grid-template-columns:repeat(2,1fr)}}
+.amazon-card{background:white;padding:16px;border:1px solid #ddd;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.amazon-card h2{font-size:17px;font-weight:800;margin:0 0 12px;line-height:1.2}
+.amazon-subgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.amazon-subitem{background:#f7f8f8;border:1px solid #f0f0f0;border-radius:8px;padding:8px;cursor:pointer}
+.amazon-subitem img{width:100%;height:90px;object-fit:contain;background:white;border-radius:6px}
+.amazon-subitem span{font-size:11px;display:block;margin-top:6px;min-height:28px;line-height:1.2;font-weight:600}
+.offer-badge{background:#111;color:white;font-size:10px;font-weight:800;padding:2px 6px;display:inline-block;margin-top:4px;border-radius:10px}
+#loginModal,#profileModal,#infoModal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:200;align-items:center;justify-content:center;padding:20px}
+.price-old{font-size:13px;color:#565959;text-decoration:line-through;margin-left:8px}
+.detail-amazon{background:white;min-height:100vh}
+.detail-grid{display:grid;grid-template-columns:45% 55%;gap:0;max-width:1300px;margin:auto}
+@media(max-width:900px){.detail-grid{grid-template-columns:1fr}}
+/* BUSCADOR CENTRO */
+.searchCenter{flex:1;max-width:500px;margin:0 14px;position:relative}
+.searchBox{background:white;border-radius:24px;display:flex;align-items:center;padding:4px 5px 4px 14px}
+.searchBox input{flex:1;border:none;outline:none;padding:8px 6px;font-size:13px;color:#111}
+.searchBox button{background:#febd69;border:none;min-width:38px;height:32px;border-radius:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#suggestBox{position:absolute;left:0;right:0;top:42px;background:white;color:#111;border-radius:0 0 12px 12px;box-shadow:0 8px 20px rgba(0,0,0,.25);display:none;z-index:1000;max-height:340px;overflow:auto}
+@media(max-width:768px){.searchCenter{max-width:100%;margin:8px 0 0 0;order:3;flex-basis:100%} header .container{flex-wrap:wrap}}
 </style>
 </head>
 <body>
+<div class="redline"></div>
+<header><div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap"><div><b style="letter-spacing:1px">WOBBASHOP</b><div id="dolarInfo" style="font-size:11px;opacity:.8">TRM $3.166,91 oficial • Envio gratis • 3 a 15 dias</div></div>
 
-<div class="header">
-<div class="logo">SHOP</div>
-
+<!-- BUSCADOR EN EL CENTRO EN LA PARTE SUPERIOR CON LUPA AL LADO -->
 <div class="searchCenter">
 <div class="searchBox">
-<input id="searchInput" placeholder="Buscar por nombre..." oninput="buscarGoogle(this.value)" autocomplete="off">
-<button onclick="buscarGoogle(document.getElementById('searchInput').value)">🔍</button>
+<input id="searchInput" type="text" placeholder="Buscar por nombre..." oninput="buscarGoogle(this.value)" onfocus="buscarGoogle(this.value)" autocomplete="off">
+<button onclick="buscarGoogle(document.getElementById('searchInput').value)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></button>
 </div>
 <div id="suggestBox"></div>
 </div>
 
-<div onclick="openCart()" style="background:#fff;color:#111;padding:6px 14px;border-radius:18px;font-weight:900;font-size:12px;cursor:pointer;white-space:nowrap">🛒 <span id="cartCount">0</span></div>
+<div style="display:flex;gap:8px;align-items:center"><button id="btnPerfil" onclick="openProfile()" style="background:white;color:#111;width:44px;height:44px;border-radius:50%;border:none;font-size:14px;font-weight:800;position:relative">U<span id="perfilBadge" style="position:absolute;bottom:-2px;right:-2px;background:#00c853;width:10px;height:10px;border-radius:50%;border:2px solid white;display:none"></span></button>
+<button onclick="toggleCart()" style="background:white;color:#111;width:44px;height:44px;border-radius:50%;border:none;position:relative;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span id="n" style="position:absolute;top:-4px;right:-4px;background:#ff3c00;color:white;font-size:10px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center">0</span></button>
+<button id="btnMoneda" onclick="cambiarMoneda()" style="background:#ffe600;color:#111;padding:8px 14px;border-radius:20px;font-size:11px;font-weight:800;border:none">USD → COP</button></div></div></header>
+
+<div id="mainShop">
+<div class="hero"><div style="padding:26px"><div style="font-size:10px;letter-spacing:2px;opacity:.8;font-weight:800;background:rgba(255,255,255,.15);display:inline-block;padding:4px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.2)">ENVIO GRATIS SIEMPRE</div><h1 style="margin:10px 0 0;font-size:40px;line-height:.9;font-weight:900">Descuentos variables hasta 60% OFF</h1><p style="font-size:12px;opacity:.7;margin:10px 0 0;line-height:1.5;max-width:340px">Tocá cualquier producto y se abre su página con características y reseñas como en Amazon. Envio gratis 3 a 15 dias.</p><div style="margin-top:14px;display:flex;gap:8px"><div style="background:white;color:#111;display:inline-flex;padding:8px 16px;border-radius:24px;font-size:11px;font-weight:800;cursor:pointer" onclick="openAllProducts()">Ver seleccion</div><div style="border:1px solid rgba(255,255,255,.3);display:inline-flex;padding:8px 16px;border-radius:24px;font-size:11px;font-weight:600;cursor:pointer" onclick="openInfo('envio')">Envio gratis • 3 a 15 dias</div></div></div><div class="hero-products" id="heroProducts"></div></div>
+
+<div class="benefits">
+<div class="ben" onclick="openInfo('envio')"><b>ENVIO GRATIS</b><p>Siempre gratis<br>3 a 15 dias</p></div>
+<div class="ben" onclick="openLogin()"><b id="benCuenta">MI CUENTA</b><p id="benCuenta2">Inicia sesion</p></div>
+<div class="ben" onclick="openInfo('ubicacion')"><b>ENTREGA</b><p>Colombia y USA<br>Con seguimiento</p></div>
+<div class="ben" onclick="openInfo('pago')"><b>PAGO SEGURO</b><p>Protegido<br>Nequi / PayPal</p></div>
+<div class="ben" onclick="filtrarMenos40k()"><b>MENOS DE $40K</b><p>Ver productos</p></div>
+<div class="ben" onclick="document.getElementById('destacadosSec').scrollIntoView({behavior:'smooth'})"><b>MAS VENDIDOS</b><p>Tendencia</p></div>
 </div>
 
-<div id="mainShop" style="max-width:1200px;margin:auto;padding:12px">
-<div id="viewCats"></div>
-<div id="viewProd" style="display:none">
-<h2 id="catName" style="font-size:15px"></h2>
-<div id="prod" class="grid"></div>
+<div class="carousel" id="destacadosSec">
+<div style="padding:0 16px;display:flex;justify-content:space-between;align-items:center">
+<h3 style="margin:0;font-size:15px;font-weight:800">Mas vendidos - Click para ver detalle como tu video</h3>
+<span style="font-size:11px;color:#888">Desliza o usa flechas</span>
 </div>
-<div id="viewDetail" style="display:none"></div>
+<div style="position:relative;margin-top:12px">
+<button class="carousel-btn left" onclick="scrollCarrusel(-300)">‹</button>
+<button class="carousel-btn right" onclick="scrollCarrusel(300)">›</button>
+<div class="carousel-track" id="carouselTrack"></div>
 </div>
+</div>
+
+<div class="trust-bar">
+<div class="trust-item" onclick="openInfo('devolucion')"><div><b style="font-size:12px">Devoluciones 30 dias</b><div style="font-size:11px;color:#666">Cambios sin costo • Envio gratis</div></div></div>
+<div class="trust-item" onclick="openInfo('garantia')"><div><b style="font-size:12px">Garantia 12 meses</b><div style="font-size:11px;color:#666">Productos verificados • Soporte</div></div></div>
+<div class="trust-item" onclick="openInfo('pago')"><div><b style="font-size:12px">Pago protegido</b><div style="font-size:11px;color:#666">Compra 100% segura • Envio gratis</div></div></div>
+</div>
+
+<div class="container" style="background:white;border-radius:14px;padding:16px;margin-top:12px;border:1px solid #eee">
+<div style="margin-bottom:18px"><h3 style="margin:0 0 10px;font-size:14px;font-weight:800">Busqueda popular - Click para filtrar</h3><div class="chips" id="chipsBuscado"></div></div>
+<div id="viewCat">
+<h2 style="margin:0;font-size:16px;font-weight:800">Categorias • Click para entrar</h2>
+<div id="catGrid" class="grid-cat" style="margin-top:12px"></div>
+<div style="margin-top:22px"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:16px;margin:0;font-weight:800">Seleccion del dia • Click abre otra pagina con detalle</h2><span onclick="openAllProducts()" style="font-size:12px;color:#111;cursor:pointer;font-weight:700;border-bottom:1px solid #111">Ver seleccion completa</span></div><div id="ofertasGrid" class="grid-prod" style="margin-top:12px"></div></div>
+</div>
+<div id="viewProd" style="display:none"><button onclick="showCats()" style="background:#f5f5f5;border:1px solid #ddd;padding:8px 16px;border-radius:24px;margin-bottom:12px;cursor:pointer;font-weight:600">← Volver al inicio</button><h2 id="catName" style="font-weight:800"></h2><div id="prod" class="grid-prod" style="margin-top:12px"></div></div>
+</div>
+
+<div class="amazon-bottom" id="amazonBottom"></div>
+</div>
+
+<div id="viewDetail" class="detail-amazon" style="display:none">
+<div style="background:white;border-bottom:1px solid #ddd;padding:10px 16px;display:flex;gap:10px;align-items:center"><button onclick="backToList()" style="background:#f0f0f0;border:1px solid #ddd;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600">← Volver a resultados</button><span style="font-size:12px;color:#666">Al hacer click se abre esta pagina con detalle completo como en tu video</span></div>
+<div class="detail-grid">
+<div style="padding:16px;border-right:1px solid #eee">
+<div id="mainImg" style="min-height:420px;display:flex;align-items:center;justify-content:center;padding:10px;background:white;position:relative"></div>
+<div id="thumbs" style="display:flex;gap:8px;padding:12px 0;overflow:auto;border-top:1px solid #eee;margin-top:12px"></div>
+</div>
+<div style="padding:20px">
+<div id="dCat" style="font-size:11px;color:#007185;font-weight:700;cursor:pointer" onclick="openCatFromText(this.innerText)"></div>
+<h1 id="dName" style="margin:6px 0;font-size:20px;font-weight:400;line-height:1.3;color:#0f1111"></h1>
+<div id="dRatingTop" style="font-size:12px;color:#007185;font-weight:400"></div>
+<hr style="margin:12px 0;border:none;border-top:1px solid #e7e7e7">
+<div style="margin:12px 0">
+<div><span id="dPrice" style="font-size:28px;font-weight:400;color:#0f1111"></span><span id="dPriceOld" class="price-old"></span><span id="dOff" style="margin-left:8px;background:#cc0c39;color:white;font-size:12px;padding:2px 6px;border-radius:3px;font-weight:700"></span></div>
+<div id="dPrice2" style="font-size:12px;color:#565959;margin-top:6px"></div>
+<div style="font-size:12px;color:#067d62;margin-top:6px;font-weight:700">Envio GRATIS siempre • Entrega 3 a 15 dias • Precio original sin cambios</div>
+<div style="font-size:12px;color:#565959;margin-top:4px">TRM $3.166,91 oficial • Pago protegido</div>
+</div>
+<div style="margin:16px 0">
+<div style="font-size:14px;font-weight:700;margin-bottom:6px">Color: <span id="dColor" style="font-weight:400">Negro</span></div>
+<div style="display:flex;gap:8px"><div style="border:2px solid #e77600;width:40px;height:40px;border-radius:6px;background:#111"></div><div style="border:1px solid #ddd;width:40px;height:40px;border-radius:6px;background:#ccc"></div></div>
+</div>
+<button onclick="addFromDetail()" style="background:#ffd814;border:1px solid #fcd200;color:#0f1111;width:100%;padding:12px;border-radius:20px;font-weight:400;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f1111" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Agregar al carrito</button>
+<button style="background:#ffa41c;border:1px solid #ff8f00;color:#0f1111;width:100%;padding:12px;border-radius:20px;font-weight:400;cursor:pointer;margin-top:8px" onclick="addFromDetail();toggleCart()">Comprar ahora</button>
+<div style="margin-top:20px;border-top:1px solid #e7e7e7;padding-top:16px">
+<h3 style="font-size:16px;font-weight:700;margin:0 0 8px">Sobre este articulo</h3>
+<div id="dSpecs" style="font-size:13px;line-height:1.5;color:#0f1111;white-space:pre-wrap"></div>
+</div>
+<div style="margin-top:20px;border-top:1px solid #e7e7e7;padding-top:16px">
+<h3 style="font-size:16px;font-weight:700;margin:0 0 10px">Opiniones de clientes</h3>
+<div id="dReviews" style="display:flex;flex-direction:column;gap:12px"></div>
+</div>
+<div style="margin-top:20px;border:1px solid #ddd;border-radius:8px;padding:12px">
+<b style="font-size:13px">Informacion de envio - Gratis siempre</b><div style="font-size:12px;color:#444;margin-top:6px;line-height:1.5">• Envio gratis en todos los productos, sin minimo<br>• Colombia: 3 a 10 dias habiles<br>• USA: 8 a 15 dias habiles<br>• Seguimiento incluido<br>• Garantia 12 meses<br>• Precio original sin cambios, descuento solo visual</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="loginModal"><div style="background:white;border-radius:16px;padding:22px;max-width:360px;width:100%"><div style="display:flex;justify-content:space-between"><h2 style="margin:0;font-size:18px;font-weight:800">Mi cuenta</h2><button onclick="closeLogin()" style="border:none;background:#f5f5f5;width:32px;height:32px;border-radius:50%;cursor:pointer">X</button></div><input id="regName" placeholder="Nombre completo" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:14px"><input id="regEmail" placeholder="WhatsApp o correo" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:10px"><button onclick="guardarRegistro()" style="background:#111;color:white;width:100%;padding:14px;border-radius:10px;border:none;font-weight:800;margin-top:14px;cursor:pointer">Crear cuenta</button></div></div>
+<div id="profileModal"><div style="background:white;border-radius:16px;padding:22px;max-width:380px;width:100%"><div style="display:flex;justify-content:space-between"><h2 style="margin:0;font-size:18px;font-weight:800">Mi perfil</h2><button onclick="closeProfile()" style="border:none;background:#f5f5f5;width:32px;height:32px;border-radius:50%;cursor:pointer">X</button></div><div id="profileContent" style="margin-top:16px"></div></div></div>
+<div id="infoModal"><div style="background:white;border-radius:16px;padding:22px;max-width:400px;width:100%"><div style="display:flex;justify-content:space-between"><h2 id="infoTitle" style="margin:0;font-size:16px;font-weight:800"></h2><button onclick="closeInfo()" style="border:none;background:#f5f5f5;width:32px;height:32px;border-radius:50%;cursor:pointer">X</button></div><div id="infoText" style="margin-top:14px;font-size:13px;line-height:1.6;color:#333"></div></div></div>
+<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:420px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column;border-left:1px solid #eee"><div style="background:#111;color:white;padding:18px;display:flex;justify-content:space-between"><b>CARRITO</b><button onclick="toggleCart()" style="background:white;color:black;width:32px;height:32px;border-radius:50%;border:none;cursor:pointer">X</button></div><div id="list" style="flex:1;overflow:auto;padding:16px"></div><div style="padding:16px;border-top:1px solid #eee"><div style="display:flex;justify-content:space-between"><span>Total real (precio original)</span><b id="t">0</b></div><div id="tSmall" style="font-size:11px;color:#666"></div><div style="font-size:10px;color:#0a7a0a;margin-top:6px;font-weight:700">Envio gratis siempre • 3 a 15 dias • Precio sin variacion</div><button onclick="pay()" style="background:#111;color:white;width:100%;padding:14px;border-radius:10px;border:none;font-weight:800;margin-top:10px;cursor:pointer">Finalizar por WhatsApp</button></div></div><div id="bg" onclick="toggleCart();closeInfo();closeProfile();closeLogin()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:none;z-index:90"></div>
 
 <script>
-// TUS PRODUCTOS - AQUI SE CONECTA CON TU SHEET, DEJALO ASI COMO ESTABA
-let productos = [
-{nombre:"Audifonos Bluetooth P9", categoria:"Tecnologia", usd:12, specs:"Sonido estereo", fotos:["https://i.ibb.co/placeholder.jpg"]},
-{nombre:"Organizador de Cables", categoria:"Hogar", usd:5, specs:"Para escritorio", fotos:["https://i.ibb.co/placeholder.jpg"]},
-{nombre:"Soporte Celular Auto", categoria:"Auto", usd:8, specs:"Gira 360", fotos:["https://i.ibb.co/placeholder.jpg"]},
-{nombre:"Tira LED RGB", categoria:"Hogar", usd:9, specs:"5 metros", fotos:["https://i.ibb.co/placeholder.jpg"]},
-{nombre:"Mini Ventilador", categoria:"Tecnologia", usd:6, specs:"Recargable", fotos:["https://i.ibb.co/placeholder.jpg"]}
-];
-
-function fmt(usd){return '$'+(usd*4200).toLocaleString('es-CO')}
-function getDiscountForProduct(i){return 35+(i%25)}
-function getVisualOldPrice(usd,off){return usd/(1-off/100)}
-function thumb(u){return u}
-let cart=[];
-
-function showCats(){
-document.getElementById('viewCats').style.display='block';
-document.getElementById('viewProd').style.display='none';
-document.getElementById('viewDetail').style.display='none';
-let cats=[...new Set(productos.map(p=>p.categoria))];
-let h='<div class="grid">';
-cats.forEach(c=>{h+=`<div class="card" onclick="openCat('${c}')" style="padding:28px;text-align:center;font-weight:800">${c}</div>`});
-h+=`</div><br><button onclick="openAllProducts()" style="width:100%;padding:14px;background:#111;color:#fff;border:none;border-radius:24px;font-weight:800">Ver todos los productos - Envio gratis</button>`;
-document.getElementById('viewCats').innerHTML=h;
+const SHEET_ID="2PACX-1vSw0ttSUsTpHjrjXGTLZfYEt2E4IGar2s55-Me0DHaCDQFZMZ6y-ck1u173-nIUBxklEIl1Wk-Y1hnf";
+const CSV_URL=`https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?output=csv`;
+let TASA=3166.91, moneda='USD', productos=[], c=[], open=false, currentCat='', detailIndex=0, imgIndex=0, isDown=false, startX, scrollLeft;
+const thumb=u=>`https://images.weserv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,''))}&w=350&h=350&fit=contain&output=webp&q=75`;
+const big=u=>`https://images.weserv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,''))}&w=800&output=webp&q=80`;
+function fixUrl(s){ if(!s) return []; let urls=String(s).match(/https?:\/\/[^\s",']+/gi)||[]; if(!urls.length&&String(s).length>20){ let u=String(s).trim().split('?')[0]; if(!u.startsWith('http')) u='https://cf.cjdropshipping.com/'+u.replace(/^com\//,''); urls=[u]; } return [...new Set(urls.map(u=>u.split('?')[0]))]; }
+function parsePrecio(raw){ if(!raw) return 0; let s=String(raw).trim().replace(/\s+/g,'.').replace(',','.').replace(/\.+/g,'.'); let n=parseFloat(s.replace(/[^0-9.]/g,'')); return isNaN(n)?0:n; }
+function getDiscountForProduct(idx){ const descuentos=[15,20,25,30,35,40,45,52,60]; return descuentos[idx % descuentos.length]; }
+function getVisualOldPrice(realPrice, off){ return realPrice * (1 + off/100); }
+async function cargarDolarHoy(){ try{ let r=await fetch('https://open.er-api.com/v6/latest/USD'); let j=await r.json(); if(j.rates&&j.rates.COP){ TASA=Math.round(j.rates.COP); document.getElementById('dolarInfo').innerHTML=`TRM $${TASA.toLocaleString('es-CO')} • Oficial $3.166,91 • Envio gratis • 3 a 15 dias`; if(productos.length){ renderAll(); } } }catch(e){} }
+function fmt(usd){ return moneda==='COP' ? '$'+Math.round(usd*TASA).toLocaleString('es-CO')+' COP' : '$'+usd.toFixed(2)+' USD'; }
+function fmtSmall(usd){ return moneda==='COP' ? `USD $${usd.toFixed(2)}` : `COP $${Math.round(usd*TASA).toLocaleString('es-CO')}`; }
+function cambiarMoneda(){ moneda=moneda==='USD'?'COP':'USD'; document.getElementById('btnMoneda').innerText=moneda==='USD'?'USD → COP':'COP → USD'; renderAll(); if(document.getElementById('viewDetail').style.display!=='none') openDetail(detailIndex); upd(); }
+function parseCSV(t){ let rows=[], row=[], cur='', q=false; for(let i=0;i<t.length;i++){ let ch=t[i]; if(ch=='"'){ if(q&&t[i+1]=='"'){cur+='"';i++;} else q=!q; } else if(ch==','&&!q){ row.push(cur); cur=''; } else if((ch=='\n'||ch=='\r')&&!q){ if(cur!==''||row.length){ row.push(cur); rows.push(row); row=[]; cur=''; } if(ch=='\r'&&t[i+1]=='\n') i++; } else cur+=ch; } if(cur!==''||row.length){ row.push(cur); rows.push(row); } return rows; }
+const NOMBRES=["Camila R. • Medellin","Juan D. • Bogota","Laura M. • Cali","Andres S. • Miami","Valentina G. • Cartagena"]; const COMENTARIOS=["Excelente calidad, llego en 8 dias, envio gratis, igual que en Amazon.","Muy buen producto, cumple lo que promete. La pagina de detalle es igual que Amazon.","Llego en perfecto estado, envio gratis 5 dias, muy recomendado.","Buena relacion precio calidad. El detalle con reseñas esta perfecto.","Atencion al cliente muy buena, envio gratis 3 a 15 dias, como en el video."];
+function genReviews(seed){ let arr=[]; for(let i=0;i<4;i++){ arr.push({name:NOMBRES[(seed+i)%NOMBRES.length], text:COMENTARIOS[(seed+i)%COMENTARIOS.length]}); } return arr; }
+function openLogin(){ document.getElementById('loginModal').style.display='flex'; document.getElementById('bg').style.display='block'; } function closeLogin(){ document.getElementById('loginModal').style.display='none'; document.getElementById('bg').style.display=open?'block':'none'; }
+function openProfile(){ let u=localStorage.getItem('wobba_user'), e=localStorage.getItem('wobba_email')||''; let cont=document.getElementById('profileContent'); if(!u){ cont.innerHTML=`<div style="text-align:center;padding:20px 0"><h3 style="font-weight:800">Tu cuenta</h3><p style="font-size:12px;color:#666">Inicia sesion para ver pedidos</p><button onclick="closeProfile();openLogin()" style="background:#111;color:white;width:100%;padding:12px;font-weight:800;margin-top:12px;cursor:pointer">Iniciar sesion</button></div>`; } else { cont.innerHTML=`<div style="text-align:center"><div style="width:60px;height:60px;background:#111;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;margin:auto;font-weight:900">${u.charAt(0).toUpperCase()}</div><h3 style="margin:12px 0 4px;font-weight:800">${u}</h3><p style="font-size:12px;color:#666">${e}</p><div style="background:#f9f9f9;border:1px solid #eee;padding:12px;margin-top:16px;text-align:left;font-size:12px"><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee"><span>Carrito</span><b>${c.length}</b></div><div style="display:flex;justify-content:space-between;padding:6px 0"><span>Envio</span><b>Gratis siempre</b></div><div style="display:flex;justify-content:space-between;padding:6px 0"><span>TRM</span><b>$${TASA.toLocaleString('es-CO')}</b></div></div><button onclick="cerrarSesion()" style="background:#fff0f0;color:#c00;width:100%;padding:12px;border:1px solid #ffcccc;margin-top:16px;font-weight:700;cursor:pointer">Cerrar sesion</button></div>`; } document.getElementById('profileModal').style.display='flex'; document.getElementById('bg').style.display='block'; }
+function closeProfile(){ document.getElementById('profileModal').style.display='none'; document.getElementById('bg').style.display=open?'block':'none'; }
+function openInfo(tipo){
+  let titles={envio:'Envio gratis siempre',devolucion:'Devoluciones',garantia:'Garantia',pago:'Pago seguro',ubicacion:'Entrega'};
+  let texts={
+    envio:'<b>Envio gratis siempre en todos los productos</b><br><br>• Medellin, Bogota, Cali: 3 a 5 dias<br>• Resto Colombia: 5 a 10 dias<br>• USA: 8 a 15 dias<br><br>Siempre gratis, sin minimo. Seguimiento incluido.',
+    devolucion:'30 dias para devoluciones sin costo. Envio gratis siempre.',
+    garantia:'12 meses garantia fabricante. Fotos reales verificadas. Envio gratis.',
+    pago:'Pago protegido. Nequi, Bancolombia, PayPal, tarjetas. TRM oficial $3.166,91. Envio gratis.',
+    ubicacion:'Entregas 3 a 15 dias gratis siempre con rastreo total. Click en cualquier producto para ver detalle completo en otra pagina como en tu video.'
+  };
+  document.getElementById('infoTitle').innerText=titles[tipo]||'Info';
+  document.getElementById('infoText').innerHTML=texts[tipo]||'';
+  document.getElementById('infoModal').style.display='flex';
+  document.getElementById('bg').style.display='block';
 }
-function openCat(cat){
-document.getElementById('viewCats').style.display='none';
-document.getElementById('viewProd').style.display='block';
-document.getElementById('viewDetail').style.display='none';
-document.getElementById('catName').innerText=cat+' • Click para ver pagina';
-renderProds(productos.filter(p=>p.categoria==cat));
+function closeInfo(){ document.getElementById('infoModal').style.display='none'; document.getElementById('bg').style.display=open?'block':'none'; }
+function cerrarSesion(){ localStorage.removeItem('wobba_user'); localStorage.removeItem('wobba_email'); document.getElementById('perfilBadge').style.display='none'; document.getElementById('benCuenta').innerText='MI CUENTA'; closeProfile(); }
+function guardarRegistro(){ let n=document.getElementById('regName').value.trim(), e=document.getElementById('regEmail').value.trim(); if(!n||!e){ alert('Completa datos'); return; } localStorage.setItem('wobba_user',n); localStorage.setItem('wobba_email',e); document.getElementById('perfilBadge').style.display='block'; document.getElementById('benCuenta').innerText='HOLA, '+n.split(' ')[0].toUpperCase(); closeLogin(); openProfile(); }
+function checkLogin(){ let u=localStorage.getItem('wobba_user'); if(u){ document.getElementById('perfilBadge').style.display='block'; document.getElementById('benCuenta').innerText='HOLA, '+u.split(' ')[0].toUpperCase(); } }
+function findProductByKeyword(keyword){
+  let k=keyword.toLowerCase();
+  let found=productos.find(p=> p.nombre.toLowerCase().includes(k) || p.categoria.toLowerCase().includes(k));
+  if(!found) found=productos[Math.floor(Math.random()*productos.length)];
+  return found;
+}
+function renderAmazonBottom(){
+  let cont=document.getElementById('amazonBottom');
+  let bloques=[
+    {titulo:"Conectate con electronicos", items:[
+      {label:"Auriculares", keyword:"auricular"},
+      {label:"Tabletas", keyword:"tablet"},
+      {label:"Juegos", keyword:"juego"},
+      {label:"Altavoces", keyword:"altavoz"}
+    ]},
+    {titulo:"Consigue los equipos y accesorios mas destacados", items:[
+      {label:"Computadoras de escritorio", keyword:"computador"},
+      {label:"Portatiles", keyword:"portatil"},
+      {label:"Discos duros", keyword:"disco"},
+      {label:"Accesorios para equipo", keyword:"accesorio"}
+    ]}
+  ];
+  let html='';
+  bloques.forEach(bloque=>{
+    html+=`<div class="amazon-card"><h2>${bloque.titulo}</h2><div class="amazon-subgrid">`;
+    bloque.items.forEach(item=>{
+      let prod=findProductByKeyword(item.keyword);
+      let idx=productos.indexOf(prod);
+      let off=getDiscountForProduct(idx>=0?idx:0);
+      let img=prod && prod.fotos[0] ? prod.fotos[0] : '';
+      html+=`<div class="amazon-subitem" onclick="openDetail(${idx>=0?idx:0})"><img src="${img?thumb(img):''}" loading="lazy"><span>${item.label}</span><div class="offer-badge">-${off}% Ver detalle</div></div>`;
+    });
+    html+=`</div><div style="margin-top:12px"><span style="font-size:12px;color:#0066c0;font-weight:700;cursor:pointer" onclick="openAllProducts()">Ver mas categorias</span></div></div>`;
+  });
+  cont.innerHTML=html;
 }
 function openAllProducts(){
-document.getElementById('viewCats').style.display='none';
-document.getElementById('viewProd').style.display='block';
-document.getElementById('viewDetail').style.display='none';
-document.getElementById('catName').innerText='Todos los productos • Envio gratis';
-renderProds(productos);
+  document.getElementById('mainShop').style.display='block';
+  document.getElementById('viewCat').style.display='none';
+  document.getElementById('viewProd').style.display='block';
+  document.getElementById('amazonBottom').style.display='none';
+  document.getElementById('viewDetail').style.display='none';
+  document.getElementById('catName').innerText=`Todos los productos • ${productos.length} productos • Envio gratis siempre • Click en cualquiera para ver su pagina`;
+  let h=''; for(let i=0;i<productos.length;i++){ let p=productos[i]; let img=p.fotos[0]||''; let off=getDiscountForProduct(i); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${i})" class="card"><div style="position:absolute;top:6px;left:6px;z-index:2;background:#111;color:white;font-size:10px;font-weight:800;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre.substring(0,60)}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;font-weight:700">Envio gratis • 3 a 15 dias • Click para ver pagina</div></div></div>`; }
+  document.getElementById('prod').innerHTML=h;
+  window.scrollTo(0,0);
 }
-function renderProds(lista){
-let h='';
-productos.forEach((p,idx)=>{
-if(!lista.includes(p)) return;
-let off=getDiscountForProduct(idx);let oldP=getVisualOldPrice(p.usd,off);
-h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:6px;left:6px;background:#111;color:#fff;font-size:10px;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${p.fotos[0]}" style="max-width:100%;max-height:100%"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldP)}</span></div><div style="font-size:10px;color:#0a7a0a">Envio gratis</div></div></div>`;
-});
-document.getElementById('prod').innerHTML=h;
+function filtrarMenos40k(){
+  let filtrados=productos.filter(p=> Math.round(p.usd*TASA) <= 40000 );
+  if(!filtrados.length){ alert(`No hay productos ≤ $40.000 con TRM $${TASA.toLocaleString('es-CO')}`); return; }
+  document.getElementById('mainShop').style.display='block';
+  document.getElementById('viewCat').style.display='none'; document.getElementById('viewProd').style.display='block'; document.getElementById('amazonBottom').style.display='none'; document.getElementById('viewDetail').style.display='none';
+  document.getElementById('catName').innerText=`Menos de $40.000 COP • ${filtrados.length} productos • Envio gratis siempre`;
+  let h=''; for(let p of filtrados){ let idx=productos.indexOf(p); let img=p.fotos[0]||''; let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:6px;left:6px;z-index:2;background:#111;color:white;font-size:10px;font-weight:800;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre.substring(0,60)}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;font-weight:700">Envio gratis • Click para ver pagina</div></div></div>`; }
+  document.getElementById('prod').innerHTML=h;
+  window.scrollTo(0,0);
 }
-function openDetail(i){
-let p=productos[i];
-document.getElementById('viewProd').style.display='none';
-document.getElementById('viewCats').style.display='none';
-document.getElementById('viewDetail').style.display='block';
-document.getElementById('viewDetail').innerHTML=`<div style="background:#fff;padding:14px;border-radius:12px"><button onclick="showCats()" style="border:none;background:#eee;padding:8px 12px;border-radius:18px">← Volver</button><h2>${p.nombre}</h2><div style="height:280px;display:flex;justify-content:center;align-items:center"><img src="${p.fotos[0]}" style="max-width:100%;max-height:100%"></div><div style="font-size:22px;font-weight:900">${fmt(p.usd)}</div><p style="font-size:13px">${p.specs}</p><button onclick="addToCart(${i})" style="width:100%;padding:14px;background:#ffd814;border:none;border-radius:24px;font-weight:900">Agregar al carrito</button></div>`;
-}
-function addToCart(i){cart.push(productos[i]);document.getElementById('cartCount').innerText=cart.length;alert('Agregado: '+productos[i].nombre)}
-function openCart(){alert('Carrito '+cart.length+'\n'+cart.map(p=>p.nombre).join('\n'))}
+function filtrarMarca(txt){ let filtrados=productos.filter(p=> (p.nombre+' '+p.categoria).toLowerCase().includes(txt.toLowerCase())); if(!filtrados.length){ alert('No hay productos de '+txt); return; } document.getElementById('mainShop').style.display='block'; document.getElementById('viewCat').style.display='none'; document.getElementById('viewProd').style.display='block'; document.getElementById('amazonBottom').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('catName').innerText=`${txt.toUpperCase()} • ${filtrados.length} productos`; let h=''; for(let p of filtrados){ let idx=productos.indexOf(p); let img=p.fotos[0]||''; let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:6px;left:6px;background:#111;color:white;font-size:10px;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div></div></div>`; } document.getElementById('prod').innerHTML=h; window.scrollTo(0,0); }
+function openCatFromText(cat){ if(!cat){ showCats(); return; } openCat(cat); }
+function scrollCarrusel(px){ document.getElementById('carouselTrack').scrollBy({left:px,behavior:'smooth'}); }
 
-// BUSCADOR EN EL CENTRO ARRIBA CON LUPA - SOLO NOMBRE TIPO GOOGLE
-function buscarGoogle(q){
-let texto=q.toLowerCase().trim();
-let box=document.getElementById('suggestBox');
-if(!texto){box.style.display='none';return;}
-let filtrados=productos.filter(p=>p.nombre.toLowerCase().includes(texto));
-let html='';
-filtrados.slice(0,8).forEach(p=>{
-let safe=p.nombre.replace(/'/g,"\\'");
-html+=`<div class="sug" onclick="selectSearch('${safe}')"><span>🔍</span> ${p.nombre}</div>`;
-});
-if(filtrados.length==0) html=`<div class="sug">No hay resultados para "${q}"</div>`;
-box.innerHTML=html;
-box.style.display='block';
-if(texto.length>=1){
-document.getElementById('viewCats').style.display='none';
-document.getElementById('viewDetail').style.display='none';
-document.getElementById('viewProd').style.display='block';
-document.getElementById('catName').innerText=`Busqueda: "${q}" • ${filtrados.length} resultados`;
-renderProds(filtrados);
+async function load(){
+  cargarDolarHoy(); checkLogin();
+  let r=await fetch(CSV_URL+'&t='+Date.now()); let text=await r.text(); let rows=parseCSV(text);
+  let header=rows[0].map(h=>h.toLowerCase()); let iNom=header.findIndex(h=>h.includes('nombre')), iPrec=header.findIndex(h=>h.includes('precio')), iCat=header.findIndex(h=>h.includes('categ')), iSpecs=header.findIndex(h=>h.includes('spec')||h.includes('descrip'));
+  let fotoIdxs=header.map((h,i)=>h.includes('foto')||h.includes('image')?i:-1).filter(i=>i!=-1);
+  productos=[]; for(let k=1;k<rows.length;k++){ let row=rows[k]; if(!row) continue; let nombre=(row[iNom]||'').trim(); if(!nombre) continue; let usd=parsePrecio(row[iPrec]); let cat=(row[iCat]||'General').replace(/,/g,' ').trim()||'General'; let fotos=[]; for(let fi of fotoIdxs){ fotos.push(...fixUrl(row[fi]||'')); } fotos=[...new Set(fotos)]; productos.push({nombre,usd,fotos,categoria:cat,specs:row[iSpecs]||'• Organizador de coche para asiento trasero. Este organizador de reposacabezas para coche esta hecho de plastico resistente, no se rompe facilmente, es duradero y garantiza una experiencia de viaje optima.\n• Con ganchos. Diseño plegable.\n• Dispensador multifuncional para pañuelos y bebidas.\n• Compatible con la mayoria de vehiculos.\n• Material: Plastico premium\n• Envio gratis siempre 3 a 15 dias\n• Garantia 12 meses',reviews:genReviews(k)}); }
+  showCats(); renderAll(); upd();
+  let track=document.getElementById('carouselTrack');
+  track.addEventListener('mousedown', (e)=>{ isDown=true; startX=e.pageX - track.offsetLeft; scrollLeft=track.scrollLeft; });
+  track.addEventListener('mouseleave', ()=>{ isDown=false; });
+  track.addEventListener('mouseup', ()=>{ isDown=false; });
+  track.addEventListener('mousemove', (e)=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - track.offsetLeft; const walk=(x-startX)*1.8; track.scrollLeft=scrollLeft-walk; });
+  track.addEventListener('touchstart', (e)=>{ startX=e.touches[0].pageX - track.offsetLeft; scrollLeft=track.scrollLeft; }, {passive:true});
+  track.addEventListener('touchmove', (e)=>{ const x=e.touches[0].pageX - track.offsetLeft; const walk=(x-startX)*1.8; track.scrollLeft=scrollLeft-walk; }, {passive:true});
 }
+function renderAll(){ renderHero(); renderCarousel(); renderChips(); renderCats(); renderOfertas(); renderAmazonBottom(); }
+function renderHero(){ let cont=document.getElementById('heroProducts'); if(!productos.length) return; let top=productos.filter(p=>p.fotos[0]).slice(0,4); let h=''; for(let p of top){ let img=p.fotos[0]; let idx=productos.indexOf(p); h+=`<img src="${thumb(img)}" onclick="openDetail(${idx})" draggable="false">`; } cont.innerHTML=h; }
+function renderCarousel(){
+  let track=document.getElementById('carouselTrack'); if(!productos.length) return;
+  let best=[...productos].sort(()=>0.5-Math.random()).slice(0,14);
+  let html=''; for(let p of best){ let img=p.fotos[0]||''; let idx=productos.indexOf(p); let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); html+=`<div class="carousel-item" onclick="if(!isDown) openDetail(${idx})"><div class="badge-off">-${off}%</div><div style="height:90px;display:flex;align-items:center;justify-content:center;background:white;margin-top:18px"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain" draggable="false"></div><b style="font-size:11px;display:block;min-height:32px;margin-top:8px;line-height:1.2">${p.nombre.substring(0,50)}</b><div style="font-weight:800;font-size:12px">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;font-weight:600">Envio gratis • Ver pagina</div></div>`; }
+  track.innerHTML=html;
+}
+function renderChips(){ let cont=document.getElementById('chipsBuscado'); if(!productos.length) return; let cats=[...new Set(productos.map(p=>p.categoria))]; let h=''; for(let cat of cats.slice(0,8)){ h+=`<div class="chip" onclick="openCat('${cat.replace(/'/g,"\\'")}')">${cat}</div>`; } h+=`<div class="chip" onclick="filtrarMenos40k()">Menos de $40.000</div>`; cont.innerHTML=h; }
+function renderCats(){ let cats=[...new Set(productos.map(p=>p.categoria))]; let h=''; for(let cat of cats){ let prodCat=productos.filter(p=>p.categoria==cat); let count=prodCat.length; let imgRep=prodCat.find(p=>p.fotos[0])?.fotos[0]||''; h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" class="card"><div class="cat-real-img"><img src="${imgRep?thumb(imgRep):''}" loading="lazy"></div><div style="padding:12px"><b style="font-size:13px;font-weight:800">${cat}</b><div style="font-size:11px;color:#666;margin-top:2px">${count} productos • Imagen real • Click para ver</div></div></div>`; } document.getElementById('catGrid').innerHTML=h; }
+function renderOfertas(){ let grid=document.getElementById('ofertasGrid'); if(!productos.length) return; let ofertas=productos.slice(0,8); let h=''; for(let p of ofertas){ let img=p.fotos[0]||''; let idx=productos.indexOf(p); let off=getDiscountForProduct(idx); let oldPrice=getVisualOldPrice(p.usd, off); h+=`<div onclick="openDetail(${idx})" class="card"><div style="position:absolute;top:8px;left:8px;z-index:2;background:#111;color:white;font-size:10px;font-weight:800;padding:4px 8px;border-radius:10px">-${off}% OFF</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:12px"><b style="font-size:11px;display:block;min-height:34px;margin:4px 0;line-height:1.3">${p.nombre}</b><div style="font-weight:800;font-size:13px">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a;margin-top:2px;font-weight:700">Envio gratis • Click para ver pagina</div></div></div>`; } grid.innerHTML=h; }
+function showCats(){document.getElementById('mainShop').style.display='block';document.getElementById('viewCat').style.display='block';document.getElementById('viewProd').style.display='none';document.getElementById('viewDetail').style.display='none';document.getElementById('amazonBottom').style.display='grid';window.scrollTo(0,0);}
+function openCat(cat){currentCat=cat;document.getElementById('mainShop').style.display='block';document.getElementById('viewCat').style.display='none';document.getElementById('viewDetail').style.display='none';document.getElementById('viewProd').style.display='block';document.getElementById('amazonBottom').style.display='none';document.getElementById('catName').innerText=cat+` • Click para ver pagina con caracteristicas y resenas`;let h='';for(let i=0;i<productos.length;i++){let p=productos[i];if(p.categoria!=cat)continue;let img=p.fotos[0]||'';let off=getDiscountForProduct(i);let oldPrice=getVisualOldPrice(p.usd, off);h+=`<div onclick="openDetail(${i})" class="card"><div style="position:absolute;top:8px;left:8px;z-index:2;background:#111;color:white;font-size:10px;font-weight:800;padding:4px 8px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" loading="lazy" style="max-width:100%;max-height:100%;object-fit:contain"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a">Envio gratis • Ver pagina</div></div></div>`;}document.getElementById('prod').innerHTML=h;window.scrollTo(0,0);}
+function openDetail(i){
+  detailIndex=i;imgIndex=0;let p=productos[i];let off=getDiscountForProduct(i);let oldPrice=getVisualOldPrice(p.usd, off);
+  document.getElementById('mainShop').style.display='none';
+  document.getElementById('viewDetail').style.display='block';
+  document.getElementById('dName').innerText=p.nombre;
+  document.getElementById('dCat').innerText=p.categoria;
+  document.getElementById('dOff').innerText=`Ahorra ${off}% • Oferta`;
+  document.getElementById('dPrice').innerText=fmt(p.usd);
+  document.getElementById('dPriceOld').innerText=fmt(oldPrice);
+  document.getElementById('dPrice2').innerText=`Precio original igual: ${fmt(p.usd)} • Antes visual ${fmt(oldPrice)} • Ahorro visual ${fmt(oldPrice-p.usd)} • ${fmtSmall(p.usd)} • TRM $3.166,91`;
+  document.getElementById('dSpecs').innerText=p.specs;
+  document.getElementById('dColor').innerText='Negro';
+  document.getElementById('dRatingTop').innerHTML=`4.5 de 5 estrellas • ${p.reviews.length} calificaciones • ${Math.floor(Math.random()*50)+10} comprados en el ultimo mes • Envio gratis`;
+  renderGallery();renderReviews();window.scrollTo(0,0);
+}
+function renderGallery(){let p=productos[detailIndex];let foto=p.fotos[imgIndex]||p.fotos[0]||'';document.getElementById('mainImg').innerHTML=foto?`<img src="${big(foto)}" style="width:100%;max-height:500px;object-fit:contain">`:'Sin foto';let th='';for(let j=0;j<p.fotos.length;j++){let f=p.fotos[j];let act=j==imgIndex?'border:2px solid #e77600;box-shadow:0 0 3px #e77600':'border:1px solid #ddd';th+=`<div onclick="imgIndex=${j};renderGallery()" style="${act};border-radius:6px;padding:3px;min-width:60px;background:white;cursor:pointer"><img src="${thumb(f)}" loading="lazy" style="width:56px;height:56px;object-fit:contain;border-radius:4px"></div>`;}document.getElementById('thumbs').innerHTML=th;}
+function renderReviews(){let p=productos[detailIndex];let h='';for(let r of p.reviews){h+=`<div style="border-bottom:1px solid #eee;padding:12px 0"><b style="font-size:12px">${r.name}</b><div style="font-size:12px;color:#e77600">★★★★★ <span style="color:#007185;font-size:11px">Compra verificada • Envio gratis 3 a 15 dias</span></div><div style="font-size:13px;color:#0f1111;line-height:1.4;margin-top:4px">${r.text}</div></div>`;}document.getElementById('dReviews').innerHTML=h;}
+function backToList(){document.getElementById('viewDetail').style.display='none';document.getElementById('mainShop').style.display='block';showCats();}
+function addFromDetail(){add(detailIndex);}function add(i){let p=productos[i];let off=getDiscountForProduct(i);let oldPrice=getVisualOldPrice(p.usd, off);c.push({n:p.nombre,usd:p.usd,old:oldPrice,off,i:Date.now()});upd();if(!open)toggleCart();}function del(i){c=c.filter(x=>x.i!=i);upd();}
+function upd(){let totalUSD=0; for(let x of c) totalUSD+=x.usd; document.getElementById('n').innerText=c.length; document.getElementById('t').innerText=fmt(totalUSD); document.getElementById('tSmall').innerText=fmtSmall(totalUSD)+` • Precio original igual • Envio gratis`; let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px">Tu carrito esta vacio • Agrega productos desde cualquier apartado</p>'; else for(let x of c){ h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0"><span style="font-size:12px">${x.n}<br><b>${fmt(x.usd)}</b> <span style="color:#999;text-decoration:line-through;font-size:10px">${fmt(x.old)}</span> <span style="background:#111;color:white;font-size:9px;padding:2px 6px;border-radius:10px">-${x.off}%</span></span><button onclick="del(${x.i})" style="background:#f5f5f5;border:1px solid #ddd;width:28px;height:28px;border-radius:50%;cursor:pointer">×</button></div>`; } document.getElementById('list').innerHTML=h;}
+function toggleCart(){open=!open;document.getElementById('cart').style.right=open?'0':'-100%';document.getElementById('bg').style.display=open?'block':'none';}
+function pay(){if(!c.length){alert('Tu carrito esta vacio');return;}let totalUSD=0,m='';for(let x of c){totalUSD+=x.usd; m+=`${x.n} (-${x.off}% visual ${fmt(x.usd)}), `;}let u=localStorage.getItem('wobba_user')||'Cliente';let msg=`Hola WobbaShop, soy ${u}\nPedido: ${m}\nTotal real igual al original: ${fmt(totalUSD)}\nEnvio gratis siempre • TRM $${TASA.toLocaleString('es-CO')} • 3 a 15 dias`;window.open('https://wa.me/573016202301?text='+encodeURIComponent(msg),'_blank');}
+
+// BUSCADOR TIPO GOOGLE - SOLO NOMBRE - CENTRO ARRIBA CON LUPA
+function buscarGoogle(q){
+ let texto=q.toLowerCase().trim();
+ let box=document.getElementById('suggestBox');
+ if(!texto){box.style.display='none'; return;}
+ if(!productos.length){box.innerHTML=`<div style="padding:10px 14px;font-size:13px">Cargando productos...</div>`; box.style.display='block'; return;}
+ let filtrados=productos.filter(p=>p.nombre.toLowerCase().includes(texto));
+ let html='';
+ filtrados.slice(0,8).forEach(p=>{
+   let idx=productos.indexOf(p);
+   let safe=p.nombre.replace(/'/g,"\\'");
+   html+=`<div onclick="selectSearch('${safe}')" style="padding:11px 14px;font-size:13px;border-bottom:1px solid #eee;cursor:pointer;display:flex;gap:8px;align-items:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> ${p.nombre}</div>`;
+ });
+ if(filtrados.length==0) html=`<div style="padding:11px 14px;font-size:13px;color:#666">No hay resultados para "${q}"</div>`;
+ box.innerHTML=html;
+ box.style.display='block';
+ if(texto.length>=1){
+   document.getElementById('mainShop').style.display='block';
+   document.getElementById('viewCat').style.display='none';
+   document.getElementById('viewProd').style.display='block';
+   document.getElementById('viewDetail').style.display='none';
+   document.getElementById('amazonBottom').style.display='none';
+   document.getElementById('catName').innerText=`Busqueda: "${q}" • ${filtrados.length} resultados • Solo por nombre`;
+   let h='';
+   filtrados.forEach(p=>{
+     let i=productos.indexOf(p);
+     let img=p.fotos[0]||'';
+     let off=getDiscountForProduct(i);
+     let oldPrice=getVisualOldPrice(p.usd, off);
+     h+=`<div onclick="openDetail(${i})" class="card"><div style="position:absolute;top:6px;left:6px;background:#111;color:white;font-size:10px;padding:3px 6px;border-radius:10px">-${off}%</div><div class="thumb-wrap"><img src="${img?thumb(img):''}" style="max-width:100%;max-height:100%"></div><div style="padding:10px"><b style="font-size:12px">${p.nombre}</b><div style="font-weight:800">${fmt(p.usd)}<span class="price-old">${fmt(oldPrice)}</span></div><div style="font-size:10px;color:#0a7a0a">Envio gratis • Click para ver pagina</div></div></div>`;
+   });
+   document.getElementById('prod').innerHTML=h || `<div style="grid-column:1/-1;text-align:center;padding:20px;background:white;border-radius:12px">No encontramos "${q}"</div>`;
+ }
 }
 function selectSearch(nombre){
-document.getElementById('searchInput').value=nombre;
-document.getElementById('suggestBox').style.display='none';
-buscarGoogle(nombre);
+ document.getElementById('searchInput').value=nombre;
+ document.getElementById('suggestBox').style.display='none';
+ buscarGoogle(nombre);
 }
 document.addEventListener('click',e=>{
-if(!e.target.closest('.searchCenter')) document.getElementById('suggestBox').style.display='none';
+ if(!e.target.closest('.searchCenter')){ document.getElementById('suggestBox').style.display='none'; }
 });
-showCats();
-</script>
-</body>
-</html>
+
+load();upd();
+</script></body></html>
