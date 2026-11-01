@@ -2,7 +2,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;font-family:'Inter',sans-serif}body{margin:0;background:#fcfaf7;color:#111;overflow-x:hidden}
-header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;border-bottom:3px solid #ff3c00}
+header{background:#111;color:white;position:sticky;top:0;z-index:40;border-bottom:3px solid #ff3c00}
 .container{max-width:1440px;margin:auto;padding:0 16px;width:100%}
 .hero{border-radius:0 0 28px 28px;background:linear-gradient(105deg,#111 0%,#1a1a1a 55%,#ff3c00 100%);color:white;min-height:150px;display:flex;flex-direction:column;justify-content:center;margin:0 auto 16px;max-width:1440px;padding:28px 24px;width:calc(100% - 16px)}
 .carousel{background:white;border-radius:20px;padding:20px 0;margin:16px auto;max-width:1440px;border:1px solid #eee;width:calc(100% - 16px)}
@@ -13,11 +13,10 @@ header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;bo
 .grid-cat{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .grid-prod{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:768px){.grid-cat{grid-template-columns:repeat(4,1fr);gap:16px} .grid-prod{grid-template-columns:repeat(4,1fr);gap:16px}}
-@media(min-width:1100px){.grid-prod{grid-template-columns:repeat(5,1fr)}}
 .card{background:white;border-radius:20px;overflow:hidden;border:1px solid #eee;cursor:pointer;width:100%;display:flex;flex-direction:column}
 .card:hover{border-color:#ff3c00}
-.cat-top{font-size:9.5px;font-weight:700;letter-spacing:1px;color:#ff3c00;text-transform:uppercase;padding:12px 14px 6px 14px;text-align:left}
-.card-name{font-size:12.5px;font-weight:700;line-height:1.3;color:#000!important;min-height:36px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:0 14px 6px 14px}
+.cat-top{font-size:9.5px;font-weight:700;letter-spacing:1px;color:#ff3c00;text-transform:uppercase;padding:12px 14px 4px 14px;text-align:left}
+.card-name{font-size:12.5px;font-weight:700;line-height:1.3;color:#000!important;min-height:38px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:0 14px 8px 14px}
 .cat-real-img{width:100%;height:140px;background:#fcfaf7;display:flex;align-items:center;justify-content:center;padding:14px}
 .thumb-wrap.small{height:140px;padding:14px;background:#fcfaf7;display:flex;align-items:center;justify-content:center}
 .thumb-wrap.small img{max-height:120px;max-width:120px;object-fit:contain}
@@ -26,8 +25,8 @@ header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;bo
 .price-old{font-size:10px;color:#999;text-decoration:line-through;margin-left:5px}
 .detail-grid{display:grid;grid-template-columns:50% 50%;gap:0;max-width:1440px;margin:auto;background:white;border-radius:20px;border:1px solid #eee;overflow:hidden;align-items:start}
 .detail-left{padding:16px;background:white}
-.detail-right{padding:20px 22px;background:white;overflow-y:auto;max-height:100vh}
-@media(max-width:900px){.detail-grid{grid-template-columns:1fr;border-radius:0;border:none} .detail-right{max-height:none;overflow:visible}}
+.detail-right{padding:20px 22px;background:white}
+@media(max-width:900px){.detail-grid{grid-template-columns:1fr;border-radius:0;border:none}}
 .searchCenter{flex:1;max-width:560px;margin:0 14px;position:relative}
 .searchBox{background:white;border-radius:24px;display:flex;align-items:center;padding:4px 5px 4px 16px;border:1px solid #eee}
 .searchBox input{flex:1;border:none;outline:none;padding:8px 6px;font-size:12.5px}
@@ -58,8 +57,9 @@ header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;bo
 </style>
 </head>
 <body>
+<div id="tradLoader" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;color:white;padding:10px 18px;border-radius:20px;font-size:11px;z-index:700;display:none">🌐 Traduciendo...</div>
 <header><div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:12px 16px">
-<div onclick="showCats()" style="cursor:pointer"><b style="letter-spacing:1px;font-size:15px">WOBBASHOP</b><div id="dolarInfo" style="font-size:10px;opacity:.6">TRM $3,164 • Envio USA, Colombia, Portugal</div></div>
+<div onclick="showCats()" style="cursor:pointer"><b style="letter-spacing:1px;font-size:15px">WOBBASHOP</b><div id="dolarInfo" style="font-size:10px;opacity:.6">TRM $4,164 • Envio USA, Colombia, Portugal</div></div>
 <div class="searchCenter"><div class="searchBox"><input id="searchInput" type="text" placeholder="Búsqueda popular" oninput="buscarInteligente(this.value)"><button onclick="abrirPrimerResultado()">⌕</button></div><div id="suggestBox"></div></div>
 <div style="display:flex;gap:6px;align-items:center">
 <button id="menuBtn" onclick="openSideMenu()"><span></span><span></span><span></span></button>
@@ -72,15 +72,15 @@ header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;bo
 <div id="menuOverlay" onclick="closeSideMenu()"></div>
 <div id="sideMenu">
 <div style="background:#111;color:white;padding:20px 22px;display:flex;justify-content:space-between"><b>WOBBASHOP</b><button onclick="closeSideMenu()" style="background:white;border:none;width:30px;height:30px;border-radius:50%">X</button></div>
-<div class="ml-row" onclick="closeSideMenu();showCats()"><span data-i18n="inicio">Inicio</span></div>
-<div class="ml-row" onclick="closeSideMenu();openWishlistPage()"><span data-i18n="lista_deseos">Lista de deseos</span><span id="wishCountMenu" style="margin-left:auto;background:#ff3c00;color:white;font-size:10px;padding:2px 8px;border-radius:10px">0</span></div>
-<div class="ml-row" onclick="closeSideMenu();openHistorialPage()"><span data-i18n="historial">Historial</span></div>
-<div class="ml-row" onclick="closeSideMenu();openMasVendidosPage()"><span data-i18n="mas_vendidos">Más vendidos</span></div>
-<div class="ml-row" onclick="toggleCategoriasMenu()"><span data-i18n="categorias">Categorías</span><span style="margin-left:auto">▼</span></div>
+<div class="ml-row" onclick="closeSideMenu();showCats()"><span>Inicio</span></div>
+<div class="ml-row" onclick="closeSideMenu();openWishlistPage()"><span>Lista de deseos</span><span id="wishCountMenu" style="margin-left:auto;background:#ff3c00;color:white;font-size:10px;padding:2px 8px;border-radius:10px">0</span></div>
+<div class="ml-row" onclick="closeSideMenu();openHistorialPage()"><span>Historial</span></div>
+<div class="ml-row" onclick="closeSideMenu();openMasVendidosPage()"><span>Más vendidos</span></div>
+<div class="ml-row" onclick="toggleCategoriasMenu()"><span>Categorías</span><span style="margin-left:auto">▼</span></div>
 <div id="categoriasListMenu" style="display:none;background:#fcfaf7"></div>
-<div class="ml-row" onclick="closeSideMenu();openFiltrosPage()"><span data-i18n="filtros">Filtros por precio</span></div>
-<div class="ml-row" onclick="closeSideMenu();openInfo('envio')"><span data-i18n="envio">Envío USA, Colombia, Portugal</span></div>
-<div class="ml-row" onclick="closeSideMenu();openProfile()"><span id="menuCuenta" data-i18n="mi_cuenta">Mi cuenta</span></div>
+<div class="ml-row" onclick="closeSideMenu();openFiltrosPage()"><span>Filtros por precio</span></div>
+<div class="ml-row" onclick="closeSideMenu();openInfo('envio')"><span>Envío USA, Colombia, Portugal</span></div>
+<div class="ml-row" onclick="closeSideMenu();openProfile()"><span id="menuCuenta">Mi cuenta</span></div>
 </div>
 
 <div id="mainShop">
@@ -88,8 +88,8 @@ header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;bo
 <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center;width:100%">
 <div>
 <p style="margin:0;font-size:10px;letter-spacing:3px;opacity:.7">USA • COLOMBIA • PORTUGAL</p>
-<h1 style="margin:10px 0 0;font-size:38px;line-height:.9;font-weight:900;letter-spacing:-1.5px" data-i18n="banner">Descuentos hasta 60% OFF</h1>
-<p style="margin:10px 0 0;font-size:12px;opacity:.8;font-weight:300;max-width:500px" data-i18n="banner_sub">Selección curada con garantía y soporte personalizado</p>
+<h1 style="margin:10px 0 0;font-size:38px;line-height:.9;font-weight:900">Descuentos hasta 60% OFF</h1>
+<p style="margin:10px 0 0;font-size:12px;opacity:.8;font-weight:300;max-width:500px">Selección curada con garantía y soporte personalizado</p>
 </div>
 <div style="background:rgba(255,255,255,.1);border-radius:16px;padding:14px;min-width:200px">
 <div style="font-size:11px;opacity:.8">Envíos a</div>
@@ -104,19 +104,19 @@ header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;bo
 <div class="trustBox"><b>Soporte directo</b><div style="font-size:10px;color:#888">WhatsApp directo</div></div>
 </div>
 
-<div class="carousel"><div style="padding:0 16px;display:flex;align-items:center;gap:8px"><span class="accent-dot"></span><h3 style="margin:0;font-size:13px;font-weight:700" data-i18n="mas_vendidos">Selección destacada</h3></div><div style="position:relative;margin-top:14px"><button class="carousel-btn left" onclick="scrollCarrusel(-300)">‹</button><button class="carousel-btn right" onclick="scrollCarrusel(300)">›</button><div class="carousel-track" id="carouselTrack"></div></div></div>
+<div class="carousel"><div style="padding:0 16px;display:flex;align-items:center;gap:8px"><span class="accent-dot"></span><h3 style="margin:0;font-size:13px;font-weight:700">Selección destacada</h3></div><div style="position:relative;margin-top:14px"><button class="carousel-btn left" onclick="scrollCarrusel(-300)">‹</button><button class="carousel-btn right" onclick="scrollCarrusel(300)">›</button><div class="carousel-track" id="carouselTrack"></div></div></div>
 
 <div class="container" style="background:white;border-radius:20px;padding:18px;margin-top:12px;border:1px solid #f0ebe4;width:calc(100% - 16px)">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h3 style="margin:0;font-size:12px;font-weight:700"><span class="accent-dot"></span><span data-i18n="busqueda_popular">Búsqueda popular</span></h3><button onclick="openFiltrosPage()" style="background:#111;color:white;border:none;padding:7px 14px;border-radius:20px;font-size:10px" data-i18n="filtros">Filtros</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><h3 style="margin:0;font-size:12px;font-weight:700"><span class="accent-dot"></span> Búsqueda popular</h3><button onclick="openFiltrosPage()" style="background:#111;color:white;border:none;padding:7px 14px;border-radius:20px;font-size:10px">Filtros</button></div>
 <div class="chips" id="chipsBuscado"></div>
-<div id="viewCat"><h2 style="margin:20px 0 0;font-size:13px;font-weight:700"><span class="accent-dot"></span><span data-i18n="categorias">Categorías</span></h2><div id="catGrid" class="grid-cat" style="margin-top:12px"></div></div>
-<div style="margin-top:22px;border:1px solid #f0ebe4;border-radius:16px;padding:16px;background:#fcfaf7"><b style="font-size:12px"><span class="accent-dot"></span><span data-i18n="combo_titulo">Recomendados</span></b><div id="combosGrid" class="grid-prod" style="margin-top:12px"></div></div>
+<div id="viewCat"><h2 style="margin:20px 0 0;font-size:13px;font-weight:700"><span class="accent-dot"></span> Categorías</h2><div id="catGrid" class="grid-cat" style="margin-top:12px"></div></div>
+<div style="margin-top:22px;border:1px solid #f0ebe4;border-radius:16px;padding:16px;background:#fcfaf7"><b style="font-size:12px"><span class="accent-dot"></span> Recomendados</b><div id="combosGrid" class="grid-prod" style="margin-top:12px"></div></div>
 </div>
 </div>
 
-<div id="viewFiltros" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px" data-i18n="filtros">FILTROS POR PRECIO</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div>
+<div id="viewFiltros" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px">FILTROS POR PRECIO</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div>
 <div style="max-width:600px;margin:auto;padding:20px">
-<h2 style="font-size:18px;font-weight:700">Filtrar por precio</h2>
+<h2 style="font-size:18px;font-weight:700;color:#000">Filtrar por precio</h2>
 <p style="font-size:11px;color:#666">Pesos colombianos y dólares</p>
 <div style="background:#fcfaf7;border:1px solid #f0ebe4;border-radius:14px;padding:18px;margin-top:12px">
 <label style="font-size:11px;font-weight:700">Precio máximo USD</label>
@@ -129,14 +129,14 @@ header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;bo
 <div id="resultadoFiltrosTxt" style="font-size:12px;color:#666;margin-top:12px"></div>
 </div></div>
 
-<div id="viewCategoria" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b id="tituloCategoria" style="font-size:13px">CATEGORIA</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><h2 id="nombreCategoria" style="margin:0;font-size:16px;font-weight:700"></h2><div id="categoriaGrid" class="grid-prod" style="margin-top:14px"></div></div></div>
-<div id="viewWishlist" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px" data-i18n="lista_deseos">LISTA DE DESEOS</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><div id="wishlistGrid" class="grid-prod"></div></div></div>
-<div id="viewHistorial" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px" data-i18n="historial">HISTORIAL</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><div id="historialGrid" class="grid-prod"></div></div></div>
-<div id="viewMasVendidos" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px" data-i18n="mas_vendidos">MÁS VENDIDOS</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><div id="masVendidosGrid" class="grid-prod"></div></div></div>
-<div id="viewMenos60k" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px" data-i18n="menos_60k">MENOS DE $60K</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><div id="menos60kGrid" class="grid-prod"></div></div></div>
+<div id="viewCategoria" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b id="tituloCategoria" style="font-size:13px">CATEGORIA</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><h2 id="nombreCategoria" style="margin:0;font-size:16px;font-weight:700;color:#000"></h2><div id="categoriaGrid" class="grid-prod" style="margin-top:14px"></div></div></div>
+<div id="viewWishlist" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px">LISTA DE DESEOS</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><div id="wishlistGrid" class="grid-prod"></div></div></div>
+<div id="viewHistorial" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px">HISTORIAL</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><div id="historialGrid" class="grid-prod"></div></div></div>
+<div id="viewMasVendidos" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px">MÁS VENDIDOS</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><div id="masVendidosGrid" class="grid-prod"></div></div></div>
+<div id="viewMenos60k" style="display:none;background:white;min-height:100vh"><div style="background:#111;color:white;padding:14px 16px;display:flex;justify-content:space-between"><b style="font-size:13px">MENOS DE $60K</b><button onclick="showCats()" style="background:white;border:none;padding:6px 14px;border-radius:20px;font-size:11px">X</button></div><div style="max-width:1440px;margin:auto;padding:14px"><div id="menos60kGrid" class="grid-prod"></div></div></div>
 
 <div id="viewDetail" style="display:none;background:#fcfaf7;min-height:100vh">
-<div style="background:white;border-bottom:1px solid #f0ebe4;padding:12px 14px;position:sticky;top:0;z-index:10"><button onclick="backToList()" style="background:#f5f1eb;border:1px solid #eee;padding:8px 14px;border-radius:20px;font-size:11px" data-i18n="volver">← Volver</button></div>
+<div style="background:white;border-bottom:1px solid #f0ebe4;padding:12px 14px;position:sticky;top:0;z-index:10"><button onclick="backToList()" style="background:#f5f1eb;border:1px solid #eee;padding:8px 14px;border-radius:20px;font-size:11px">← Volver</button></div>
 <div class="detail-grid">
 <div class="detail-left"><div id="mainImg" style="min-height:380px;display:flex;align-items:center;justify-content:center;background:#fcfaf7;border-radius:16px;overflow:hidden"></div><div id="thumbs" style="display:flex;gap:8px;padding:12px 0;overflow:auto;margin-top:12px"></div><div id="videoBox" style="display:none;margin-top:16px"></div></div>
 <div class="detail-right">
@@ -145,10 +145,10 @@ header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;bo
 <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><span id="dStars" style="color:#111;font-size:12px"></span><span id="dRatingTxt" style="font-size:10px;color:#888"></span></div>
 <div style="margin-top:14px"><span id="dPrice" style="font-size:26px;font-weight:800;color:#000"></span><span id="dPriceOld" class="price-old"></span></div>
 <div id="dPrice2" style="font-size:10px;color:#888;margin-top:4px"></div>
-<div id="boxColores" style="display:none;margin-top:20px"><b style="font-size:11px;font-weight:600;color:#000"><span data-i18n="color">Color</span>: <span id="selColorTxt" style="font-weight:400;color:#ff3c00"></span></b><div id="coloresBox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div></div>
-<div id="boxCantidad" style="display:none;margin-top:20px"><b style="font-size:11px;font-weight:600;color:#000" data-i18n="cantidad">Cantidad</b><div style="margin-top:10px;display:flex;align-items:center;gap:12px"><div class="qtyBox"><button type="button" onclick="changeQty(-1)" style="border:none;background:white;width:32px;height:32px">-</button><span id="qtyNum" style="width:30px;text-align:center;font-weight:600">1</span><button type="button" onclick="changeQty(1)" style="border:none;background:white;width:32px;height:32px">+</button></div><span id="cantOptions" style="display:flex;gap:6px;flex-wrap:wrap"></span></div></div>
-<div id="boxAccesorios" style="display:none;margin-top:20px"><b style="font-size:11px;font-weight:600;color:#000"><span data-i18n="accesorios">Accesorios</span>: <span id="selAccTxt" style="font-weight:400;color:#ff3c00"></span></b><div id="accBox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div></div>
-<div id="alertaLogin" style="display:none;background:#fff3e0;border:1px solid #ffcc80;border-radius:12px;padding:12px;margin-top:16px;text-align:center;font-size:11px"><b data-i18n="debe_registrarse">Debes registrarte</b></div>
+<div id="boxColores" style="display:none;margin-top:20px"><b style="font-size:11px;font-weight:600;color:#000">Color: <span id="selColorTxt" style="font-weight:400;color:#ff3c00"></span></b><div id="coloresBox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div></div>
+<div id="boxCantidad" style="display:none;margin-top:20px"><b style="font-size:11px;font-weight:600;color:#000">Cantidad</b><div style="margin-top:10px;display:flex;align-items:center;gap:12px"><div class="qtyBox"><button type="button" onclick="changeQty(-1)" style="border:none;background:white;width:32px;height:32px">-</button><span id="qtyNum" style="width:30px;text-align:center;font-weight:600">1</span><button type="button" onclick="changeQty(1)" style="border:none;background:white;width:32px;height:32px">+</button></div><span id="cantOptions" style="display:flex;gap:6px;flex-wrap:wrap"></span></div></div>
+<div id="boxAccesorios" style="display:none;margin-top:20px"><b style="font-size:11px;font-weight:600;color:#000">Accesorios: <span id="selAccTxt" style="font-weight:400;color:#ff3c00"></span></b><div id="accBox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div></div>
+<div id="alertaLogin" style="display:none;background:#fff3e0;border:1px solid #ffcc80;border-radius:12px;padding:12px;margin-top:16px;text-align:center;font-size:11px"><b>Debes registrarte</b></div>
 <div style="margin-top:16px;background:#f5f1eb;border-radius:12px;padding:12px;border:1px solid #f0ebe4">
 <div style="font-size:10px;color:#888">Números copiables</div>
 <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
@@ -156,63 +156,96 @@ header{background:#111;color:white;padding:0;position:sticky;top:0;z-index:40;bo
 <span class="copiable" onclick="copiarTexto('+573016202301')">WhatsApp: +57 301 620 2301 📋</span>
 </div>
 </div>
-<button id="btnAddCart" onclick="addFromDetail()" style="background:#111;color:white;width:100%;padding:14px;border-radius:24px;font-weight:600;margin-top:16px;font-size:12px;border:none" data-i18n="agregar_carrito">Agregar al carrito</button>
-<button id="btnWishDetail" onclick="toggleWishlistDetail()" style="background:#fcfaf7;border:1px solid #f0ebe4;width:100%;padding:12px;border-radius:24px;font-weight:500;margin-top:8px;font-size:11px" data-i18n="agregar_deseos">Guardar en lista</button>
+<button onclick="addFromDetail()" style="background:#111;color:white;width:100%;padding:14px;border-radius:24px;font-weight:600;margin-top:16px;font-size:12px;border:none">Agregar al carrito</button>
+<button id="btnWishDetail" onclick="toggleWishlistDetail()" style="background:#fcfaf7;border:1px solid #f0ebe4;width:100%;padding:12px;border-radius:24px;font-weight:500;margin-top:8px;font-size:11px">Guardar en lista</button>
 <div style="margin-top:24px">
-<h3 style="font-size:12px;font-weight:700;color:#000" data-i18n="especificaciones">Especificaciones completas</h3>
+<h3 style="font-size:12px;font-weight:700;color:#000">Especificaciones completas</h3>
 <div id="dSpecs" class="specs-full"></div>
-<div class="politicas" id="politicasBox"></div>
 </div>
 <div style="margin-top:24px;border-top:1px solid #f0ebe4;padding-top:18px">
-<h3 style="font-size:12px;font-weight:700;color:#000" data-i18n="resenas">Reseñas</h3>
+<h3 style="font-size:12px;font-weight:700;color:#000">Reseñas</h3>
 <div id="dReviews" style="margin-top:12px"></div>
 </div>
 <div style="margin-top:24px;border-top:1px solid #f0ebe4;padding-top:18px">
-<h3 style="font-size:12px;font-weight:700;color:#000" data-i18n="compra_frecuente">Comprados juntos</h3>
+<h3 style="font-size:12px;font-weight:700;color:#000">Comprados juntos</h3>
 <div id="crossSell" class="grid-prod" style="margin-top:12px"></div>
 </div>
 </div>
 </div>
 </div>
 
-<div id="loginModal" style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:600;align-items:center;justify-content:center;padding:16px"><div style="background:white;border-radius:20px;padding:22px;max-width:420px;width:100%;max-height:92vh;overflow:auto"><div style="display:flex;justify-content:space-between"><div><h2 style="margin:0;font-size:16px;font-weight:700" data-i18n="registro_obligatorio">Crear cuenta</h2></div><button onclick="closeLogin()" style="border:none;background:#f5f1eb;width:30px;height:30px;border-radius:50%">X</button></div>
+<div id="loginModal" style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:600;align-items:center;justify-content:center;padding:16px"><div style="background:white;border-radius:20px;padding:22px;max-width:420px;width:100%;max-height:92vh;overflow:auto"><div style="display:flex;justify-content:space-between"><div><h2 style="margin:0;font-size:16px;font-weight:700">Crear cuenta</h2></div><button onclick="closeLogin()" style="border:none;background:#f5f1eb;width:30px;height:30px;border-radius:50%">X</button></div>
 <input id="regName" placeholder="Nombre completo *" style="width:100%;padding:12px;border-radius:10px;border:1px solid #e5ddd3;margin-top:14px;font-size:12px">
 <input id="regEmail" placeholder="Correo *" type="email" style="width:100%;padding:12px;border-radius:10px;border:1px solid #e5ddd3;margin-top:10px;font-size:12px">
 <input id="regPhone" placeholder="WhatsApp (opcional)" style="width:100%;padding:12px;border-radius:10px;border:1px solid #e5ddd3;margin-top:10px;font-size:12px">
 <input id="regDir" placeholder="Dirección *" style="width:100%;padding:12px;border-radius:10px;border:1px solid #e5ddd3;margin-top:10px;font-size:12px">
 <input id="regCiudad" placeholder="Ciudad * Ej: Medellín" style="width:100%;padding:12px;border-radius:10px;border:1px solid #e5ddd3;margin-top:10px;font-size:12px">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><input id="regPais" placeholder="País *" value="Colombia" style="padding:12px;border-radius:10px;border:1px solid #e5ddd3;font-size:12px"><input id="regDepto" placeholder="Departamento *" style="padding:12px;border-radius:10px;border:1px solid #e5ddd3;font-size:12px"></div>
-<button onclick="guardarRegistro()" style="background:#111;color:white;width:100%;padding:14px;border-radius:12px;border:none;font-weight:600;margin-top:16px;font-size:12px" data-i18n="crear_cuenta">Crear cuenta</button>
+<button onclick="guardarRegistro()" style="background:#111;color:white;width:100%;padding:14px;border-radius:12px;border:none;font-weight:600;margin-top:16px;font-size:12px">Crear cuenta</button>
 </div></div>
 
-<div id="profileModal" style="position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:800;align-items:center;justify-content:center;padding:16px"><div style="background:white;border-radius:18px;padding:22px;max-width:380px;width:100%"><div style="display:flex;justify-content:space-between"><h2 style="margin:0;font-size:15px;font-weight:700" data-i18n="mi_perfil">Mi perfil</h2><button onclick="closeProfile()" style="border:none;background:#f5f1eb;width:30px;height:30px;border-radius:50%">X</button></div><div id="profileContent" style="margin-top:16px"></div></div></div>
+<div id="profileModal" style="position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:800;align-items:center;justify-content:center;padding:16px"><div style="background:white;border-radius:18px;padding:22px;max-width:380px;width:100%"><div style="display:flex;justify-content:space-between"><h2 style="margin:0;font-size:15px;font-weight:700">Mi perfil</h2><button onclick="closeProfile()" style="border:none;background:#f5f1eb;width:30px;height:30px;border-radius:50%">X</button></div><div id="profileContent" style="margin-top:16px"></div></div></div>
 <div id="infoModal" style="position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:200;align-items:center;justify-content:center;padding:16px"><div style="background:white;border-radius:16px;padding:22px;max-width:400px;width:100%"><div style="display:flex;justify-content:space-between"><h2 id="infoTitle" style="margin:0;font-size:13px"></h2><button onclick="closeInfo()" style="border:none;background:#f5f1eb;width:30px;height:30px;border-radius:50%">X</button></div><div id="infoText" style="margin-top:14px;font-size:11.5px"></div></div></div>
-<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:400px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column"><div style="background:#111;color:white;padding:18px;display:flex;justify-content:space-between"><b style="font-size:13px" data-i18n="carrito">Carrito</b><button onclick="toggleCart()" style="background:white;color:black;width:30px;height:30px;border-radius:50%;border:none">X</button></div><div id="list" style="flex:1;overflow:auto;padding:16px"></div><div style="padding:16px;border-top:1px solid #f0ebe4"><div style="display:flex;justify-content:space-between"><span style="font-size:12px" data-i18n="total">Total</span><b id="t" style="font-size:14px">0</b></div><div id="tSmall" style="font-size:10px;color:#888"></div><button id="btnPay" onclick="pay()" style="background:#111;color:white;width:100%;padding:14px;border-radius:12px;border:none;font-weight:600;margin-top:10px;font-size:12px" data-i18n="finalizar_whatsapp">Finalizar WhatsApp +57 301 620 2301</button></div></div><div id="bg" onclick="toggleCart();closeInfo();closeProfile();closeLogin();closeSideMenu()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.35);display:none;z-index:90"></div>
+<div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:400px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column"><div style="background:#111;color:white;padding:18px;display:flex;justify-content:space-between"><b style="font-size:13px">Carrito</b><button onclick="toggleCart()" style="background:white;color:black;width:30px;height:30px;border-radius:50%;border:none">X</button></div><div id="list" style="flex:1;overflow:auto;padding:16px"></div><div style="padding:16px;border-top:1px solid #f0ebe4"><div style="display:flex;justify-content:space-between"><span style="font-size:12px">Total</span><b id="t" style="font-size:14px">0</b></div><div id="tSmall" style="font-size:10px;color:#888"></div><button onclick="pay()" style="background:#111;color:white;width:100%;padding:14px;border-radius:12px;border:none;font-weight:600;margin-top:10px;font-size:12px">Finalizar por WhatsApp</button></div></div><div id="bg" onclick="toggleCart();closeInfo();closeProfile();closeLogin();closeSideMenu()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.35);display:none;z-index:90"></div>
 
 <script>
 const SHEET_ID="2PACX-1vSw0ttSUsTpHjrjXGTLZfYEt2E4IGar2s55-Me0DHaCDQFZMZ6y-ck1u173-nIUBxklEIl1Wk-Y1hnf";
 const CSV_URL=`https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?output=csv`;
 let TASA=4164, moneda='USD', productos=[], productosOriginal=[], c=[], open=false, detailId=null, imgIndex=0, lastSearchResults=[], wishlist=JSON.parse(localStorage.getItem('wobba_wish')||'[]');
 let selectedColor='', selectedAcc='', selectedQty=1, currentLang=localStorage.getItem('wobba_lang')||'es';
-const translations={
-es:{inicio:"Inicio",lista_deseos:"Lista de deseos",historial:"Historial",mas_vendidos:"Más vendidos",categorias:"Categorías",menos_60k:"Menos de $60K",menos_60k_titulo:"Productos por menos de $60.000 COP",filtros:"Filtros por precio",envio:"Envío USA, Colombia, Portugal",pago:"Pago +57 301 620 2301",mi_cuenta:"Mi cuenta",mi_perfil:"Mi perfil",banner:"Descuentos hasta 60% OFF",banner_sub:"Selección curada con garantía",busqueda_popular:"Búsqueda popular",volver:"← Volver",color:"Color",cantidad:"Cantidad",accesorios:"Accesorios",envio_gratis:"Envío USA, Colombia, Portugal • +57 301 620 2301",agregar_carrito:"Agregar al carrito",agregar_deseos:"Guardar en lista",pago_directo:"Pago directo",especificaciones:"Especificaciones completas",pago_seguro:"Pago seguro",finaliza_compra:"Finaliza tu compra",copiar_nequi:"Copiar Nequi",carrito:"Carrito",total:"Total",finalizar_whatsapp:"Finalizar por WhatsApp",crear_cuenta:"Crear cuenta",registro_obligatorio:"Crear cuenta",para_comprar:"Necesaria para comprar",debe_registrarse:"Debes registrarte",envio_banner:"USA • COLOMBIA • PORTUGAL",trust1:"Pago seguro",combo_titulo:"Recomendados",resenas:"Reseñas",compra_frecuente:"Comprados juntos"},
-en:{inicio:"Home",lista_deseos:"Wishlist",historial:"History",mas_vendidos:"Best sellers",categorias:"Categories",menos_60k:"Under $60K",menos_60k_titulo:"Products under $60.000 COP",filtros:"Price filters",envio:"Shipping USA, Colombia, Portugal",pago:"Payment +57 301 620 2301",mi_cuenta:"My account",mi_perfil:"My profile",banner:"Discounts up to 60% OFF",banner_sub:"Curated selection with warranty",busqueda_popular:"Popular search",volver:"← Back",color:"Color",cantidad:"Quantity",accesorios:"Accessories",envio_gratis:"Shipping USA, Colombia, Portugal • +57 301 620 2301",agregar_carrito:"Add to cart",agregar_deseos:"Save to wishlist",pago_directo:"Direct payment",especificaciones:"Full specifications",pago_seguro:"Secure payment",finaliza_compra:"Complete your purchase",copiar_nequi:"Copy Nequi",carrito:"Cart",total:"Total",finalizar_whatsapp:"Checkout via WhatsApp",crear_cuenta:"Create account",registro_obligatorio:"Create account",para_comprar:"Required",debe_registrarse:"You must register",envio_banner:"USA • COLOMBIA • PORTUGAL",trust1:"Secure",combo_titulo:"Recommended",resenas:"Reviews",compra_frecuente:"Frequently bought together"},
-pt:{inicio:"Início",lista_deseos:"Lista de desejos",historial:"Histórico",mas_vendidos:"Mais vendidos",categorias:"Categorias",menos_60k:"Menos de $60K",menos_60k_titulo:"Produtos por menos de $60.000 COP",filtros:"Filtros por preço",envio:"Envio EUA, Colômbia, Portugal",pago:"Pagamento +57 301 620 2301",mi_cuenta:"Minha conta",mi_perfil:"Meu perfil",banner:"Descontos de até 60% OFF",banner_sub:"Seleção curada",busqueda_popular:"Busca popular",volver:"← Voltar",color:"Cor",cantidad:"Quantidade",accesorios:"Acessórios",envio_gratis:"Envio EUA, Colômbia, Portugal • +57 301 620 2301",agregar_carrito:"Adicionar ao carrinho",agregar_deseos:"Salvar na lista",pago_directo:"Pagamento direto",especificaciones:"Especificações completas",pago_seguro:"Pagamento seguro",finaliza_compra:"Finalize sua compra",copiar_nequi:"Copiar Nequi",carrito:"Carrinho",total:"Total",finalizar_whatsapp:"Finalizar via WhatsApp",crear_cuenta:"Criar conta",registro_obligatorio:"Criar conta",para_comprar:"Necessária",debe_registrarse:"Você precisa se cadastrar",envio_banner:"EUA • COLÔMBIA • PORTUGAL",trust1:"Pagamento",combo_titulo:"Recomendado",resenas:"Avaliações",compra_frecuente:"Comprados juntos"}
-};
 let tradCache = JSON.parse(localStorage.getItem('wobba_trad_cache')||'{}');
-async function translateText(text, targetLang){ if(!text||targetLang==='es') return text; let key=targetLang+'::'+text; if(tradCache[key]) return tradCache[key]; try{ let url=`https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl=${targetLang}&dt=t&q=${encodeURIComponent(text.substring(0,800))}`; let res=await fetch(url); let data=await res.json(); let translated=data[0].map(x=>x[0]).join(''); tradCache[key]=translated; localStorage.setItem('wobba_trad_cache',JSON.stringify(tradCache)); return translated; }catch(e){ return text; } }
-async function translateAllProducts(targetLang){ document.getElementById('tradLoader').style.display='block'; if(targetLang==='es'){ productos=JSON.parse(JSON.stringify(productosOriginal)); } else { let translated=[]; for(let i=0;i<productosOriginal.length;i++){ let p=productosOriginal[i]; let nombreT=await translateText(p.nombre_original,targetLang); let catT=await translateText(p.categoria_original,targetLang); let specsT=await translateText(p.specs_original,targetLang); let coloresT=[]; for(let c of p.colores_original){ coloresT.push(await translateText(c,targetLang)); } let accT=[]; for(let a of p.accesorios_original){ accT.push(await translateText(a,targetLang)); } translated.push({...p,nombre:nombreT,categoria:catT,specs:specsT,colores:coloresT,accesorios:accT}); if(i%5===0) renderAll(); } if(translated.length) productos=translated; } document.getElementById('tradLoader').style.display='none'; applyTranslations(); renderAll(); if(detailId!==null) openDetail(detailId); }
-function applyTranslations(){ document.querySelectorAll('[data-i18n]').forEach(el=>{ let k=el.getAttribute('data-i18n'); if(translations[currentLang] && translations[currentLang][k]) el.innerText=translations[currentLang][k]; }); document.getElementById('searchInput').placeholder = t('busqueda_popular'); document.getElementById('dolarInfo').innerText = `TRM $${TASA.toLocaleString()} • ${t('envio')}`; }
-function setLang(lang){ currentLang=lang; localStorage.setItem('wobba_lang',lang); document.getElementById('langSelect').value=lang; translateAllProducts(lang); }
-function t(key){ return translations[currentLang][key] || translations['es'][key] || key; }
+
+async function translateText(text, targetLang){ 
+  if(!text||targetLang==='es') return text; 
+  let key=targetLang+'::'+text; 
+  if(tradCache[key]) return tradCache[key]; 
+  try{ 
+    let url=`https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl=${targetLang}&dt=t&q=${encodeURIComponent(text.substring(0,800))}`; 
+    let res=await fetch(url); 
+    let data=await res.json(); 
+    let translated=data[0].map(x=>x[0]).join(''); 
+    tradCache[key]=translated; 
+    localStorage.setItem('wobba_trad_cache',JSON.stringify(tradCache)); 
+    return translated; 
+  }catch(e){ return text; } 
+}
+
+async function translateAllProducts(targetLang){ 
+  document.getElementById('tradLoader').style.display='block';
+  if(targetLang==='es'){ 
+    productos=JSON.parse(JSON.stringify(productosOriginal)); 
+  } else { 
+    let translated=[]; 
+    for(let i=0;i<productosOriginal.length;i++){ 
+      let p=productosOriginal[i]; 
+      let nombreT=await translateText(p.nombre_original,targetLang); 
+      let catT=await translateText(p.categoria_original,targetLang); 
+      let specsT=await translateText(p.specs_original,targetLang); 
+      let coloresT=[]; for(let c of p.colores_original){ coloresT.push(await translateText(c,targetLang)); } 
+      let accT=[]; for(let a of p.accesorios_original){ accT.push(await translateText(a,targetLang)); } 
+      translated.push({...p,nombre:nombreT,categoria:catT,specs:specsT,colores:coloresT,accesorios:accT}); 
+    } 
+    if(translated.length) productos=translated; 
+  } 
+  document.getElementById('tradLoader').style.display='none'; 
+  renderAll(); 
+  if(detailId!==null) openDetail(detailId); 
+}
+
+function setLang(lang){ 
+  currentLang=lang; 
+  localStorage.setItem('wobba_lang',lang); 
+  document.getElementById('langSelect').value=lang; 
+  translateAllProducts(lang); 
+}
+
 function normalize(str){ return String(str).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,''); }
-function buscarInteligente(q){ let texto=normalize(q.trim()); let box=document.getElementById('suggestBox'); if(!texto){ box.style.display='none'; lastSearchResults=[]; return; } let filtrados=productos.filter(p=>{ let n=normalize(p.nombre); let cat=normalize(p.categoria); return n.includes(texto) || cat.includes(texto); }); lastSearchResults=filtrados; let html=''; filtrados.slice(0,10).forEach(p=>{ html+=`<div onclick="abrirProductoDirecto(${p.id})" style="padding:11px 14px;font-size:12px;border-bottom:1px solid #f5f1eb;cursor:pointer;display:flex;gap:10px"><img src="${safeImg(p.fotos[0])}" style="width:28px;height:28px;object-fit:contain" loading="lazy"><span><b style="font-weight:600;color:#000">${p.nombre}</b><br><small style="color:#888">${p.categoria}</small></span></div>`; }); box.innerHTML=html; box.style.display='block'; }
+function buscarInteligente(q){ let texto=normalize(q.trim()); let box=document.getElementById('suggestBox'); if(!texto){ box.style.display='none'; lastSearchResults=[]; return; } let filtrados=productos.filter(p=>{ let n=normalize(p.nombre); let cat=normalize(p.categoria); return n.includes(texto) || cat.includes(texto); }); lastSearchResults=filtrados; let html=''; filtrados.slice(0,10).forEach(p=>{ html+=`<div onclick="abrirProductoDirecto(${p.id})" style="padding:11px 14px;font-size:12px;border-bottom:1px solid #f5f1eb;cursor:pointer;display:flex;gap:10px"><img src="${safeImg(p.fotos[0])}" style="width:28px;height:28px;object-fit:contain" loading="lazy"><span><b style="font-weight:700;color:#000">${p.nombre}</b><br><small style="color:#888">${p.categoria}</small></span></div>`; }); box.innerHTML=html; box.style.display='block'; }
 function isLogged(){ return !!localStorage.getItem('wobba_user'); }
 function requireLogin(){ if(isLogged()) return true; document.getElementById('alertaLogin').style.display='block'; document.getElementById('perfilBadge').style.display='block'; openLogin(); return false; }
 function safeImg(u){ if(!u) return 'https://via.placeholder.com/300?text=Sin+foto'; let url=u; if(url.includes('cf.cjdropshipping.com')) url+='?x-oss-process=image/resize,w_300/quality,q_80'; return url; }
 function fixUrl(s){ if(!s) return []; let urls=String(s).match(/https?:\/\/[^\s",']+/gi)||[]; if(!urls.length&&String(s).length>20){ let u=String(s).trim().split('?')[0]; if(!u.startsWith('http')) u='https://cf.cjdropshipping.com/'+u.replace(/^com\//,''); urls=[u]; } return [...new Set(urls.map(u=>u.split('?')[0]))]; }
 function parsePrecio(raw){ if(!raw) return 0; let s=String(raw).trim().replace(/\s+/g,'.').replace(',','.').replace(/\.+/g,'.'); let n=parseFloat(s.replace(/[^0-9.]/g,'')); return isNaN(n)?0:n; }
-function getVisualOldPrice(realPrice, off){ return realPrice * (1 + off/100); }
 function parseList(cell){ if(!cell) return []; return String(cell).split(',').map(s=>s.trim()).filter(Boolean); }
 function fmt(usd){ return moneda==='COP' ? '$'+Math.round(usd*TASA).toLocaleString()+' COP' : '$'+usd.toFixed(2)+' USD'; }
 function fmtSmall(usd){ return moneda==='COP' ? `USD $${usd.toFixed(2)}` : `COP $${Math.round(usd*TASA).toLocaleString()}`; }
@@ -223,16 +256,16 @@ function openSideMenu(){ document.getElementById('sideMenu').classList.add('open
 function closeSideMenu(){ document.getElementById('sideMenu').classList.remove('open'); document.getElementById('menuOverlay').style.display='none'; document.getElementById('bg').style.display=open?'block':'none'; }
 function toggleCategoriasMenu(){ let el=document.getElementById('categoriasListMenu'); el.style.display=el.style.display==='none'?'block':'none'; renderMenuCategorias(); }
 function renderMenuCategorias(){ let cats=[...new Set(productos.map(p=>p.categoria))]; let cont=document.getElementById('categoriasListMenu'); if(!cats.length){ cont.innerHTML='<div style="padding:12px;color:#999">Cargando...</div>'; return; } let h=''; for(let cat of cats){ h+=`<div class="menuCat" onclick="closeSideMenu();openCat('${cat.replace(/'/g,"\\'")}')">• ${cat}</div>`; } cont.innerHTML=h; }
-function openInfo(tipo){ let titles={envio:t('envio'),pago:t('pago')}; let texts={ envio:`${t('envio')}<br><span class="copiable" onclick="copiarTexto('+573016202301')">WhatsApp +57 301 620 2301 📋</span>`, pago:`<span class="copiable" onclick="copiarTexto('+573016202301')">Nequi +57 301 620 2301 📋</span><br><span class="copiable" onclick="copiarTexto('+573016202301')">WhatsApp +57 301 620 2301 📋</span>` }; document.getElementById('infoTitle').innerText=titles[tipo]||'Info'; document.getElementById('infoText').innerHTML=texts[tipo]||''; document.getElementById('infoModal').style.display='flex'; document.getElementById('bg').style.display='block'; }
+function openInfo(tipo){ let titles={envio:'Envío USA, Colombia, Portugal',pago:'Pago +57 301 620 2301'}; let texts={ envio:`Envío USA, Colombia, Portugal<br><span class="copiable" onclick="copiarTexto('+573016202301')">WhatsApp +57 301 620 2301 📋</span>`, pago:`<span class="copiable" onclick="copiarTexto('+573016202301')">Nequi +57 301 620 2301 📋</span><br><span class="copiable" onclick="copiarTexto('+573016202301')">WhatsApp +57 301 620 2301 📋</span>` }; document.getElementById('infoTitle').innerText=titles[tipo]||'Info'; document.getElementById('infoText').innerHTML=texts[tipo]||''; document.getElementById('infoModal').style.display='flex'; document.getElementById('bg').style.display='block'; }
 function closeInfo(){ document.getElementById('infoModal').style.display='none'; document.getElementById('bg').style.display=open?'block':'none'; }
 function scrollCarrusel(px){ document.getElementById('carouselTrack').scrollBy({left:px,behavior:'smooth'}); }
 function cambiarMoneda(){ moneda=moneda==='USD'?'COP':'USD'; document.getElementById('btnMoneda').innerText=moneda==='USD'?'USD → COP':'COP → USD'; renderAll(); if(detailId!==null) openDetail(detailId); upd(); }
-async function cargarDolarHoy(){ try{ let r=await fetch('https://open.er-api.com/v6/latest/USD'); let j=await r.json(); if(j.rates&&j.rates.COP){ TASA=Math.round(j.rates.COP); applyTranslations(); } }catch(e){} }
+async function cargarDolarHoy(){ try{ let r=await fetch('https://open.er-api.com/v6/latest/USD'); let j=await r.json(); if(j.rates&&j.rates.COP){ TASA=Math.round(j.rates.COP); document.getElementById('dolarInfo').innerText=`TRM $${TASA.toLocaleString()} • Envio USA, Colombia, Portugal`; } }catch(e){} }
 function openLogin(){ document.getElementById('loginModal').style.display='flex'; document.getElementById('bg').style.display='block'; }
 function closeLogin(){ document.getElementById('loginModal').style.display='none'; document.getElementById('bg').style.display=open?'block':'none'; }
-function openProfile(){ let u=localStorage.getItem('wobba_user'), e=localStorage.getItem('wobba_email')||'', tel=localStorage.getItem('wobba_phone')||'', dir=localStorage.getItem('wobba_dir')||'', ciudad=localStorage.getItem('wobba_ciudad')||'', pais=localStorage.getItem('wobba_pais')||'Colombia', depto=localStorage.getItem('wobba_depto')||''; let cont=document.getElementById('profileContent'); if(!u){ cont.innerHTML=`<div style="text-align:center;padding:20px 0"><h3 style="font-weight:700;font-size:14px">${t('mi_cuenta')}</h3><button onclick="closeProfile();openLogin()" style="background:#111;color:white;width:100%;padding:12px;font-weight:600;margin-top:14px;border-radius:10px;border:none">${t('crear_cuenta')}</button></div>`; } else { cont.innerHTML=`<div style="background:#fcfaf7;border:1px solid #f0ebe4;border-radius:12px;padding:14px"><b style="font-size:13px;color:#000">${u}</b><div style="font-size:11px;color:#666">${e}</div><div style="margin-top:12px;font-size:11px;line-height:2"><div><b>Email:</b> ${e}</div><div><b>WhatsApp:</b> <span class="copiable" onclick="copiarTexto('${tel}')">${tel||'No registrado'} 📋</span></div><div><b>Dirección:</b> ${dir}</div><div><b>Ciudad:</b> ${ciudad}</div><div><b>País:</b> ${pais}</div><div><b>Depto:</b> ${depto}</div></div></div><button onclick="cerrarSesion()" style="background:#111;color:white;width:100%;padding:14px;margin-top:16px;border-radius:10px;font-weight:600;border:none">Cerrar sesión</button>`; } document.getElementById('profileModal').style.display='flex'; document.getElementById('bg').style.display='block'; }
+function openProfile(){ let u=localStorage.getItem('wobba_user'), e=localStorage.getItem('wobba_email')||'', tel=localStorage.getItem('wobba_phone')||'', dir=localStorage.getItem('wobba_dir')||'', ciudad=localStorage.getItem('wobba_ciudad')||'', pais=localStorage.getItem('wobba_pais')||'Colombia', depto=localStorage.getItem('wobba_depto')||''; let cont=document.getElementById('profileContent'); if(!u){ cont.innerHTML=`<div style="text-align:center;padding:20px 0"><h3 style="font-weight:700;font-size:14px;color:#000">Mi cuenta</h3><button onclick="closeProfile();openLogin()" style="background:#111;color:white;width:100%;padding:12px;font-weight:600;margin-top:14px;border-radius:10px;border:none">Crear cuenta</button></div>`; } else { cont.innerHTML=`<div style="background:#fcfaf7;border:1px solid #f0ebe4;border-radius:12px;padding:14px"><b style="font-size:13px;color:#000">${u}</b><div style="font-size:11px;color:#666">${e}</div><div style="margin-top:12px;font-size:11px;line-height:2"><div><b>Email:</b> ${e}</div><div><b>WhatsApp:</b> <span class="copiable" onclick="copiarTexto('${tel}')">${tel||'No registrado'} 📋</span></div><div><b>Dirección:</b> ${dir}</div><div><b>Ciudad:</b> ${ciudad}</div><div><b>País:</b> ${pais}</div><div><b>Depto:</b> ${depto}</div></div></div><button onclick="cerrarSesion()" style="background:#111;color:white;width:100%;padding:14px;margin-top:16px;border-radius:10px;font-weight:600;border:none">Cerrar sesión</button>`; } document.getElementById('profileModal').style.display='flex'; document.getElementById('bg').style.display='block'; }
 function closeProfile(){ document.getElementById('profileModal').style.display='none'; document.getElementById('bg').style.display=open?'block':'none'; }
-function cerrarSesion(){ ['wobba_user','wobba_email','wobba_phone','wobba_dir','wobba_ciudad','wobba_pais','wobba_depto'].forEach(k=>localStorage.removeItem(k)); document.getElementById('menuCuenta').innerText=t('mi_cuenta'); document.getElementById('perfilBadge').style.display='block'; closeProfile(); }
+function cerrarSesion(){ ['wobba_user','wobba_email','wobba_phone','wobba_dir','wobba_ciudad','wobba_pais','wobba_depto'].forEach(k=>localStorage.removeItem(k)); document.getElementById('menuCuenta').innerText='Mi cuenta'; document.getElementById('perfilBadge').style.display='block'; closeProfile(); }
 function guardarRegistro(){ let n=document.getElementById('regName').value.trim(), e=document.getElementById('regEmail').value.trim(), phone=document.getElementById('regPhone').value.trim(), dir=document.getElementById('regDir').value.trim(), ciudad=document.getElementById('regCiudad').value.trim(), pais=document.getElementById('regPais').value.trim(), depto=document.getElementById('regDepto').value.trim(); if(!n||!e||!dir||!ciudad||!pais||!depto){ alert('Completa Nombre, Correo, Dirección, Ciudad, País y Departamento'); return; } localStorage.setItem('wobba_user',n); localStorage.setItem('wobba_email',e); localStorage.setItem('wobba_phone',phone); localStorage.setItem('wobba_dir',dir); localStorage.setItem('wobba_ciudad',ciudad); localStorage.setItem('wobba_pais',pais); localStorage.setItem('wobba_depto',depto); document.getElementById('menuCuenta').innerText='Hola, '+n.split(' ')[0]; document.getElementById('perfilBadge').style.display='none'; document.getElementById('alertaLogin').style.display='none'; closeLogin(); openProfile(); }
 function checkLogin(){ let u=localStorage.getItem('wobba_user'); if(u){ document.getElementById('menuCuenta').innerText='Hola, '+u.split(' ')[0]; document.getElementById('perfilBadge').style.display='none'; } }
 function openFiltrosPage(){ document.getElementById('mainShop').style.display='none'; document.getElementById('viewCat').style.display='none'; document.getElementById('viewCategoria').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('viewWishlist').style.display='none'; document.getElementById('viewHistorial').style.display='none'; document.getElementById('viewMasVendidos').style.display='none'; document.getElementById('viewMenos60k').style.display='none'; document.getElementById('viewFiltros').style.display='block'; window.scrollTo(0,0); }
@@ -242,7 +275,8 @@ function toggleWishlistDetail(){ if(detailId===null) return; toggleWishlist(deta
 function updateWishCount(){ document.getElementById('wishCountMenu').innerText=wishlist.length; }
 function openWishlistPage(){ document.getElementById('mainShop').style.display='none'; document.getElementById('viewCat').style.display='none'; document.getElementById('viewCategoria').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('viewMenos60k').style.display='none'; document.getElementById('viewHistorial').style.display='none'; document.getElementById('viewMasVendidos').style.display='none'; document.getElementById('viewFiltros').style.display='none'; document.getElementById('viewWishlist').style.display='block'; let cont=document.getElementById('wishlistGrid'); if(!wishlist.length){ cont.innerHTML='<p style="color:#999;text-align:center;padding:40px;font-size:12px">Lista vacía</p>'; return; } let h=''; wishlist.forEach(id=>{ let p=productos.find(x=>x.id===id); if(p) h+=cardMiniHTML(p); }); cont.innerHTML=h; window.scrollTo(0,0); }
 async function load(){
-  setLang(currentLang); cargarDolarHoy(); checkLogin(); updateWishCount();
+  setLang(currentLang); 
+  cargarDolarHoy(); checkLogin(); updateWishCount();
   let r=await fetch(CSV_URL+'&t='+Date.now()); let text=await r.text(); let rows=parseCSV(text);
   let header=rows[0].map(h=>h.toLowerCase()); 
   let iNom=header.findIndex(h=>h.includes('nombre')), iPrec=header.findIndex(h=>h.includes('precio')), iCat=header.findIndex(h=>h.includes('categ')), iSpecs=header.findIndex(h=>h.includes('spec')||h.includes('descrip'));
@@ -259,7 +293,7 @@ async function load(){
   showCats(); renderAll(); upd();
   if(currentLang!=='es') translateAllProducts(currentLang);
 }
-function renderAll(){ renderCarousel(); renderChips(); renderCats(); renderCombos(); applyTranslations(); }
+function renderAll(){ renderCarousel(); renderChips(); renderCats(); renderCombos(); }
 function renderCarousel(){ let track=document.getElementById('carouselTrack'); if(!productos.length) return; let best=[...productos].slice(0,12); let html=''; best.forEach(p=>{ html+=`<div class="carousel-item" onclick="openDetail(${p.id})"><div class="cat-top">${p.categoria}</div><div class="card-name" style="min-height:auto;padding:4px 0">${p.nombre.substring(0,45)}</div><div style="height:90px;display:flex;align-items:center;justify-content:center"><img src="${safeImg(p.fotos[0])}" style="max-width:100%;max-height:100%;object-fit:contain" loading="lazy"></div><div style="font-weight:700;font-size:12px;margin-top:6px;color:#000">${fmt(p.usd)}</div></div>`; }); track.innerHTML=html; }
 function renderChips(){ let cont=document.getElementById('chipsBuscado'); if(!productos.length) return; let cats=[...new Set(productos.map(p=>p.categoria))]; let h=''; for(let cat of cats.slice(0,8)){ h+=`<div class="chip" onclick="openCat('${cat.replace(/'/g,"\\'")}')">${cat}</div>`; } cont.innerHTML=h; }
 function renderCats(){ let cats=[...new Set(productos.map(p=>p.categoria))]; let h=''; for(let cat of cats){ let prodCat=productos.filter(p=>p.categoria==cat); let imgRep=prodCat.find(p=>p.fotos[0])?.fotos[0]||''; h+=`<div onclick="openCat('${cat.replace(/'/g,"\\'")}')" class="card"><div class="cat-top">${cat}</div><div class="card-name" style="color:#000">${cat}</div><div class="cat-real-img"><img src="${safeImg(imgRep)}" loading="lazy"></div><div style="padding:8px 14px 12px"><div style="font-size:10px;color:#888">${prodCat.length} productos</div></div></div>`; } document.getElementById('catGrid').innerHTML=h; }
@@ -283,7 +317,7 @@ function openDetail(id){
   document.getElementById('mainShop').style.display='none'; document.getElementById('viewCat').style.display='none'; document.getElementById('viewCategoria').style.display='none'; document.getElementById('viewHistorial').style.display='none'; document.getElementById('viewMasVendidos').style.display='none'; document.getElementById('viewMenos60k').style.display='none'; document.getElementById('viewWishlist').style.display='none'; document.getElementById('viewFiltros').style.display='none'; document.getElementById('viewDetail').style.display='block';
   document.getElementById('dName').innerText=p.nombre; document.getElementById('dCat').innerText=p.categoria;
   document.getElementById('dPrice').innerText=fmt(p.usd); document.getElementById('dPriceOld').innerText=fmt(p.usd*1.25); document.getElementById('dPrice2').innerText=fmtSmall(p.usd); document.getElementById('dSpecs').innerText=p.specs||'Sin especificaciones';
-  document.getElementById('dStars').innerText='★★★★★'; document.getElementById('dRatingTxt').innerText=`${p.rating} • ${p.reviews.length} ${t('resenas')}`;
+  document.getElementById('dStars').innerText='★★★★★'; document.getElementById('dRatingTxt').innerText=`${p.rating} • ${p.reviews.length} Reseñas`;
   document.getElementById('qtyNum').innerText='1'; selectedColor=''; selectedAcc=''; document.getElementById('selColorTxt').innerText=''; document.getElementById('selAccTxt').innerText='';
   if(p.colores && p.colores.length){ document.getElementById('boxColores').style.display='block'; let h=''; p.colores.forEach(col=>{ h+=`<button type="button" class="opt" onclick="event.stopPropagation(); selColor(this,'${col.replace(/'/g,"\\'")}')">${col}</button>`; }); document.getElementById('coloresBox').innerHTML=h; selectedColor=p.colores[0]; document.getElementById('selColorTxt').innerText=p.colores[0]; } else { document.getElementById('boxColores').style.display='none'; }
   document.getElementById('boxCantidad').style.display='block';
@@ -303,18 +337,14 @@ function changeQty(d){ selectedQty=Math.max(1, selectedQty+d); document.getEleme
 function renderGallery(){ let p=productos.find(x=>x.id===detailId); if(!p) return; let foto=p.fotos[imgIndex]||p.fotos[0]||''; document.getElementById('mainImg').innerHTML=foto?`<img src="${safeImg(foto)}" style="width:100%;max-height:460px;object-fit:contain" loading="eager">`:'Sin foto'; let th=''; for(let j=0;j<p.fotos.length;j++){ let f=p.fotos[j]; let act=j==imgIndex?'border:1px solid #ff3c00':'border:1px solid #f0ebe4'; th+=`<div onclick="imgIndex=${j};renderGallery()" style="${act};border-radius:10px;padding:4px;min-width:56px;background:white;cursor:pointer"><img src="${safeImg(f)}" style="width:52px;height:52px;object-fit:contain" loading="lazy"></div>`; } document.getElementById('thumbs').innerHTML=th; }
 function backToList(){showCats();}
 function addFromDetail(){ if(!requireLogin()) return; add(detailId); }
-function add(id){ if(!requireLogin()) return; let p=productos.find(x=>x.id===id); if(!p) return; let txt=`${p.nombre}`; if(selectedColor) txt+=` | ${t('color')}: ${selectedColor}`; if(selectedAcc) txt+=` | ${selectedAcc}`; txt+=` | ${t('cantidad')}: ${selectedQty}`; let totalUsd=p.usd * selectedQty; c.push({n:txt, usd:totalUsd, i:Date.now()}); upd(); if(!open) toggleCart(); }
+function add(id){ if(!requireLogin()) return; let p=productos.find(x=>x.id===id); if(!p) return; let txt=`${p.nombre}`; if(selectedColor) txt+=` | Color: ${selectedColor}`; if(selectedAcc) txt+=` | ${selectedAcc}`; txt+=` | Cant: ${selectedQty}`; let totalUsd=p.usd * selectedQty; c.push({n:txt, usd:totalUsd, i:Date.now()}); upd(); if(!open) toggleCart(); }
 function del(i){c=c.filter(x=>x.i!=i);upd();}
 function upd(){
   let totalUSD=0; for(let x of c) totalUSD+=x.usd;
   let badge=document.getElementById('n');
-  if(c.length===0){
-    badge.style.display='none';
-  } else {
-    badge.style.display='flex';
-    badge.innerText=c.length;
-  }
-  document.getElementById('t').innerText=fmt(totalUSD); document.getElementById('tSmall').innerText=fmtSmall(totalUSD)+` • ${t('envio')}`; let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px;font-size:11px">Vacío</p>'; else for(let x of c){ h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #f5f1eb;padding:12px 0"><span style="font-size:11px;color:#000">${x.n}<br><b>${fmt(x.usd)}</b></span><button onclick="del(${x.i})" style="background:#f5f1eb;border:1px solid #eee;width:26px;height:26px;border-radius:50%">×</button></div>`; } document.getElementById('list').innerHTML=h;
+  if(c.length===0){ badge.style.display='none'; } 
+  else { badge.style.display='flex'; badge.innerText=c.length; }
+  document.getElementById('t').innerText=fmt(totalUSD); document.getElementById('tSmall').innerText=fmtSmall(totalUSD); let h=''; if(!c.length)h='<p style=text-align:center;color:#999;margin-top:30px;font-size:11px">Vacío</p>'; else for(let x of c){ h+=`<div style="display:flex;justify-content:space-between;border-bottom:1px solid #f5f1eb;padding:12px 0"><span style="font-size:11px;color:#000">${x.n}<br><b>${fmt(x.usd)}</b></span><button onclick="del(${x.i})" style="background:#f5f1eb;border:1px solid #eee;width:26px;height:26px;border-radius:50%">×</button></div>`; } document.getElementById('list').innerHTML=h;
 }
 function toggleCart(){open=!open;document.getElementById('cart').style.right=open?'0':'-100%';document.getElementById('bg').style.display=open?'block':'none';}
 function pay(){ if(!requireLogin()) return; if(!c.length){alert('Vacio');return;} let totalUSD=0,m=''; let user=localStorage.getItem('wobba_user'), email=localStorage.getItem('wobba_email'), phone=localStorage.getItem('wobba_phone'), dir=localStorage.getItem('wobba_dir'), ciudad=localStorage.getItem('wobba_ciudad'), pais=localStorage.getItem('wobba_pais'), depto=localStorage.getItem('wobba_depto'); for(let x of c){totalUSD+=x.usd; m+=`${x.n}, `;} let msg=`Hola WobbaShop\nCliente: ${user} - ${email} - ${phone}\nDirección: ${dir}, ${ciudad}, ${depto}, ${pais}\nPedido: ${m}\nTotal: ${fmt(totalUSD)}\nSoporte +57 301 620 2301`; window.open('https://wa.me/573016202301?text='+encodeURIComponent(msg),'_blank'); }
