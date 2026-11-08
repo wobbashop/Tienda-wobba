@@ -154,13 +154,13 @@ header{background:#111;color:white;position:sticky;top:0;z-index:40;border-botto
 <div id="boxAccesorios" style="display:none;margin-top:20px;width:100%"><b style="font-size:11px;font-weight:600;color:#000"><span data-i18n="accesorios">Accesorios</span>: <span id="selAccTxt" style="font-weight:400;color:#ff3c00"></span></b><div id="accBox" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"></div></div>
 <div id="alertaLogin" style="display:none;background:#fff3e0;border:1px solid #ffcc80;border-radius:12px;padding:12px;margin-top:16px;text-align:center;font-size:11px"><b data-i18n="debe_registrarse">Debes registrarte</b></div>
 
-<!-- SOLO LO DE LA IMAGEN -->
+<!-- SOLO LO DE LA IMAGEN - SIN 80% - TIEMPO OFICIAL TEEMDROP POR PAÍS -->
 <div class="ship-box">
 <div style="font-size:10px;color:#888">🚚 Enviar a</div>
 <select id="shipCountry" class="ship-select" onchange="updateShipping()"></select>
 <div class="ship-info">
 <div><span class="muted">Por método de envío:</span> <b>YUN-Electro-Economía</b></div>
-<div><span class="muted">Tiempo estimado de procesamiento:</span> <b>1-3 días para pedidos del 80%</b></div>
+<div><span class="muted">Tiempo estimado de procesamiento:</span> <b id="shipProcessing">1-3 días</b></div>
 <div><span class="muted">Tiempo estimado de envío:</span> <b id="shipTime"></b> ⓘ</div>
 <div><span class="muted">TOTAL:</span> <span class="ship-total" id="shipTotal"></span> ⓘ</div>
 </div>
@@ -209,25 +209,27 @@ let TASA=4164, moneda='USD', productos=[], productosOriginal=[], c=[], open=fals
 let selectedColor='', selectedAcc='', selectedQty=1, currentLang=localStorage.getItem('wobba_lang')||'es';
 let autoIndex=0, autoInterval, startX=0;
 let tradCache = JSON.parse(localStorage.getItem('wobba_trad_cache')||'{}');
-// PAÍSES + COSTO OFICIAL TEEMDROP YUN-Electro-Economía aprox. para paquete base
-// El precio del producto VIENE SOLO DE SHEETS. Aquí solo está el envío.
-// TOTAL = (precio Sheets x cantidad) + envío TeemDrop del país elegido
-// Si el envío del país es más barato que USA, el TOTAL baja. Si es más caro, sube.
+// CUENTA OFICIAL TEEMDROP - YUN-Electro-Economía
+// ship = costo de envío oficial TeemDrop para ese país
+// processing = tiempo de procesamiento oficial TeemDrop para ese país
+// time = tiempo estimado de envío oficial TeemDrop para ese país
+// TOTAL = (precio que TÚ pones en Sheets x cantidad) + ship del país
+// Si ship es más barato, TOTAL baja. Si es más caro, TOTAL sube.
 const SHIP_PAISES=[
-{country:"Estados Unidos", ship:10.59, time:"10-20 días"},
-{country:"Colombia", ship:10.00, time:"20-40 días"},
-{country:"Portugal", ship:11.20, time:"10-20 días"},
-{country:"Brasil", ship:9.50, time:"20-40 días"},
-{country:"Argentina", ship:11.50, time:"20-40 días"},
-{country:"España", ship:11.20, time:"10-20 días"},
-{country:"México", ship:10.80, time:"10-20 días"},
-{country:"Paraguay", ship:11.80, time:"20-40 días"},
-{country:"Chile", ship:11.00, time:"20-40 días"},
-{country:"Bolivia", ship:11.80, time:"20-40 días"},
-{country:"Perú", ship:10.50, time:"20-40 días"},
-{country:"Ecuador", ship:10.50, time:"20-40 días"},
-{country:"Venezuela", ship:11.80, time:"20-40 días"},
-{country:"Uruguay", ship:11.50, time:"20-40 días"},
+{country:"Estados Unidos", ship:10.59, processing:"1-3 días", time:"10-20 días"},
+{country:"Colombia", ship:10.00, processing:"1-3 días", time:"15-30 días"},
+{country:"Portugal", ship:11.20, processing:"1-3 días", time:"10-20 días"},
+{country:"Brasil", ship:9.50, processing:"1-3 días", time:"15-30 días"},
+{country:"Argentina", ship:11.50, processing:"1-3 días", time:"15-30 días"},
+{country:"España", ship:11.20, processing:"1-3 días", time:"10-20 días"},
+{country:"México", ship:10.80, processing:"1-3 días", time:"10-20 días"},
+{country:"Paraguay", ship:11.80, processing:"1-3 días", time:"20-35 días"},
+{country:"Chile", ship:11.00, processing:"1-3 días", time:"15-30 días"},
+{country:"Bolivia", ship:11.80, processing:"1-3 días", time:"20-35 días"},
+{country:"Perú", ship:10.50, processing:"1-3 días", time:"15-30 días"},
+{country:"Ecuador", ship:10.50, processing:"1-3 días", time:"15-30 días"},
+{country:"Venezuela", ship:11.80, processing:"1-3 días", time:"20-35 días"},
+{country:"Uruguay", ship:11.50, processing:"1-3 días", time:"15-30 días"},
 ];
 function updateShipping(){
   let p=productos.find(x=>x.id===detailId);
@@ -235,6 +237,7 @@ function updateShipping(){
   let sel=document.getElementById('shipCountry');
   if(!sel) return;
   let s=SHIP_PAISES.find(x=>x.country===sel.value)||SHIP_PAISES[0];
+  document.getElementById('shipProcessing').innerText=s.processing;
   document.getElementById('shipTime').innerText=s.time;
   let total=(p.usd*selectedQty)+s.ship;
   document.getElementById('shipTotal').innerText=fmt(total);
