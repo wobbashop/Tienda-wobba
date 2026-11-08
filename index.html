@@ -47,13 +47,11 @@ header button{background:#fff;color:#111;border:none;padding:8px 14px;border-rad
 .btn-wa{background:#25D366;color:#fff}
 .btn-cart{background:#111;color:#fff}
 .desc-box{margin-top:18px;background:#fff;border-radius:18px;padding:18px;line-height:1.7;color:#4b5563}
-/* ===== SOLO LO DE LA FOTO ===== */
 .ship-box{border:1px solid #e5e7eb;border-radius:14px;padding:14px 16px;background:#fff;margin-top:16px}
 .ship-label{font-size:14px;color:#6b7280;display:flex;gap:8px;align-items:center}
 .ship-select{border:1px solid #d1d5db;border-radius:10px;padding:11px;font-size:16px;font-weight:700;width:100%;background:#fff;cursor:pointer;margin-top:6px}
 .ship-info{margin-top:12px;font-size:14px;line-height:1.9;color:#374151}
 .ship-info .muted{color:#9ca3af}
-.ship-price{font-size:19px;font-weight:800}
 .ship-total{font-size:17px;font-weight:800}
 #cartDrawer{position:fixed;top:0;right:-100%;width:100%;max-width:400px;height:100%;background:#fff;z-index:100;transition:.3s;box-shadow:-10px 0 30px rgba(0,0,0,.2);display:flex;flex-direction:column}
 #cartDrawer.open{right:0}
@@ -100,7 +98,6 @@ footer{text-align:center;padding:28px;color:#9ca3af;font-size:13px;line-height:1
         <div style="color:#f59e0b">★★★★★ <span style="color:#6b7280;font-size:13px" id="pReviews"></span></div>
         <div style="margin:12px 0"><span id="pPrice" style="font-size:30px;font-weight:800"></span> <span id="pOld" style="color:#9ca3af;text-decoration:line-through"></span></div>
         <p id="pDesc" style="color:#4b5563;line-height:1.6;font-size:15px"></p>
-
         <div class="qty-box">
           <div class="qty">
             <button onclick="changeQty(-1)">-</button>
@@ -110,7 +107,7 @@ footer{text-align:center;padding:28px;color:#9ca3af;font-size:13px;line-height:1
           <span style="color:#6b7280">⚖️ <b id="totalWeight"></b></span>
         </div>
 
-        <!-- ===== EXACTO LO DE LA FOTO ===== -->
+        <!-- SOLO LO DE LA IMAGEN -->
         <div class="ship-box">
           <span class="ship-label">🚚 Enviar a</span>
           <select id="shipCountry" class="ship-select" onchange="updateShipping()"></select>
@@ -119,19 +116,12 @@ footer{text-align:center;padding:28px;color:#9ca3af;font-size:13px;line-height:1
             <div><span class="muted">Tiempo estimado de procesamiento:</span> <b>1-3 días para pedidos del 80%</b></div>
             <div><span class="muted">Tiempo estimado de envío:</span> <b id="shipTime"></b> ⓘ</div>
             <div><span class="muted">Peso:</span> <b id="shipWeight"></b></div>
-            <div><span class="muted">Costo TeemDrop aprox:</span> <span id="teemCost" style="color:#6b7280"></span></div>
-            <div><span class="muted">Total de envío en tienda:</span> <span class="ship-price" id="shipCost"></span> ⓘ</div>
             <div><span class="muted">TOTAL:</span> <span class="ship-total" id="grandTotal"></span> ⓘ</div>
           </div>
         </div>
-        <!-- ===== FIN LO DE LA FOTO ===== -->
 
         <button class="btn btn-wa" onclick="orderWhatsApp()">💬 Pedir por WhatsApp</button>
         <button class="btn btn-cart" onclick="addToCartFromDetail()">🛒 Agregar al carrito</button>
-        <div style="display:flex;gap:8px;margin-top:12px;font-size:13px;color:#4b5563;flex-wrap:wrap">
-          <span style="background:#f3f4f6;padding:8px 10px;border-radius:10px">🛡️ Compra protegida</span>
-          <span style="background:#f3f4f6;padding:8px 10px;border-radius:10px">📦 Seguimiento</span>
-        </div>
       </div>
     </div>
     <div class="desc-box"><h3>Detalles del producto</h3><p id="pLong"></p></div>
@@ -161,32 +151,18 @@ let currentProduct = null;
 let qty = 1;
 let cart = [];
 
-// ===== SOLO ESTOS 13 PAÍSES - LO DE LA FOTO =====
-// teem = lo que cobra TeemDrop aprox. store = teem + 10
+// Solo los paises que salen en la imagen
 const SHIPPING = [
-  {country:"Estados Unidos", teem:10.59, time:"10-20 días"},
-  {country:"Colombia", teem:10.00, time:"20-40 días"},
-  {country:"Portugal", teem:11.20, time:"10-20 días"},
-  {country:"Brasil", teem:9.50, time:"20-40 días"},
-  {country:"Argentina", teem:11.50, time:"20-40 días"},
-  {country:"España", teem:11.20, time:"10-20 días"},
-  {country:"México", teem:10.80, time:"10-20 días"},
-  {country:"Paraguay", teem:11.80, time:"20-40 días"},
-  {country:"Chile", teem:11.00, time:"20-40 días"},
-  {country:"Bolivia", teem:11.80, time:"20-40 días"},
-  {country:"Perú", teem:10.50, time:"20-40 días"},
-  {country:"Ecuador", teem:10.50, time:"20-40 días"},
-  {country:"Venezuela", teem:11.80, time:"20-40 días"},
+  {country:"Estados Unidos", ship:10.59, time:"10-20 días"},
+  {country:"Alemania", ship:11.20, time:"10-20 días"},
+  {country:"Reino Unido", ship:11.20, time:"10-20 días"},
+  {country:"Eslovaquia", ship:11.20, time:"10-20 días"},
+  {country:"Arabia Saudita", ship:11.80, time:"10-20 días"},
+  {country:"Portugal", ship:11.20, time:"10-20 días"},
+  {country:"Italia", ship:11.20, time:"10-20 días"},
+  {country:"Francia", ship:11.20, time:"10-20 días"},
+  {country:"República Checa", ship:11.20, time:"10-20 días"},
 ];
-const MARKUP = 10;
-function getShipping(country, weightGrams){
-  const base = SHIPPING.find(s=>s.country===country) || SHIPPING[0];
-  const extra = Math.max(0, weightGrams - 373);
-  const extraCost = Math.ceil(extra / 200) * 1.5;
-  const teem = base.teem + extraCost;
-  const store = teem + MARKUP;
-  return {time: base.time, teem, store};
-}
 
 async function loadFromSheets(){
   try{
@@ -261,12 +237,9 @@ SHIPPING.forEach(s=>{
 });
 function updateShipping(){
   if(!currentProduct) return;
-  const totalW = currentProduct.weight * qty;
-  const s = getShipping(select.value, totalW);
+  const s = SHIPPING.find(x=>x.country===select.value) || SHIPPING[0];
   document.getElementById('shipTime').textContent = s.time;
-  document.getElementById('teemCost').textContent = "$"+s.teem.toFixed(2);
-  document.getElementById('shipCost').textContent = "$"+s.store.toFixed(2);
-  document.getElementById('grandTotal').textContent = "$"+((currentProduct.price*qty)+s.store).toFixed(2);
+  document.getElementById('grandTotal').textContent = "$"+((currentProduct.price*qty)+s.ship).toFixed(2);
 }
 function addToCartFromDetail(){ cart.push({ ...currentProduct, qty }); updateCart(); openCart(); }
 function updateCart(){
@@ -280,9 +253,8 @@ function removeItem(i){ cart.splice(i,1); updateCart(); }
 function openCart(){ document.getElementById('cartDrawer').classList.add('open'); document.getElementById('overlay').classList.add('show'); }
 function closeCart(){ document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
 function orderWhatsApp(){
-  const totalW = currentProduct.weight * qty;
-  const s = getShipping(select.value, totalW);
-  const msg = `Hola WobbaShop! Quiero pedir:%0A• ${currentProduct.name}%0A• Cantidad: ${qty}%0A• Peso: ${totalW} g%0A• Enviar a: ${select.value}%0A• Método: YUN-Electro-Economía%0A• Envío tienda: $${s.store} (TeemDrop $${s.teem} + $10) - ${s.time}%0A• TOTAL: $${((currentProduct.price*qty)+s.store).toFixed(2)}`;
+  const s = SHIPPING.find(x=>x.country===select.value) || SHIPPING[0];
+  const msg = `Hola WobbaShop! Quiero pedir:%0A• ${currentProduct.name}%0A• Cantidad: ${qty}%0A• Enviar a: ${select.value}%0A• Método: YUN-Electro-Economía%0A• TOTAL: $${((currentProduct.price*qty)+s.ship).toFixed(2)}`;
   window.open("https://wa.me/573016202301?text="+msg, "_blank");
 }
 function checkoutWhatsApp(){
