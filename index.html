@@ -1,4 +1,18 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>WobbaShop</title>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<!-- SEO WOBBA SHOP - SOLO APARECE COMO WOBBA SHOP EN GOOGLE - 100% GRATIS - SIN VERCEL -->
+<title>Wobba Shop</title>
+<meta name="description" content="Wobba Shop">
+<meta name="keywords" content="Wobba Shop">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Wobba Shop">
+<link rel="canonical" href="https://wobbashop.is-a.dev/">
+<meta property="og:title" content="Wobba Shop">
+<meta property="og:description" content="Wobba Shop">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wobba Shop">
+<meta property="og:url" content="https://wobbashop.is-a.dev/">
+<meta property="og:image" content="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Wobba Shop","description":"Wobba Shop","url":"https://wobbashop.is-a.dev/"}</script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;font-family:'Inter',sans-serif}body{margin:0;background:#fcfaf7;color:#111;overflow-x:hidden}
@@ -31,8 +45,6 @@ header{background:#111;color:white;position:sticky;top:0;z-index:40;border-botto
 .card-info{padding:0 14px 14px}
 .card-price{font-weight:800;font-size:13px;color:#000}
 .price-old{font-size:10px;color:#999;text-decoration:line-through;margin-left:5px}
-
-/* FIX DEFINITIVO LADO DERECHO - NUNCA MAS MOCHO */
 .detail-grid{display:grid;grid-template-columns:48% 52%;gap:0;max-width:1440px;margin:0 auto;background:white;border-radius:20px;border:1px solid #eee;overflow:visible}
 .detail-left{padding:16px;background:white;position:sticky;top:70px;align-self:start;border-radius:20px 0 0 20px}
 .detail-right{padding:22px 24px;background:white;width:100%;min-width:0;max-width:100%;overflow:visible;word-wrap:break-word;overflow-wrap:break-word;border-radius:0 20px 20px 0}
@@ -41,7 +53,6 @@ header{background:#111;color:white;position:sticky;top:0;z-index:40;border-botto
 .detail-left{position:relative;top:0;border-radius:0;width:100%;max-width:100vw}
 .detail-right{border-radius:0;padding:16px;width:100%;max-width:100vw;min-width:0;overflow:visible;display:block}
 }
-
 .searchCenter{flex:1;max-width:560px;margin:0 14px;position:relative}
 .searchBox{background:white;border-radius:24px;display:flex;align-items:center;padding:4px 5px 4px 16px;border:1px solid #eee}
 .searchBox input{flex:1;border:none;outline:none;padding:8px 6px;font-size:12.5px}
@@ -196,6 +207,8 @@ header{background:#111;color:white;position:sticky;top:0;z-index:40;border-botto
 <div id="infoModal" style="position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:200;align-items:center;justify-content:center;padding:16px"><div style="background:white;border-radius:16px;padding:22px;max-width:400px;width:100%"><div style="display:flex;justify-content:space-between"><h2 id="infoTitle" style="margin:0;font-size:13px"></h2><button onclick="closeInfo()" style="border:none;background:#f5f1eb;width:30px;height:30px;border-radius:50%">X</button></div><div id="infoText" style="margin-top:14px;font-size:11.5px"></div></div></div>
 <div id="cart" style="position:fixed;top:0;right:-100%;width:100%;max-width:400px;height:100%;background:white;z-index:99;transition:.3s;display:flex;flex-direction:column"><div style="background:#111;color:white;padding:18px;display:flex;justify-content:space-between"><b style="font-size:13px" data-i18n="carrito">Carrito</b><button onclick="toggleCart()" style="background:white;color:black;width:30px;height:30px;border-radius:50%;border:none">X</button></div><div id="list" style="flex:1;overflow:auto;padding:16px"></div><div style="padding:16px;border-top:1px solid #f0ebe4"><div style="display:flex;justify-content:space-between"><span style="font-size:12px" data-i18n="total">Total</span><b id="t" style="font-size:14px">0</b></div><div id="tSmall" style="font-size:10px;color:#888"></div><button onclick="pay()" style="background:#111;color:white;width:100%;padding:14px;border-radius:12px;border:none;font-weight:600;margin-top:10px;font-size:12px" data-i18n="finalizar_whatsapp">Finalizar por WhatsApp</button></div></div><div id="bg" onclick="toggleCart();closeInfo();closeProfile();closeLogin();closeSideMenu()" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.35);display:none;z-index:90"></div>
 
+<footer style="text-align:center;padding:20px;color:#888;font-size:12px">© 2026 Wobba Shop</footer>
+
 <script>
 const SHEET_ID="2PACX-1vSw0ttSUsTpHjrjXGTLZfYEt2E4IGar2s55-Me0DHaCDQFZMZ6y-ck1u173-nIUBxklEIl1Wk-Y1hnf";
 const CSV_URL=`https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?output=csv`;
@@ -203,7 +216,6 @@ let TASA=4164, moneda='USD', productos=[], productosOriginal=[], c=[], open=fals
 let selectedColor='', selectedAcc='', selectedQty=1, currentLang=localStorage.getItem('wobba_lang')||'es';
 let autoIndex=0, autoInterval, startX=0;
 let tradCache = JSON.parse(localStorage.getItem('wobba_trad_cache')||'{}');
-
 const translations={
 es:{
 inicio:"Inicio",lista_deseos:"Lista de deseos",historial:"Historial",mas_vendidos:"Más vendidos",categorias:"Categorías",menos_60k:"Menos de $60K",filtros:"Filtros por precio",envio:"Envío USA, Colombia, Portugal",pago:"Pago +57 301 620 2301",mi_cuenta:"Mi cuenta",mi_perfil:"Mi perfil",banner:"Descuentos hasta 60% OFF",banner_sub:"Selección curada con garantía",busqueda_popular:"Búsqueda popular",volver:"← Volver",color:"Color",cantidad:"Cantidad",accesorios:"Accesorios",envio_gratis:"Envío USA, Colombia, Portugal • +57 301 620 2301",agregar_carrito:"Agregar al carrito",agregar_deseos:"Guardar en lista",especificaciones:"Especificaciones completas",pago_seguro:"Pago seguro",carrito:"Carrito",total:"Total",finalizar_whatsapp:"Finalizar por WhatsApp",crear_cuenta:"Crear cuenta",registro_obligatorio:"Crear cuenta",debe_registrarse:"Debes registrarte",envio_banner:"USA • COLOMBIA • PORTUGAL",trust1:"Pago seguro",trust1_sub:"Nequi verificado",trust2:"Envío internacional",trust3:"Soporte directo",trust3_sub:"WhatsApp directo",combo_titulo:"Recomendados",resenas:"Reseñas",compra_frecuente:"Comprados juntos",filtrar_titulo:"Filtrar por precio",precio_usd:"Precio máximo USD",precio_cop:"Precio máximo COP",buscar_productos:"Buscar productos",numeros_copiables:"Números copiables",soporte_txt:"WhatsApp directo y soporte personalizado",envio_internacional:"ENVÍO INTERNACIONAL",importados_txt:"Productos importados con garantía"
@@ -215,7 +227,6 @@ pt:{
 inicio:"Início",lista_deseos:"Lista de desejos",historial:"Histórico",mas_vendidos:"Mais vendidos",categorias:"Categorias",menos_60k:"Menos de $60K",filtros:"Filtros por preço",envio:"Envio EUA, Colômbia, Portugal",pago:"Pagamento +57 301 620 2301",mi_cuenta:"Minha conta",mi_perfil:"Meu perfil",banner:"Descontos de até 60% OFF",banner_sub:"Seleção curada com garantia",busqueda_popular:"Busca popular",volver:"← Voltar",color:"Cor",cantidad:"Quantidade",accesorios:"Acessórios",envio_gratis:"Envio EUA, Colômbia, Portugal • +57 301 620 2301",agregar_carrito:"Adicionar ao carrinho",agregar_deseos:"Salvar na lista",especificaciones:"Especificações completas",pago_seguro:"Pagamento seguro",carrito:"Carrinho",total:"Total",finalizar_whatsapp:"Finalizar via WhatsApp",crear_cuenta:"Criar conta",registro_obligatorio:"Criar conta",debe_registrarse:"Você precisa se cadastrar",envio_banner:"EUA • COLÔMBIA • PORTUGAL",trust1:"Pagamento seguro",trust1_sub:"Nequi verificado",trust2:"Envio internacional",trust3:"Suporte direto",trust3_sub:"WhatsApp direto",combo_titulo:"Recomendado",resenas:"Avaliações",compra_frecuente:"Comprados juntos",filtrar_titulo:"Filtrar por preço",precio_usd:"Preço máximo USD",precio_cop:"Preço máximo COP",buscar_productos:"Buscar produtos",numeros_copiables:"Números copiáveis",soporte_txt:"WhatsApp direto e suporte personalizado",envio_internacional:"ENVIO INTERNACIONAL",importados_txt:"Produtos importados com garantia"
 }
 };
-
 function initAutoCarousel(){
   const track=document.getElementById('autoTrack');
   const carousel=document.getElementById('autoCarousel');
@@ -232,7 +243,6 @@ function updateAutoCarousel(){
   dots.forEach((d,i)=>d.classList.toggle('active',i===autoIndex));
 }
 function goToSlide(i){ autoIndex=i; updateAutoCarousel(); clearInterval(autoInterval); autoInterval=setInterval(()=>{ autoIndex=(autoIndex+1)%3; updateAutoCarousel(); },3000); }
-
 async function translateText(text, targetLang){ 
   if(!text||targetLang==='es') return text; 
   let key=targetLang+'::'+text; 
@@ -247,17 +257,14 @@ async function translateText(text, targetLang){
     return translated; 
   }catch(e){ return text; } 
 }
-
 async function translateAllProducts(targetLang){ 
   document.getElementById('tradLoader').style.display='block';
   document.getElementById('tradLoader').innerText= targetLang==='en' ? '🌐 Translating everything...' : '🌐 Traduzindo tudo...';
-  // Traducir UI estática
   document.querySelectorAll('[data-i18n]').forEach(el=>{ 
     let k=el.getAttribute('data-i18n'); 
     if(translations[targetLang] && translations[targetLang][k]) el.innerText=translations[targetLang][k]; 
   });
   document.getElementById('searchInput').placeholder = translations[targetLang].busqueda_popular;
-  
   if(targetLang==='es'){ 
     productos=JSON.parse(JSON.stringify(productosOriginal)); 
   } else { 
@@ -282,14 +289,12 @@ async function translateAllProducts(targetLang){
   renderAll(); 
   if(detailId!==null) openDetail(detailId); 
 }
-
 function setLang(lang){ 
   currentLang=lang; 
   localStorage.setItem('wobba_lang',lang); 
   document.getElementById('langSelect').value=lang; 
   translateAllProducts(lang); 
 }
-
 function normalize(str){ return String(str).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,''); }
 function buscarInteligente(q){ let texto=normalize(q.trim()); let box=document.getElementById('suggestBox'); if(!texto){ box.style.display='none'; lastSearchResults=[]; return; } let filtrados=productos.filter(p=>{ let n=normalize(p.nombre); let cat=normalize(p.categoria); return n.includes(texto) || cat.includes(texto); }); lastSearchResults=filtrados; let html=''; filtrados.slice(0,10).forEach(p=>{ html+=`<div onclick="abrirProductoDirecto(${p.id})" style="padding:11px 14px;font-size:12px;border-bottom:1px solid #f5f1eb;cursor:pointer;display:flex;gap:10px"><img src="${safeImg(p.fotos[0])}" style="width:28px;height:28px;object-fit:contain" loading="lazy"><span><b style="font-weight:700;color:#000">${p.nombre}</b><br><small style="color:#888">${p.categoria}</small></span></div>`; }); box.innerHTML=html; box.style.display='block'; }
 function isLogged(){ return !!localStorage.getItem('wobba_user'); }
@@ -349,7 +354,6 @@ async function load(){
     let base = { id:k, nombre, categoria:cat, specs:row[iSpecs]||'', nombre_original:nombre, categoria_original:cat, specs_original:row[iSpecs]||'', colores_original:[...colores], accesorios_original:[...accesorios], usd, fotos, videos, colores, cantidades: iCant>=0?parseList(row[iCant]):['1'], accesorios, reviews:generateFakeReviews(k), reviews_original:generateFakeReviews(k), rating:(Math.random()*0.4+4.5).toFixed(1) };
     productos.push({...base, reviews:[...base.reviews]}); productosOriginal.push({...base, reviews:[...base.reviews], reviews_original:[...base.reviews_original]} );
   }
-  // Aplicar traducción inicial si no es ES
   if(currentLang!=='es'){
     translateAllProducts(currentLang);
   } else {
@@ -358,7 +362,6 @@ async function load(){
   upd(); initAutoCarousel();
 }
 function renderAll(){ 
-  // Traducir UI estática si es ES (si es otro idioma ya se tradujo en translateAllProducts)
   if(currentLang==='es'){
     document.querySelectorAll('[data-i18n]').forEach(el=>{ 
       let k=el.getAttribute('data-i18n'); 
@@ -433,5 +436,7 @@ function openMenos60kPage(){ let limiteCOP=60000; let limiteUSD=limiteCOP / TASA
 function openHistorialPage(){ document.getElementById('mainShop').style.display='none'; document.getElementById('viewCat').style.display='none'; document.getElementById('viewCategoria').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('viewFiltros').style.display='none'; document.getElementById('viewMenos60k').style.display='none'; document.getElementById('viewMasVendidos').style.display='none'; document.getElementById('viewWishlist').style.display='none'; document.getElementById('viewHistorial').style.display='block'; let hist=JSON.parse(localStorage.getItem('wobba_historial')||'[]'); let cont=document.getElementById('historialGrid'); if(!hist.length){ cont.innerHTML='<p style="color:#999;text-align:center;padding:40px;font-size:11px">Vacío</p>'; return; } let h=''; hist.forEach(id=>{ let p=productos.find(x=>x.id===id); if(p) h+=cardMiniHTML(p); }); cont.innerHTML=h; window.scrollTo(0,0); }
 function openMasVendidosPage(){ document.getElementById('mainShop').style.display='none'; document.getElementById('viewCat').style.display='none'; document.getElementById('viewCategoria').style.display='none'; document.getElementById('viewDetail').style.display='none'; document.getElementById('viewFiltros').style.display='none'; document.getElementById('viewMenos60k').style.display='none'; document.getElementById('viewHistorial').style.display='none'; document.getElementById('viewWishlist').style.display='none'; document.getElementById('viewMasVendidos').style.display='block'; let best=[...productos].slice(0,24); let h=''; best.forEach(p=>{ h+=cardMiniHTML(p); }); document.getElementById('masVendidosGrid').innerHTML=h; window.scrollTo(0,0); }
 document.addEventListener('click',e=>{ if(!e.target.closest('.searchCenter')){ let b=document.getElementById('suggestBox'); if(b) b.style.display='none'; } });
+// SEO: Forzar que el titulo siempre sea solo Wobba Shop en Google
+document.title = "Wobba Shop";
 load();upd();
 </script></body></html>
