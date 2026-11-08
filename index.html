@@ -6,478 +6,65 @@
 <meta name="google-site-verification" content="0PKTxbUrvdDYYnepJuC8LMoshiz20eMG9CS6RIMzA4k" />
 <title>WobbaShop - Tienda</title>
 <style>
-/* ================= RESET ================= */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:system-ui,-apple-system,sans-serif;
-}
-body{
-  background:#f9fafb;
-  color:#111;
-}
-/* ================= HEADER ================= */
-header{
-  background:#111;
-  color:#fff;
-  padding:14px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  position:sticky;
-  top:0;
-  z-index:50;
-}
-header b{
-  font-size:22px;
-  cursor:pointer;
-}
-header b span{
-  color:#f59e0b;
-}
-header button{
-  background:#fff;
-  color:#111;
-  border:none;
-  padding:8px 14px;
-  border-radius:999px;
-  font-weight:700;
-  cursor:pointer;
-}
-/* ================= HERO ================= */
-.hero{
-  background:#111;
-  color:#fff;
-  text-align:center;
-  padding:36px 18px;
-}
-.hero h1{
-  font-size:32px;
-  line-height:1.2;
-}
-.hero p{
-  color:#d1d5db;
-  margin-top:8px;
-}
-.hero input{
-  width:100%;
-  max-width:480px;
-  padding:12px 16px;
-  border:none;
-  border-radius:999px;
-  margin-top:16px;
-  font-size:15px;
-}
-/* ================= BENEFICIOS ================= */
-.benefits{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-  padding:16px;
-  background:#fff;
-}
-.benefits span{
-  background:#f3f4f6;
-  padding:10px 14px;
-  border-radius:999px;
-  font-size:13px;
-  font-weight:600;
-}
-/* ================= LAYOUT ================= */
-.container{
-  max-width:1100px;
-  margin:0 auto;
-  padding:18px;
-}
-.filters{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding:6px 0 14px;
-}
-.filters button{
-  white-space:nowrap;
-  border:1px solid #e5e7eb;
-  background:#fff;
-  padding:8px 14px;
-  border-radius:999px;
-  cursor:pointer;
-  font-weight:600;
-}
-.filters button.active{
-  background:#111;
-  color:#fff;
-}
-/* ================= GRID PRODUCTOS ================= */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
-}
-@media(max-width:900px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-@media(max-width:480px){
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
-}
-.card{
-  background:#fff;
-  border-radius:16px;
-  overflow:hidden;
-  cursor:pointer;
-  box-shadow:0 2px 10px rgba(0,0,0,.05);
-}
-.card img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  background:#eee;
-}
-.card-body{
-  padding:12px;
-}
-.card-body h3{
-  font-size:15px;
-  line-height:1.3;
-  min-height:38px;
-}
-.card-body .stars{
-  color:#f59e0b;
-  font-size:13px;
-  margin:4px 0;
-}
-.card-body .price{
-  font-size:18px;
-  font-weight:800;
-}
-.card-body .old{
-  color:#9ca3af;
-  text-decoration:line-through;
-  font-size:13px;
-  font-weight:400;
-  margin-left:6px;
-}
-.card-body button{
-  width:100%;
-  margin-top:8px;
-  background:#111;
-  color:#fff;
-  border:none;
-  padding:10px;
-  border-radius:10px;
-  font-weight:700;
-  cursor:pointer;
-}
-.badge-free{
-  position:absolute;
-  background:#25D366;
-  color:#fff;
-  font-size:11px;
-  font-weight:800;
-  padding:4px 8px;
-  border-radius:999px;
-  top:8px;
-  left:8px;
-}
-.img-wrap{
-  position:relative;
-}
-/* ================= PÁGINA PRODUCTO ================= */
-#productPage{
-  display:none;
-}
-.back{
-  cursor:pointer;
-  color:#6b7280;
-  font-size:14px;
-  margin-bottom:12px;
-  display:inline-block;
-}
-.product-detail{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px;
-  background:#fff;
-  border-radius:18px;
-  padding:20px;
-}
-@media(max-width:768px){
-  .product-detail{
-    grid-template-columns:1fr;
-  }
-}
-.product-detail img.main{
-  width:100%;
-  border-radius:14px;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  background:#eee;
-}
-.thumbs{
-  display:flex;
-  gap:8px;
-  margin-top:8px;
-}
-.thumbs img{
-  width:70px;
-  height:70px;
-  border-radius:10px;
-  object-fit:cover;
-  cursor:pointer;
-  border:2px solid transparent;
-}
-.thumbs img.active{
-  border-color:#111;
-}
-.qty-box{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin:14px 0;
-}
-.qty{
-  display:flex;
-  border:1px solid #d1d5db;
-  border-radius:12px;
-  overflow:hidden;
-}
-.qty button{
-  width:42px;
-  height:42px;
-  border:none;
-  background:#f3f4f6;
-  font-size:20px;
-  cursor:pointer;
-}
-.qty input{
-  width:50px;
-  text-align:center;
-  border:none;
-  font-weight:700;
-  font-size:16px;
-}
-.btn{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:12px;
-  font-size:16px;
-  font-weight:800;
-  cursor:pointer;
-  margin-top:10px;
-}
-.btn-wa{
-  background:#25D366;
-  color:#fff;
-}
-.btn-cart{
-  background:#111;
-  color:#fff;
-}
-.desc-box{
-  margin-top:18px;
-  background:#fff;
-  border-radius:18px;
-  padding:18px;
-  line-height:1.7;
-  color:#4b5563;
-}
-/* ================= ENVÍO - LO DE LA FOTO ================= */
-.ship-box{
-  border:1px solid #e5e7eb;
-  border-radius:14px;
-  padding:14px 16px;
-  background:#fff;
-  margin-top:16px;
-}
-.ship-label{
-  font-size:14px;
-  color:#6b7280;
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-.ship-select{
-  border:1px solid #d1d5db;
-  border-radius:10px;
-  padding:11px;
-  font-size:16px;
-  font-weight:700;
-  width:100%;
-  background:#fff;
-  cursor:pointer;
-  margin-top:6px;
-}
-.ship-info{
-  margin-top:12px;
-  font-size:14px;
-  line-height:1.9;
-  color:#374151;
-}
-.ship-info .muted{
-  color:#9ca3af;
-}
-.ship-price{
-  font-size:19px;
-  font-weight:800;
-}
-.ship-total{
-  font-size:17px;
-  font-weight:800;
-}
-/* ================= PAÍSES ================= */
-.countries-section{
-  background:#fff;
-  border-radius:18px;
-  padding:20px;
-  margin-top:22px;
-}
-.countries-section h2{
-  margin-bottom:6px;
-}
-.countries-section p{
-  color:#6b7280;
-  font-size:14px;
-  margin-bottom:12px;
-}
-.country-pill{
-  display:inline-block;
-  background:#f3f4f6;
-  padding:8px 12px;
-  border-radius:999px;
-  margin:4px;
-  font-size:14px;
-  font-weight:600;
-}
-.ship-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:12px;
-  font-size:14px;
-}
-.ship-table th,
-.ship-table td{
-  border-bottom:1px solid #eee;
-  padding:10px;
-  text-align:left;
-}
-.ship-table th{
-  background:#f9fafb;
-}
-/* ================= CÓMO FUNCIONA / OPINIONES / FAQ ================= */
-.info-section{
-  background:#fff;
-  border-radius:18px;
-  padding:20px;
-  margin-top:22px;
-}
-.info-section h2{
-  margin-bottom:12px;
-}
-.info-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:12px;
-}
-@media(max-width:768px){
-  .info-grid{
-    grid-template-columns:1fr;
-  }
-}
-.info-card{
-  background:#f9fafb;
-  padding:16px;
-  border-radius:14px;
-}
-.info-card b{
-  display:block;
-  margin-bottom:6px;
-}
-.info-card p{
-  color:#6b7280;
-  font-size:14px;
-  line-height:1.5;
-}
-.faq-item{
-  border-bottom:1px solid #eee;
-  padding:12px 0;
-}
-.faq-item b{
-  display:block;
-  margin-bottom:4px;
-}
-.faq-item p{
-  color:#6b7280;
-  font-size:14px;
-}
-/* ================= CARRITO ================= */
-#cartDrawer{
-  position:fixed;
-  top:0;
-  right:-100%;
-  width:100%;
-  max-width:400px;
-  height:100%;
-  background:#fff;
-  z-index:100;
-  transition:.3s;
-  box-shadow:-10px 0 30px rgba(0,0,0,.2);
-  display:flex;
-  flex-direction:column;
-}
-#cartDrawer.open{
-  right:0;
-}
-.cart-head{
-  padding:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #eee;
-}
-.cart-items{
-  flex:1;
-  overflow:auto;
-  padding:14px;
-}
-.cart-item{
-  display:flex;
-  gap:10px;
-  margin-bottom:12px;
-}
-.cart-item img{
-  width:70px;
-  height:70px;
-  border-radius:10px;
-  object-fit:cover;
-}
-.cart-foot{
-  padding:16px;
-  border-top:1px solid #eee;
-}
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
-  display:none;
-  z-index:90;
-}
-.overlay.show{
-  display:block;
-}
-footer{
-  text-align:center;
-  padding:28px;
-  color:#9ca3af;
-  font-size:13px;
-  line-height:1.7;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
+body{background:#f9fafb;color:#111}
+header{background:#111;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50}
+header b{font-size:22px;cursor:pointer}
+header b span{color:#f59e0b}
+header button{background:#fff;color:#111;border:none;padding:8px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+.hero{background:#111;color:#fff;text-align:center;padding:36px 18px}
+.hero h1{font-size:32px;line-height:1.2}
+.hero p{color:#d1d5db;margin-top:8px}
+.hero input{width:100%;max-width:480px;padding:12px 16px;border:none;border-radius:999px;margin-top:16px;font-size:15px}
+.container{max-width:1100px;margin:0 auto;padding:18px}
+.filters{display:flex;gap:8px;overflow-x:auto;padding:6px 0 14px}
+.filters button{white-space:nowrap;border:1px solid #e5e7eb;background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:600}
+.filters button.active{background:#111;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border-radius:16px;overflow:hidden;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#eee}
+.card-body{padding:12px}
+.card-body h3{font-size:15px;line-height:1.3;min-height:38px}
+.card-body .stars{color:#f59e0b;font-size:13px;margin:4px 0}
+.card-body .price{font-size:18px;font-weight:800}
+.card-body .old{color:#9ca3af;text-decoration:line-through;font-size:13px;font-weight:400;margin-left:6px}
+.card-body button{width:100%;margin-top:8px;background:#111;color:#fff;border:none;padding:10px;border-radius:10px;font-weight:700;cursor:pointer}
+#productPage{display:none}
+.back{cursor:pointer;color:#6b7280;font-size:14px;margin-bottom:12px;display:inline-block}
+.product-detail{display:grid;grid-template-columns:1fr 1fr;gap:22px;background:#fff;border-radius:18px;padding:20px}
+@media(max-width:768px){.product-detail{grid-template-columns:1fr}}
+.product-detail img.main{width:100%;border-radius:14px;aspect-ratio:1/1;object-fit:cover;background:#eee}
+.thumbs{display:flex;gap:8px;margin-top:8px}
+.thumbs img{width:70px;height:70px;border-radius:10px;object-fit:cover;cursor:pointer;border:2px solid transparent}
+.thumbs img.active{border-color:#111}
+.qty-box{display:flex;align-items:center;gap:12px;margin:14px 0}
+.qty{display:flex;border:1px solid #d1d5db;border-radius:12px;overflow:hidden}
+.qty button{width:42px;height:42px;border:none;background:#f3f4f6;font-size:20px;cursor:pointer}
+.qty input{width:50px;text-align:center;border:none;font-weight:700;font-size:16px}
+.btn{width:100%;padding:14px;border:none;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;margin-top:10px}
+.btn-wa{background:#25D366;color:#fff}
+.btn-cart{background:#111;color:#fff}
+.desc-box{margin-top:18px;background:#fff;border-radius:18px;padding:18px;line-height:1.7;color:#4b5563}
+/* ===== SOLO LO DE LA FOTO ===== */
+.ship-box{border:1px solid #e5e7eb;border-radius:14px;padding:14px 16px;background:#fff;margin-top:16px}
+.ship-label{font-size:14px;color:#6b7280;display:flex;gap:8px;align-items:center}
+.ship-select{border:1px solid #d1d5db;border-radius:10px;padding:11px;font-size:16px;font-weight:700;width:100%;background:#fff;cursor:pointer;margin-top:6px}
+.ship-info{margin-top:12px;font-size:14px;line-height:1.9;color:#374151}
+.ship-info .muted{color:#9ca3af}
+.ship-price{font-size:19px;font-weight:800}
+.ship-total{font-size:17px;font-weight:800}
+#cartDrawer{position:fixed;top:0;right:-100%;width:100%;max-width:400px;height:100%;background:#fff;z-index:100;transition:.3s;box-shadow:-10px 0 30px rgba(0,0,0,.2);display:flex;flex-direction:column}
+#cartDrawer.open{right:0}
+.cart-head{padding:16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee}
+.cart-items{flex:1;overflow:auto;padding:14px}
+.cart-item{display:flex;gap:10px;margin-bottom:12px}
+.cart-item img{width:70px;height:70px;border-radius:10px;object-fit:cover}
+.cart-foot{padding:16px;border-top:1px solid #eee}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:90}
+.overlay.show{display:block}
+footer{text-align:center;padding:28px;color:#9ca3af;font-size:13px;line-height:1.7}
 </style>
 </head>
 <body>
@@ -487,108 +74,18 @@ footer{
   <button onclick="openCart()">🛒 Carrito (<span id="cartCount">0</span>)</button>
 </header>
 
-<!-- ========== INICIO ========== -->
 <div id="homePage">
   <div class="hero">
     <h1>Todo lo que está en tendencia,<br>en un solo lugar.</h1>
-    <p>Envíos a todo el mundo • Compra protegida • Pago por WhatsApp</p>
+    <p>Compra protegida • Pago por WhatsApp</p>
     <input placeholder="🔍 Buscar producto..." oninput="searchProduct(this.value)">
   </div>
-
-  <div class="benefits">
-    <span>🚚 Envíos a 13 países</span>
-    <span>🛡️ Compra protegida</span>
-    <span>💬 Pedido por WhatsApp</span>
-    <span>↩️ Devolución 7 días</span>
-  </div>
-
   <div class="container">
     <div class="filters" id="filters"></div>
-    <div class="grid" id="grid">
-      <p id="loading" style="color:#9ca3af">Cargando productos desde Google Sheets...</p>
-    </div>
-
-    <!-- ===== PAÍSES A LOS QUE ENVIAMOS ===== -->
-    <div class="countries-section">
-      <h2>🌍 Países en los que enviamos</h2>
-      <p>Solo enviamos a estos países. Si tu país no está aquí, escríbenos por WhatsApp y te confirmamos.</p>
-      <div id="countryPills"></div>
-      <table class="ship-table">
-        <thead>
-          <tr>
-            <th>País</th>
-            <th>Tiempo estimado de envío</th>
-            <th>Costo de envío en tienda</th>
-          </tr>
-        </thead>
-        <tbody id="shipTableBody"></tbody>
-      </table>
-      <p style="margin-top:10px;font-size:12px">* El costo de envío en tienda incluye el costo de TeemDrop + $10 de gestión y empaque. El tiempo es el oficial de TeemDrop desde que sale del almacén. Procesamiento: 1-3 días hábiles.</p>
-    </div>
-
-    <!-- ===== CÓMO FUNCIONA ===== -->
-    <div class="info-section">
-      <h2>🛒 ¿Cómo funciona?</h2>
-      <div class="info-grid">
-        <div class="info-card">
-          <b>1. Eliges tu producto</b>
-          <p>Entra al producto, elige tu país y cantidad. Ahí mismo ves el peso, el tiempo y el total con envío.</p>
-        </div>
-        <div class="info-card">
-          <b>2. Pides por WhatsApp</b>
-          <p>Le das a Pedir por WhatsApp y nos llega tu pedido completo con país, peso y total.</p>
-        </div>
-        <div class="info-card">
-          <b>3. Te lo enviamos</b>
-          <p>Procesamos en 1-3 días y TeemDrop lo envía con seguimiento hasta tu casa.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== OPINIONES ===== -->
-    <div class="info-section">
-      <h2>⭐ Lo que dicen nuestros clientes</h2>
-      <div class="info-grid">
-        <div class="info-card">
-          <b>★★★★★ María - Colombia</b>
-          <p>Llegó en el tiempo que decía y el seguimiento funcionó todo el camino.</p>
-        </div>
-        <div class="info-card">
-          <b>★★★★★ Carlos - México</b>
-          <p>Pedí por WhatsApp y me respondieron rápido. Todo bien empacado.</p>
-        </div>
-        <div class="info-card">
-          <b>★★★★★ Ana - España</b>
-          <p>El producto es igual a la foto. Volvería a comprar.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== FAQ ===== -->
-    <div class="info-section">
-      <h2>❓ Preguntas frecuentes</h2>
-      <div class="faq-item">
-        <b>¿Cuánto tarda el envío?</b>
-        <p>Procesamiento 1-3 días + envío según tu país. EEUU, España, Portugal y México: 10-20 días. Sudamérica: 20-40 días.</p>
-      </div>
-      <div class="faq-item">
-        <b>¿Cómo pago?</b>
-        <p>Por WhatsApp te confirmamos el total y el método de pago disponible para tu país.</p>
-      </div>
-      <div class="faq-item">
-        <b>¿Puedo cambiar mi país después?</b>
-        <p>Sí, en la página del producto puedes cambiar el país y el precio de envío se actualiza solo.</p>
-      </div>
-      <div class="faq-item">
-        <b>¿El peso afecta el envío?</b>
-        <p>Sí. Si el producto pesa más de 373g, TeemDrop cobra un poco más y la tienda lo suma automáticamente.</p>
-      </div>
-    </div>
-
+    <div class="grid" id="grid"><p id="loading" style="color:#9ca3af">Cargando productos desde Google Sheets...</p></div>
   </div>
 </div>
 
-<!-- ========== PÁGINA DE PRODUCTO ========== -->
 <div id="productPage">
   <div class="container">
     <span class="back" onclick="showHome()">← Volver a la tienda</span>
@@ -601,10 +98,7 @@ footer{
         <span style="background:#fef3c7;color:#92400e;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px">🔥 TENDENCIA</span>
         <h1 id="pName" style="font-size:26px;margin:10px 0;line-height:1.2"></h1>
         <div style="color:#f59e0b">★★★★★ <span style="color:#6b7280;font-size:13px" id="pReviews"></span></div>
-        <div style="margin:12px 0">
-          <span id="pPrice" style="font-size:30px;font-weight:800"></span>
-          <span id="pOld" style="color:#9ca3af;text-decoration:line-through"></span>
-        </div>
+        <div style="margin:12px 0"><span id="pPrice" style="font-size:30px;font-weight:800"></span> <span id="pOld" style="color:#9ca3af;text-decoration:line-through"></span></div>
         <p id="pDesc" style="color:#4b5563;line-height:1.6;font-size:15px"></p>
 
         <div class="qty-box">
@@ -616,67 +110,50 @@ footer{
           <span style="color:#6b7280">⚖️ <b id="totalWeight"></b></span>
         </div>
 
-        <!-- ===== ENVÍO - LO DE LA FOTO ===== -->
+        <!-- ===== EXACTO LO DE LA FOTO ===== -->
         <div class="ship-box">
           <span class="ship-label">🚚 Enviar a</span>
           <select id="shipCountry" class="ship-select" onchange="updateShipping()"></select>
           <div class="ship-info">
-            <div><span class="muted">Tiempo estimado de procesamiento:</span> <b>1-3 días</b></div>
+            <div><span class="muted">Por método de envío:</span> <b>YUN-Electro-Economía</b></div>
+            <div><span class="muted">Tiempo estimado de procesamiento:</span> <b>1-3 días para pedidos del 80%</b></div>
             <div><span class="muted">Tiempo estimado de envío:</span> <b id="shipTime"></b> ⓘ</div>
             <div><span class="muted">Peso:</span> <b id="shipWeight"></b></div>
             <div><span class="muted">Costo TeemDrop aprox:</span> <span id="teemCost" style="color:#6b7280"></span></div>
             <div><span class="muted">Total de envío en tienda:</span> <span class="ship-price" id="shipCost"></span> ⓘ</div>
-            <div><span class="muted">Total con envío:</span> <span class="ship-total" id="grandTotal"></span></div>
+            <div><span class="muted">TOTAL:</span> <span class="ship-total" id="grandTotal"></span> ⓘ</div>
           </div>
         </div>
+        <!-- ===== FIN LO DE LA FOTO ===== -->
 
         <button class="btn btn-wa" onclick="orderWhatsApp()">💬 Pedir por WhatsApp</button>
         <button class="btn btn-cart" onclick="addToCartFromDetail()">🛒 Agregar al carrito</button>
         <div style="display:flex;gap:8px;margin-top:12px;font-size:13px;color:#4b5563;flex-wrap:wrap">
           <span style="background:#f3f4f6;padding:8px 10px;border-radius:10px">🛡️ Compra protegida</span>
-          <span style="background:#f3f4f6;padding:8px 10px;border-radius:10px">↩️ Devolución 7 días</span>
           <span style="background:#f3f4f6;padding:8px 10px;border-radius:10px">📦 Seguimiento</span>
         </div>
       </div>
     </div>
-
-    <div class="desc-box">
-      <h3>Detalles del producto</h3>
-      <p id="pLong"></p>
-    </div>
-
+    <div class="desc-box"><h3>Detalles del producto</h3><p id="pLong"></p></div>
     <h2 style="margin:22px 0 12px">También te puede gustar</h2>
     <div class="grid" id="relatedGrid"></div>
   </div>
 </div>
 
-<!-- ========== CARRITO ========== -->
 <div class="overlay" id="overlay" onclick="closeCart()"></div>
 <div id="cartDrawer">
-  <div class="cart-head">
-    <b>Tu carrito</b>
-    <button onclick="closeCart()" style="border:none;background:#eee;padding:8px 12px;border-radius:999px;cursor:pointer">✕</button>
-  </div>
+  <div class="cart-head"><b>Tu carrito</b><button onclick="closeCart()" style="border:none;background:#eee;padding:8px 12px;border-radius:999px;cursor:pointer">✕</button></div>
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-foot">
-    <div style="display:flex;justify-content:space-between;font-weight:800;font-size:17px">
-      <span>Total:</span>
-      <span id="cartTotal">$0.00</span>
-    </div>
+    <div style="display:flex;justify-content:space-between;font-weight:800;font-size:17px"><span>Total:</span><span id="cartTotal">$0.00</span></div>
     <button class="btn btn-wa" onclick="checkoutWhatsApp()">💬 Pedir todo por WhatsApp</button>
   </div>
 </div>
 
-<footer>
-  WobbaShop © 2026<br>
-  Envíos a todo el mundo • WhatsApp +57 301 620 2301<br>
-  Medellín, Colombia
-</footer>
+<footer>WobbaShop © 2026<br>WhatsApp +57 301 620 2301<br>Medellín, Colombia</footer>
 
 <script>
-// ===== SOLO CAMBIA ESTA LÍNEA CON TU LINK DE SHEETS =====
 const SHEET_URL = "TU_LINK_DE_GOOGLE_SHEETS_AQUI";
-
 let PRODUCTS = [];
 let currentFilter = "Todos";
 let searchText = "";
@@ -684,7 +161,7 @@ let currentProduct = null;
 let qty = 1;
 let cart = [];
 
-// ===== SOLO ESTOS 13 PAÍSES - PRECIOS BASE PARA 373g =====
+// ===== SOLO ESTOS 13 PAÍSES - LO DE LA FOTO =====
 // teem = lo que cobra TeemDrop aprox. store = teem + 10
 const SHIPPING = [
   {country:"Estados Unidos", teem:10.59, time:"10-20 días"},
@@ -701,9 +178,7 @@ const SHIPPING = [
   {country:"Ecuador", teem:10.50, time:"20-40 días"},
   {country:"Venezuela", teem:11.80, time:"20-40 días"},
 ];
-
 const MARKUP = 10;
-
 function getShipping(country, weightGrams){
   const base = SHIPPING.find(s=>s.country===country) || SHIPPING[0];
   const extra = Math.max(0, weightGrams - 373);
@@ -713,74 +188,36 @@ function getShipping(country, weightGrams){
   return {time: base.time, teem, store};
 }
 
-// ===== Pinta la sección de países =====
-document.getElementById('countryPills').innerHTML = SHIPPING.map(s=>`<span class="country-pill">🌍 ${s.country}</span>`).join('');
-
-document.getElementById('shipTableBody').innerHTML = SHIPPING.map(s=>{
-  const store = (s.teem + MARKUP).toFixed(2);
-  return `<tr><td><b>${s.country}</b></td><td>${s.time}</td><td><b>$${store}</b> <span style="color:#9ca3af">(TeemDrop $${s.teem.toFixed(2)} + $10)</span></td></tr>`;
-}).join('');
-
-// ===== Cargar productos desde Google Sheets =====
 async function loadFromSheets(){
   try{
     const res = await fetch(SHEET_URL);
     const text = await res.text();
     const lines = text.split("\n").filter(l=>l.trim()!=="");
     const headers = lines[0].split(",").map(h=>h.trim().toLowerCase().replace(/"/g,""));
-
     PRODUCTS = lines.slice(1).map((line, idx)=>{
       const values = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
       const clean = values.map(v=>v.replace(/^"|"$/g,"").trim());
       const obj = {};
       headers.forEach((h,i)=>{ obj[h] = clean[i] || ""; });
-      return {
-        id: idx,
-        name: obj.name || "",
-        price: parseFloat(obj.price) || 0,
-        old: parseFloat(obj.old) || 0,
-        weight: parseFloat(obj.weight) || 373,
-        cat: obj.cat || "General",
-        img: obj.img || "",
-        desc: obj.desc || "",
-        long: obj.long || "",
-        reviews: obj.reviews || ""
-      };
+      return { id: idx, name: obj.name || "", price: parseFloat(obj.price) || 0, old: parseFloat(obj.old) || 0, weight: parseFloat(obj.weight) || 373, cat: obj.cat || "General", img: obj.img || "", desc: obj.desc || "", long: obj.long || "", reviews: obj.reviews || "" };
     }).filter(p=>p.name!=="");
-
     document.getElementById('loading')?.remove();
-    renderFilters();
-    renderGrid();
+    renderFilters(); renderGrid();
   }catch(e){
     document.getElementById('grid').innerHTML = "<p style='color:red'>No pude cargar Google Sheets. Revisa que el link esté publicado como CSV.</p>";
   }
 }
-
-// ===== Filtros y búsqueda =====
 function renderFilters(){
   const cats = ["Todos", ...new Set(PRODUCTS.map(p=>p.cat))];
   document.getElementById('filters').innerHTML = cats.map(c=>`<button class="${c===currentFilter?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join('');
 }
-
-function setFilter(c){
-  currentFilter=c;
-  renderFilters();
-  renderGrid();
-}
-
-function searchProduct(v){
-  searchText=v.toLowerCase();
-  renderGrid();
-}
-
+function setFilter(c){ currentFilter=c; renderFilters(); renderGrid(); }
+function searchProduct(v){ searchText=v.toLowerCase(); renderGrid(); }
 function renderGrid(){
   const list = PRODUCTS.filter(p=>(currentFilter==="Todos"||p.cat===currentFilter) && p.name.toLowerCase().includes(searchText));
   document.getElementById('grid').innerHTML = list.map(p=>`
     <div class="card">
-      <div class="img-wrap" onclick="openProduct(${p.id})">
-        <span class="badge-free">ENVÍO MUNDIAL</span>
-        <img src="${p.img}">
-      </div>
+      <div onclick="openProduct(${p.id})"><img src="${p.img}"></div>
       <div class="card-body">
         <h3 onclick="openProduct(${p.id})">${p.name}</h3>
         <div class="stars">★★★★★ <span style="color:#6b7280">${p.reviews}</span></div>
@@ -789,8 +226,6 @@ function renderGrid(){
       </div>
     </div>`).join('');
 }
-
-// ===== Abrir producto =====
 function openProduct(id){
   currentProduct = PRODUCTS.find(p=>p.id===id);
   if(!currentProduct) return;
@@ -806,48 +241,24 @@ function openProduct(id){
   document.getElementById('pLong').textContent = currentProduct.long;
   document.getElementById('pReviews').textContent = currentProduct.reviews;
   document.getElementById('pThumbs').innerHTML = `<img class="active" src="${currentProduct.img}">`;
-  updateQtyDisplay();
-  updateShipping();
+  updateQtyDisplay(); updateShipping();
   window.scrollTo(0,0);
   document.getElementById('relatedGrid').innerHTML = PRODUCTS.filter(p=>p.id!==id).slice(0,4).map(p=>`
-    <div class="card" onclick="openProduct(${p.id})">
-      <img src="${p.img}">
-      <div class="card-body">
-        <h3>${p.name}</h3>
-        <div class="price">$${p.price}</div>
-      </div>
-    </div>`).join('');
+    <div class="card" onclick="openProduct(${p.id})"><img src="${p.img}"><div class="card-body"><h3>${p.name}</h3><div class="price">$${p.price}</div></div></div>`).join('');
 }
-
-function showHome(){
-  document.getElementById('productPage').style.display='none';
-  document.getElementById('homePage').style.display='block';
-  window.scrollTo(0,0);
-}
-
-function changeQty(n){
-  qty = Math.max(1, qty+n);
-  document.getElementById('qty').value = qty;
-  updateQtyDisplay();
-  updateShipping();
-}
-
+function showHome(){ document.getElementById('productPage').style.display='none'; document.getElementById('homePage').style.display='block'; window.scrollTo(0,0); }
+function changeQty(n){ qty = Math.max(1, qty+n); document.getElementById('qty').value = qty; updateQtyDisplay(); updateShipping(); }
 function updateQtyDisplay(){
   const totalW = currentProduct.weight * qty;
   document.getElementById('totalWeight').textContent = totalW + " g";
   document.getElementById('shipWeight').textContent = totalW + " g";
 }
-
-// ===== Select de países =====
 const select = document.getElementById('shipCountry');
 SHIPPING.forEach(s=>{
-  const o=document.createElement('option');
-  o.value=s.country;
-  o.textContent=s.country;
+  const o=document.createElement('option'); o.value=s.country; o.textContent=s.country;
   if(s.country==="Estados Unidos") o.selected=true;
   select.appendChild(o);
 });
-
 function updateShipping(){
   if(!currentProduct) return;
   const totalW = currentProduct.weight * qty;
@@ -857,58 +268,28 @@ function updateShipping(){
   document.getElementById('shipCost').textContent = "$"+s.store.toFixed(2);
   document.getElementById('grandTotal').textContent = "$"+((currentProduct.price*qty)+s.store).toFixed(2);
 }
-
-// ===== Carrito + WhatsApp =====
-function addToCartFromDetail(){
-  cart.push({ ...currentProduct, qty });
-  updateCart();
-  openCart();
-}
-
+function addToCartFromDetail(){ cart.push({ ...currentProduct, qty }); updateCart(); openCart(); }
 function updateCart(){
   document.getElementById('cartCount').textContent = cart.reduce((a,b)=>a+b.qty,0);
   document.getElementById('cartItems').innerHTML = cart.length===0 ? "<p style='color:#9ca3af;text-align:center;margin-top:20px'>Tu carrito está vacío</p>" : cart.map((p,i)=>`
-    <div class="cart-item">
-      <img src="${p.img}">
-      <div>
-        <b>${p.name}</b><br>
-        <span>$${p.price} x ${p.qty}</span><br>
-        <button onclick="removeItem(${i})" style="border:none;background:none;color:red;cursor:pointer;font-size:12px">Eliminar</button>
-      </div>
-    </div>`).join('');
+    <div class="cart-item"><img src="${p.img}"><div><b>${p.name}</b><br><span>$${p.price} x ${p.qty}</span><br><button onclick="removeItem(${i})" style="border:none;background:none;color:red;cursor:pointer;font-size:12px">Eliminar</button></div></div>`).join('');
   const total = cart.reduce((a,b)=>a+b.price*b.qty,0);
   document.getElementById('cartTotal').textContent = "$"+total.toFixed(2);
 }
-
-function removeItem(i){
-  cart.splice(i,1);
-  updateCart();
-}
-
-function openCart(){
-  document.getElementById('cartDrawer').classList.add('open');
-  document.getElementById('overlay').classList.add('show');
-}
-
-function closeCart(){
-  document.getElementById('cartDrawer').classList.remove('open');
-  document.getElementById('overlay').classList.remove('show');
-}
-
+function removeItem(i){ cart.splice(i,1); updateCart(); }
+function openCart(){ document.getElementById('cartDrawer').classList.add('open'); document.getElementById('overlay').classList.add('show'); }
+function closeCart(){ document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
 function orderWhatsApp(){
   const totalW = currentProduct.weight * qty;
   const s = getShipping(select.value, totalW);
-  const msg = `Hola WobbaShop! Quiero pedir:%0A• ${currentProduct.name}%0A• Cantidad: ${qty}%0A• Peso: ${totalW} g%0A• Enviar a: ${select.value}%0A• Envío tienda: $${s.store} (TeemDrop $${s.teem} + $10) - ${s.time}%0A• Total con envío: $${((currentProduct.price*qty)+s.store).toFixed(2)}`;
+  const msg = `Hola WobbaShop! Quiero pedir:%0A• ${currentProduct.name}%0A• Cantidad: ${qty}%0A• Peso: ${totalW} g%0A• Enviar a: ${select.value}%0A• Método: YUN-Electro-Economía%0A• Envío tienda: $${s.store} (TeemDrop $${s.teem} + $10) - ${s.time}%0A• TOTAL: $${((currentProduct.price*qty)+s.store).toFixed(2)}`;
   window.open("https://wa.me/573016202301?text="+msg, "_blank");
 }
-
 function checkoutWhatsApp(){
   const msg = "Hola WobbaShop! Quiero pedir:%0A" + cart.map(p=>`• ${p.name} x ${p.qty} - $${(p.price*p.qty).toFixed(2)}`).join("%0A");
   window.open("https://wa.me/573016202301?text="+msg, "_blank");
 }
-
-loadFromSheets();
-updateCart();
+loadFromSheets(); updateCart();
 </script>
 </body>
 </html>
